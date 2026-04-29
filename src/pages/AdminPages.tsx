@@ -1,50 +1,7 @@
 import { AdminStatGrid } from '../components/admin/AdminStatGrid';
 import { ModerationTable } from '../components/admin/ModerationTable';
 
-export function AdminDashboardPage() {
-  return (
-    <div className="stack-lg">
-      <h1>Admin Dashboard</h1>
-      <AdminStatGrid />
-    </div>
-  );
-}
-
-export function AdminAdvisorsPage() {
-  return (
-    <ModerationTable
-      title="Advisor Moderation"
-      columns={['Advisor', 'Headline', 'Status', 'Verification', 'Profile %', 'Submitted', 'Actions']}
-      rows={[
-        ['Nina Patel', 'Former CFO', 'pending', 'verified', '92%', '2026-04-20', 'Approve / Reject / Request Changes / Suspend'],
-        ['Rachel Kim', 'CMO Advisor', 'review', 'unverified', '83%', '2026-04-22', 'Approve / Reject / Request Changes / Suspend'],
-      ]}
-    />
-  );
-}
-
-export function AdminBookingsPage() {
-  return (
-    <ModerationTable
-      title="Booking Operations"
-      columns={['Booking ID', 'Client', 'Advisor', 'Status', 'Payment', 'Consent', 'Refund', 'Actions']}
-      rows={[
-        ['bk-1001', 'Jordan Lee', 'Nina Patel', 'confirmed', 'paid', 'both consented', 'n/a', 'View / Intervene'],
-        ['bk-1004', 'Jordan Lee', 'Alex Johnson', 'disputed', 'paid', 'advisor missing', 'pending', 'Resolve / Refund'],
-      ]}
-    />
-  );
-}
-
-export function AdminReviewsPage() {
-  return (
-    <ModerationTable
-      title="Review Moderation"
-      columns={['Advisor', 'Client', 'Rating', 'Snippet', 'Status', 'Actions']}
-      rows={[
-        ['Omar Liu', 'Jordan Lee', '2', 'Late to call...', 'flagged', 'Approve / Hide / Flag'],
-        ['Laura Mendes', 'Kim Tran', '5', 'Fantastic tactical guidance...', 'live', 'Approve / Hide / Flag'],
-      ]}
-    />
-  );
-}
+export const AdminDashboardPage = () => <div className="stack-lg"><h1>Admin Operations</h1><AdminStatGrid /></div>;
+export const AdminAdvisorsPage = () => <ModerationTable title="Advisor Moderation" columns={['Advisor','Status','Verification','Profile %','Actions']} rows={[['Nina Patel','Pending','Verified','92%','Approve / Request Changes'],['Rachel Kim','Under Review','Unverified','83%','Approve / Reject']]}/>;
+export const AdminBookingsPage = () => <ModerationTable title="Booking Operations" columns={['Booking','Status','Consent','Refund','Actions']} rows={[['bk-1001','Confirmed','Complete','n/a','View'],['bk-1004','Disputed','Advisor missing','Pending','Investigate / Refund']]}/>;
+export const AdminReviewsPage = () => <ModerationTable title="Quality Queue" columns={['Item','Issue Type','Status','Actions']} rows={[['Review #441','Flagged review','Open','Moderate'],['Transcript #884','Recording issue','Open','Escalate']]}/>;

@@ -1,74 +1,12 @@
-import { ProfileEditorSection } from '../components/advisorDashboard/ProfileEditorSection';
-import { BookingCard } from '../components/bookings/BookingCard';
+import { useState } from 'react';
 import { Card } from '../components/common/Card';
-import { Tabs } from '../components/common/Tabs';
 import { StatCard } from '../components/common/StatCard';
 import { bookings } from '../mocks/bookings';
-import { useState } from 'react';
 
-export function AdvisorDashboardPage() {
-  return (
-    <div className="stack-lg">
-      <h1>Advisor Dashboard</h1>
-      <div className="grid cols-3">
-        <StatCard label="Profile completion" value="78%" />
-        <StatCard label="Revenue (placeholder)" value="$8,450" />
-        <StatCard label="Average rating" value="4.8" />
-      </div>
-      <Card><h3>Pending profile tasks</h3><ul><li>Add two more case studies</li><li>Upload credential proof</li></ul></Card>
-      <section><h3>Upcoming bookings</h3><div className="grid cols-2">{bookings.filter((b) => b.status === 'confirmed').map((b) => <BookingCard key={b.id} booking={b} />)}</div></section>
-    </div>
-  );
-}
+export function AdvisorDashboardPage() { return <div className="stack-lg"><h1>Advisor Dashboard</h1><div className="grid cols-4"><StatCard label="Profile completion" value="86%"/><StatCard label="Upcoming bookings" value="6"/><StatCard label="Availability health" value="Strong"/><StatCard label="Revenue (placeholder)" value="$12,300"/></div><Card><h3>Pending tasks</h3><ul><li>Complete trust indicators</li><li>Update next-week availability</li></ul><div className="stack-row"><button className="btn">Edit Profile</button><button className="btn ghost">Manage Availability</button></div></Card></div>; }
 
-const sections = [
-  ['Identity', 'Basic public profile identity fields.'],
-  ['Positioning', 'Clarify who you help and outcomes.'],
-  ['Professional identity', 'Role history and leadership scope.'],
-  ['Experience history', 'Timeline and depth highlights.'],
-  ['Industries/functions', 'Select target segments and capabilities.'],
-  ['Achievements', 'Quantified impact statements.'],
-  ['Case studies', 'Problem to outcome narratives.'],
-  ['Advisory topics', 'Topics and formats clients can book.'],
-  ['Session offerings', 'Package, duration, and price placeholders.'],
-  ['Media/proof', 'Upload placeholder only.'],
-  ['Trust indicators', 'Verification and compliance placeholders.'],
-] as const;
+export function AdvisorProfileEditorPage() { const sections=['Identity','Positioning','Executive background','Industries/functions','Advisory topics','Achievements','Case studies','Session offerings','Trust indicators']; return <div className="stack-lg"><h1>Profile Editor</h1>{sections.map((s)=><Card key={s}><h3>{s}</h3><p className="muted">Provide clear, evidence-backed details to build buyer trust.</p><input placeholder={`${s} details`} /></Card>)}</div>; }
 
-export function AdvisorProfileEditorPage() {
-  return (
-    <div className="stack-lg">
-      <h1>Profile Editor</h1>
-      {sections.map(([title, helper]) => (
-        <ProfileEditorSection key={title} title={title} helper={helper}>
-          <input placeholder={`${title} field`} />
-        </ProfileEditorSection>
-      ))}
-    </div>
-  );
-}
+export function AdvisorAvailabilityPage() { return <div className="stack-lg"><h1>Availability Manager</h1><Card><label>Timezone<select><option>America/New_York</option><option>America/Los_Angeles</option></select></label></Card><Card><h3>Weekly Availability Grid</h3><p>Mon-Fri blocks with editable morning/afternoon/evening slots.</p></Card><div className="grid cols-3"><Card><label>Slot duration<select><option>30 min</option><option>45 min</option><option>60 min</option></select></label></Card><Card><label>Buffer settings<select><option>15 min</option><option>30 min</option></select></label></Card><Card><label>Minimum notice<input defaultValue="24 hours"/></label></Card></div><Card><h3>Blackout dates & generated preview</h3><p>No-sync placeholder with preview of bookable times.</p></Card><Card><h3>External calendar busy-sync</h3><p className="muted">Placeholder for future Google/Microsoft busy-state sync.</p></Card></div>; }
 
-export function AdvisorAvailabilityPage() {
-  return (
-    <div className="stack-lg">
-      <h1>Availability Manager</h1>
-      <Card><label>Timezone <select><option>America/New_York</option><option>America/Los_Angeles</option></select></label></Card>
-      <Card><h3>Weekly availability grid</h3><p>Static grid placeholder (Mon-Sun, morning/afternoon/evening blocks).</p></Card>
-      <div className="grid cols-2"><Card><label>Slot duration <select><option>30 min</option><option>45 min</option><option>60 min</option></select></label></Card><Card><label>Buffer before/after <select><option>15 min</option><option>30 min</option></select></label></Card></div>
-      <Card><label>Minimum notice <input defaultValue="24 hours" /></label><label>Max bookings/day <input defaultValue="4" /></label></Card>
-      <Card><h3>Blackout dates + generated slot preview</h3><p>Placeholder only; no real calendar integration.</p></Card>
-    </div>
-  );
-}
-
-const tabs = ['upcoming', 'completed', 'cancelled', 'disputed'] as const;
-export function AdvisorBookingsPage() {
-  const [active, setActive] = useState<(typeof tabs)[number]>('upcoming');
-  return (
-    <div className="stack-lg">
-      <h1>Advisor Bookings</h1>
-      <Tabs values={[...tabs]} active={active} onChange={setActive} />
-      <div className="grid cols-2">{bookings.map((b) => <Card key={b.id}><h4>{b.sessionName}</h4><p>{b.clientName}</p><p>Actions: View booking • Add session link • Mark completed • Upload recording placeholder</p></Card>)}</div>
-    </div>
-  );
-}
+export function AdvisorBookingsPage() { const [active] = useState('all'); return <div className="stack-lg"><h1>Advisor Bookings</h1><p className="muted">{active}</p><div className="grid cols-2">{bookings.map((b)=><Card key={b.id}><h4>{b.sessionName}</h4><p>{b.clientName}</p><p className="muted">Track prep notes, attendance, and post-session artifacts.</p></Card>)}</div></div>; }
