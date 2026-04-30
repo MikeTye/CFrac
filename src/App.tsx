@@ -5,7 +5,8 @@ import { PublicLayout } from './components/layout/PublicLayout';
 import { AdminAdvisorsPage, AdminBookingsPage, AdminDashboardPage, AdminReviewsPage } from './pages/AdminPages';
 import { AdvisorAvailabilityPage, AdvisorBookingsPage, AdvisorDashboardPage, AdvisorProfileEditorPage } from './pages/AdvisorPages';
 import { BookingDetailPage, ClientBookingsPage, ClientDashboardPage } from './pages/ClientPages';
-import { AdvisorProfilePage, AdvisorsPage, LandingPage, LoginPage, RegisterPage } from './pages/PublicPages';
+import { AdvisorProfilePage, AdvisorsPage, LoginPage, RegisterPage } from './pages/PublicPages';
+import { LandingPage } from './pages/LandingPage';
 
 export function App() {
   return (
