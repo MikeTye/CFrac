@@ -43,6 +43,3 @@ export function AdvisorProfilePage() {
         {open ? <BookingModal advisor={advisor} onClose={() => setOpen(false)} /> : null}
     </div>;
 }
-
-export const LoginPage = () => <Card><h1>Login</h1><input placeholder="Email" /><input placeholder="Password" type="password" /><button className="btn">Login</button></Card>;
-export const RegisterPage = () => <Card><h1>Create account</h1><input placeholder="Full name" /><input placeholder="Email" /><input placeholder="Password" type="password" /><button className="btn">Create account</button></Card>;
