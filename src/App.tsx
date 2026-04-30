@@ -10,6 +10,8 @@ import { LandingPage } from './pages/LandingPage';
 import { SignupPage } from './pages/SignUpPage';
 import { LoginPage } from './pages/LoginPage';
 import { AdvisorDashboardPage } from './pages/Advisor/AdvisorDashboardPage';
+import { OnboardingPage } from './pages/OnboardingPage';
+import { VerifyCodePage } from './pages/VerifyCodePage';
 
 export function App() {
   return (
@@ -20,6 +22,8 @@ export function App() {
         <Route path="/advisors/:advisorId" element={<AdvisorProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />
+        <Route path="/verify-code" element={<VerifyCodePage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
       </Route>
 
       <Route path="/client" element={<DashboardLayout role="client" />}>

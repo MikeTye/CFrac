@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ACCOUNT_TYPES = [
     {
@@ -23,8 +23,8 @@ export function SignupPage() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [agreed, setAgreed] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div className="auth-shell auth-shell--signup">
@@ -83,7 +83,7 @@ export function SignupPage() {
                             </p>
                         </header>
 
-                        <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+                        <form className="auth-form" onSubmit={(e) => { e.preventDefault(); navigate('/verify-code', { state: { intent: 'signup' } }); }}>
                             {/* Account type toggle */}
                             <fieldset className="auth-type-fieldset">
                                 <legend className="auth-label">I am joining as…</legend>
@@ -145,28 +145,7 @@ export function SignupPage() {
                                 />
                             </div>
 
-                            <div className="auth-field">
-                                <label className="auth-label" htmlFor="signup-password">
-                                    Password
-                                    <span className="auth-label-hint">min. 8 characters</span>
-                                </label>
-                                <input
-                                    id="signup-password"
-                                    type="password"
-                                    className="auth-input"
-                                    placeholder="••••••••"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    autoComplete="new-password"
-                                />
-                                {/* Password strength bar */}
-                                <div className="auth-strength-bar" aria-hidden="true">
-                                    <div
-                                        className="auth-strength-fill"
-                                        style={{ width: password.length >= 12 ? '100%' : password.length >= 8 ? '60%' : password.length >= 4 ? '30%' : '0%' }}
-                                    />
-                                </div>
-                            </div>
+                            
 
                             <div className="auth-agree-row">
                                 <label className="auth-checkbox-label">

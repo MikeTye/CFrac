@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SOCIAL_PROOF = [
     { stat: '340+', label: 'vetted advisors' },
@@ -9,8 +9,8 @@ const SOCIAL_PROOF = [
 
 export function LoginPage() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
+    const [magicLink, setMagicLink] = useState('');
+    const navigate = useNavigate();
 
     return (
         <div className="auth-shell">
@@ -63,7 +63,7 @@ export function LoginPage() {
                             <p className="hero-eyebrow">Welcome back</p>
                             <h1 className="auth-form-title">
                                 Sign in to your<br />
-                                <em>advisor account.</em>
+                                <em>account.</em>
                             </h1>
                             <p className="auth-form-sub muted">
                                 Don't have an account?{' '}
@@ -71,7 +71,7 @@ export function LoginPage() {
                             </p>
                         </header>
 
-                        <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+                        <form className="auth-form" onSubmit={(e) => { e.preventDefault(); navigate('/verify-code', { state: { intent: 'login' } }); }}>
                             <div className="auth-field">
                                 <label className="auth-label" htmlFor="login-email">
                                     Email address
@@ -88,38 +88,11 @@ export function LoginPage() {
                             </div>
 
                             <div className="auth-field">
-                                <div className="auth-field-top">
-                                    <label className="auth-label" htmlFor="login-password">
-                                        Password
-                                    </label>
-                                    <Link to="/forgot-password" className="auth-link auth-link--small">
-                                        Forgot password?
-                                    </Link>
-                                </div>
-                                <div className="auth-input-wrap">
-                                    <input
-                                        id="login-password"
-                                        type={showPassword ? 'text' : 'password'}
-                                        className="auth-input"
-                                        placeholder="••••••••"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        autoComplete="current-password"
-                                    />
-                                    <button
-                                        type="button"
-                                        className="auth-input-toggle"
-                                        onClick={() => setShowPassword((v) => !v)}
-                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
-                                    >
-                                        {showPassword ? '◎' : '○'}
-                                    </button>
-                                </div>
+                                <label className="auth-label" htmlFor="login-magic">One-time access code</label>
+                                <input id="login-magic" type="text" className="auth-input" placeholder="Sent instantly after continue" value={magicLink} onChange={(e) => setMagicLink(e.target.value)} />
                             </div>
 
-                            <button type="submit" className="btn auth-submit-btn">
-                                Sign in
-                            </button>
+                            <button type="submit" className="btn auth-submit-btn">Continue</button>
 
                             <div className="auth-divider">
                                 <span className="auth-divider-line" />
