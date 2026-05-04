@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 
 const links = [
+  { label: 'Demo Start', to: '/demo-start' },
   { label: 'Public Home', to: '/' },
   { label: 'Search', to: '/advisors' },
-  { label: 'Client Demo', to: '/client' },
+  { label: 'Client Demo', to: '/client/dashboard' },
   { label: 'Advisor Demo', to: '/advisor' },
   { label: 'Admin Demo', to: '/admin' },
 ];
