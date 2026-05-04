@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { AdminLayout } from './components/layout/AdminLayout';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { PublicLayout } from './components/layout/PublicLayout';
-import { AdminAdvisorsPage, AdminBookingsPage, AdminDashboardPage, AdminReviewsPage } from './pages/AdminPages';
 import { ClientDashboardPage } from './pages/Client/ClientDashboardPage';
 import { ClientIntakeNewPage } from './pages/Client/ClientIntakeNewPage';
 import { ClientIntakeStatusPage } from './pages/Client/ClientIntakeStatusPage';
@@ -27,6 +26,13 @@ import { AdvisorCalendarConnectionsPage } from './pages/Advisor/AdvisorCalendarC
 import { AdvisorIntakeQueuePage } from './pages/Advisor/AdvisorIntakeQueuePage';
 import { AdvisorBookingsPage } from './pages/Advisor/AdvisorBookingsPage';
 import { AdvisorBookingDetailPage } from './pages/Advisor/AdvisorBookingDetailPage';
+import { AdminDashboardPage } from './pages/Admin/AdminDashboardPage';
+import { AdminModerationAdvisorsPage } from './pages/Admin/AdminModerationAdvisorsPage';
+import { AdminBookingsPage } from './pages/Admin/AdminBookingsPage';
+import { AdminDisputeReviewPage } from './pages/Admin/AdminDisputeReviewPage';
+import { AdminRecordingAuditPage } from './pages/Admin/AdminRecordingAuditPage';
+import { AdminDeclineMonitoringPage } from './pages/Admin/AdminDeclineMonitoringPage';
+import { DemoStartPage } from './pages/DemoStartPage';
 
 export function App() {
   return (
@@ -37,6 +43,7 @@ export function App() {
         <Route path="/landing3" element={<LandingPage3 />} />
         <Route path="/advisors" element={<AdvisorsPage />} />
         <Route path="/advisors/:advisorId" element={<AdvisorProfilePage />} />
+        <Route path="/demo-start" element={<DemoStartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />
         <Route path="/verify-code" element={<VerifyCodePage />} />
@@ -68,9 +75,11 @@ export function App() {
 
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboardPage />} />
-        <Route path="advisors" element={<AdminAdvisorsPage />} />
+        <Route path="moderation/advisors" element={<AdminModerationAdvisorsPage />} />
         <Route path="bookings" element={<AdminBookingsPage />} />
-        <Route path="reviews" element={<AdminReviewsPage />} />
+        <Route path="disputes/:disputeId" element={<AdminDisputeReviewPage />} />
+        <Route path="audit/recordings/:bookingId" element={<AdminRecordingAuditPage />} />
+        <Route path="monitoring/declines" element={<AdminDeclineMonitoringPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
