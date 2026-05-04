@@ -3310,3 +3310,19 @@ td {
     font-weight: 600;
     margin-top: 0.2rem;
 }
+.demo-nav {
+    position: sticky;
+    top: 64px;
+    z-index: 2;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: .6rem 1.5rem;
+    background: #f7faff;
+    border-bottom: 1px solid #dbe5f4;
+}
+
+.demo-nav-label { font-size: .78rem; font-weight: 700; color: #385172; }
+.demo-nav-links { display: flex; gap: .5rem; flex-wrap: wrap; }
+.demo-nav-link { padding: .3rem .6rem; border: 1px solid #cdd9ee; border-radius: 999px; font-size: .8rem; background: white; }
+.demo-nav-link--active { background: #1d4ed8; color: white; border-color: #1d4ed8; }

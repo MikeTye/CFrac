@@ -3,7 +3,6 @@ import { AdminLayout } from './components/layout/AdminLayout';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { AdminAdvisorsPage, AdminBookingsPage, AdminDashboardPage, AdminReviewsPage } from './pages/AdminPages';
-import { AdvisorAvailabilityPage, AdvisorBookingsPage, AdvisorProfileEditorPage } from './pages/AdvisorPages';
 import { BookingDetailPage, ClientBookingsPage, ClientDashboardPage } from './pages/ClientPages';
 import { LandingPage } from './pages/LandingPage';
 import { SignupPage } from './pages/SignUpPage';
@@ -15,6 +14,13 @@ import { AdvisorsPage } from './pages/Advisor/AdvisorsPage';
 import { AdvisorProfilePage } from './pages/Advisor/AdvisorProfilePage';
 import { LandingPage2 } from './pages/LandingPage2';
 import { LandingPage3 } from './pages/LandingPage3';
+import { AdvisorProfileEditorPage } from './pages/Advisor/AdvisorProfileEditorPage';
+import { AdvisorAvailabilityPage } from './pages/Advisor/AdvisorAvailabilityPage';
+import { AdvisorOfferingsPage } from './pages/Advisor/AdvisorOfferingsPage';
+import { AdvisorCalendarConnectionsPage } from './pages/Advisor/AdvisorCalendarConnectionsPage';
+import { AdvisorIntakeQueuePage } from './pages/Advisor/AdvisorIntakeQueuePage';
+import { AdvisorBookingsPage } from './pages/Advisor/AdvisorBookingsPage';
+import { AdvisorBookingDetailPage } from './pages/Advisor/AdvisorBookingDetailPage';
 
 export function App() {
   return (
@@ -41,7 +47,12 @@ export function App() {
         <Route index element={<AdvisorDashboardPage />} />
         <Route path="profile" element={<AdvisorProfileEditorPage />} />
         <Route path="availability" element={<AdvisorAvailabilityPage />} />
+        <Route path="offerings" element={<AdvisorOfferingsPage />} />
+        <Route path="calendar" element={<AdvisorCalendarConnectionsPage />} />
+        <Route path="intakes" element={<AdvisorIntakeQueuePage />} />
+        <Route path="intakes/:intakeId" element={<AdvisorIntakeQueuePage />} />
         <Route path="bookings" element={<AdvisorBookingsPage />} />
+        <Route path="bookings/:bookingId" element={<AdvisorBookingDetailPage />} />
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>

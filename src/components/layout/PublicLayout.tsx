@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
+import { DemoNav } from './DemoNav';
 
 export function PublicLayout() {
   return (
@@ -12,6 +13,7 @@ export function PublicLayout() {
           <Link to="/register">Register</Link>
         </div>
       </nav>
+      <DemoNav />
       <main className="page-wrap"><Outlet /></main>
     </div>
   );
