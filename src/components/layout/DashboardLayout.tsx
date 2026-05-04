@@ -2,10 +2,13 @@ import { Link, Outlet } from 'react-router-dom';
 
 const items = {
   client: [
-    ['Dashboard', '/client'],
-    ['My Bookings', '/client/bookings'],
-    ['Saved Advisors', '/advisors'],
-    ['Account', '/register'],
+    ['Dashboard', '/client/dashboard'],
+    ['New Intake', '/client/intake/new'],
+    ['Intake Status', '/client/intake/int-1002/status'],
+    ['Checkout', '/client/checkout/bk-1002'],
+    ['Booking Detail', '/client/booking/bk-1002'],
+    ['Join Session', '/client/join/bk-1002'],
+    ['Past Session', '/client/sessions/bk-1001'],
   ],
   advisor: [
     ['Dashboard', '/advisor'],

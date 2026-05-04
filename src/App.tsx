@@ -3,7 +3,13 @@ import { AdminLayout } from './components/layout/AdminLayout';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { AdminAdvisorsPage, AdminBookingsPage, AdminDashboardPage, AdminReviewsPage } from './pages/AdminPages';
-import { BookingDetailPage, ClientBookingsPage, ClientDashboardPage } from './pages/ClientPages';
+import { ClientDashboardPage } from './pages/Client/ClientDashboardPage';
+import { ClientIntakeNewPage } from './pages/Client/ClientIntakeNewPage';
+import { ClientIntakeStatusPage } from './pages/Client/ClientIntakeStatusPage';
+import { ClientCheckoutPage } from './pages/Client/ClientCheckoutPage';
+import { ClientBookingDetailPage } from './pages/Client/ClientBookingDetailPage';
+import { ClientJoinSessionPage } from './pages/Client/ClientJoinSessionPage';
+import { ClientSessionDetailsPage } from './pages/Client/ClientSessionDetailsPage';
 import { LandingPage } from './pages/LandingPage';
 import { SignupPage } from './pages/SignUpPage';
 import { LoginPage } from './pages/LoginPage';
@@ -38,9 +44,14 @@ export function App() {
       </Route>
 
       <Route path="/client" element={<DashboardLayout role="client" />}>
-        <Route index element={<ClientDashboardPage />} />
-        <Route path="bookings" element={<ClientBookingsPage />} />
-        <Route path="bookings/:bookingId" element={<BookingDetailPage />} />
+        <Route path="dashboard" element={<ClientDashboardPage />} />
+        <Route path="intake/new" element={<ClientIntakeNewPage />} />
+        <Route path="intake/:intakeId/status" element={<ClientIntakeStatusPage />} />
+        <Route path="checkout/:bookingId" element={<ClientCheckoutPage />} />
+        <Route path="booking/:bookingId" element={<ClientBookingDetailPage />} />
+        <Route path="join/:bookingId" element={<ClientJoinSessionPage />} />
+        <Route path="sessions/:bookingId" element={<ClientSessionDetailsPage />} />
+        <Route index element={<Navigate to="/client/dashboard" replace />} />
       </Route>
 
       <Route path="/advisor" element={<DashboardLayout role="advisor" />}>
