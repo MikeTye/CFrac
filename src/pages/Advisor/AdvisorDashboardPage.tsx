@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppLayout } from '../../components/layout/AppLayout';
 import { AppointmentCard, type Appointment } from '../../components/appointments/AppointmentCard';
 import { SectionHeader } from '../../components/common/SectionHeader';
 
@@ -319,11 +318,15 @@ export function AdvisorDashboardPage() {
     const [isNewUser, setIsNewUser] = useState(false);
 
     return (
-        <AppLayout
-            pageTitle="Dashboard"
-            pageSubtitle="Good morning, Ada"
-        >
-            {/* Demo toggle — remove in production */}
+        <>
+            <div className="dash-page-head">
+                <div>
+                    <p className="hero-eyebrow">Dashboard</p>
+                    <h1 className="dash-page-title">Good morning, Ada</h1>
+                    <p className="muted">Manage bookings, summaries, and advisor recommendations.</p>
+                </div>
+            </div>
+
             <div className="dash-demo-toggle">
                 <button
                     type="button"
@@ -344,17 +347,12 @@ export function AdvisorDashboardPage() {
             </div>
 
             {isNewUser ? (
-                /* ── New user: empty state ── */
                 <EmptyState />
             ) : (
-                /* ── Returning user: populated dashboard ── */
                 <div className="dash-layout-main">
-                    {/* ── Left: primary content ── */}
                     <div className="dash-primary">
-                        {/* Stat strip */}
                         <StatStrip />
 
-                        {/* Upcoming sessions */}
                         <section className="dash-section">
                             <SectionHeader title="Upcoming sessions" />
                             <div className="dash-appt-list">
@@ -364,10 +362,8 @@ export function AdvisorDashboardPage() {
                             </div>
                         </section>
 
-                        {/* Suggested advisors */}
                         <SuggestedAdvisors />
 
-                        {/* Past sessions */}
                         <section className="dash-section">
                             <div className="dash-section-head">
                                 <SectionHeader title="Past sessions" />
@@ -387,12 +383,11 @@ export function AdvisorDashboardPage() {
                         </section>
                     </div>
 
-                    {/* ── Right: sticky panel ── */}
                     <div className="dash-secondary sticky-panel">
                         <QuickActionsPanel />
                     </div>
                 </div>
             )}
-        </AppLayout>
+        </>
     );
 }

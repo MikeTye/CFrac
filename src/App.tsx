@@ -5,19 +5,24 @@ import { PublicLayout } from './components/layout/PublicLayout';
 import { AdminAdvisorsPage, AdminBookingsPage, AdminDashboardPage, AdminReviewsPage } from './pages/AdminPages';
 import { AdvisorAvailabilityPage, AdvisorBookingsPage, AdvisorProfileEditorPage } from './pages/AdvisorPages';
 import { BookingDetailPage, ClientBookingsPage, ClientDashboardPage } from './pages/ClientPages';
-import { AdvisorProfilePage, AdvisorsPage } from './pages/PublicPages';
 import { LandingPage } from './pages/LandingPage';
 import { SignupPage } from './pages/SignUpPage';
 import { LoginPage } from './pages/LoginPage';
 import { AdvisorDashboardPage } from './pages/Advisor/AdvisorDashboardPage';
 import { OnboardingPage } from './pages/OnboardingPage';
 import { VerifyCodePage } from './pages/VerifyCodePage';
+import { AdvisorsPage } from './pages/Advisor/AdvisorsPage';
+import { AdvisorProfilePage } from './pages/Advisor/AdvisorProfilePage';
+import { LandingPage2 } from './pages/LandingPage2';
+import { LandingPage3 } from './pages/LandingPage3';
 
 export function App() {
   return (
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/landing2" element={<LandingPage2 />} />
+        <Route path="/landing3" element={<LandingPage3 />} />
         <Route path="/advisors" element={<AdvisorsPage />} />
         <Route path="/advisors/:advisorId" element={<AdvisorProfilePage />} />
         <Route path="/login" element={<LoginPage />} />

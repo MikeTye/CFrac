@@ -1,0 +1,983 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   DOSSIER DESIGN SYSTEM  ·  Cold War Advisory Platform
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Fonts ────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&family=IM+Fell+English:ital@0;1&display=swap');
+
+/* ── Tokens ───────────────────────────────────────────────────────────────── */
+:root {
+    --dos-bg:          #f5f0e8;
+    --dos-surface:     #ede8dc;
+    --dos-surface-alt: #e4ddd0;
+    --dos-ink:         #1a1714;
+    --dos-ink-muted:   #4a4540;
+    --dos-ink-faint:   #7a746c;
+    --dos-accent:      #8b1a0f;      /* redacted red */
+    --dos-accent-dim:  #c44a3a;
+    --dos-rule:        #b0a898;
+    --dos-rule-heavy:  #7a6e60;
+    --dos-stamp-ink:   rgba(139, 26, 15, 0.18);
+    --dos-tag-bg:      #ddd8cc;
+    --dos-tag-text:    #2e2926;
+
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-display: 'Special Elite', cursive;
+    --font-body: 'IM Fell English', serif;
+
+    --page-max: 1320px;
+    --section-gap: 6rem;
+    --radius-sm: 2px;
+    --radius-md: 4px;
+}
+
+/* ── Base reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.landing-dos {
+    background: var(--dos-bg);
+    color: var(--dos-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+    /* Subtle aged paper texture via repeating gradient */
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 28px,
+            rgba(100, 90, 70, 0.04) 28px,
+            rgba(100, 90, 70, 0.04) 29px
+        );
+}
+
+.page-wrap {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-gap { padding: var(--section-gap) 0; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BUTTONS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.dos-btn-primary,
+.dos-btn-ghost {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    padding: 10px 22px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.dos-btn-primary {
+    background: var(--dos-ink);
+    color: var(--dos-bg);
+    border: 1px solid var(--dos-ink);
+}
+.dos-btn-primary:hover {
+    background: var(--dos-accent);
+    border-color: var(--dos-accent);
+}
+
+.dos-btn-ghost {
+    background: transparent;
+    color: var(--dos-ink);
+    border: 1px solid var(--dos-rule-heavy);
+}
+.dos-btn-ghost:hover {
+    border-color: var(--dos-ink);
+    background: rgba(26, 23, 20, 0.06);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   HERO — DOSSIER SPLIT
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.hero-dos {
+    border-bottom: 2px solid var(--dos-rule-heavy);
+}
+
+.hero-dos-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 2rem;
+    background: var(--dos-ink);
+    color: var(--dos-bg);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    max-width: 100%;
+}
+
+.hero-dos-inner {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 520px);
+    gap: 5rem;
+    align-items: start;
+}
+
+/* ── Copy column ── */
+.hero-dos-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--dos-accent);
+    margin-bottom: 1.25rem;
+}
+
+.hero-dos-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    line-height: 1.2;
+    color: var(--dos-ink);
+    margin-bottom: 1.5rem;
+}
+.hero-dos-headline em {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--dos-accent-dim);
+}
+
+.hero-dos-sub {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--dos-ink-muted);
+    max-width: 520px;
+    margin-bottom: 2rem;
+}
+
+/* Trust grid */
+.hero-trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--dos-rule-heavy);
+    margin-bottom: 2rem;
+}
+
+.hero-trust-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+    border-right: 1px solid var(--dos-rule);
+    border-bottom: 1px solid var(--dos-rule);
+}
+.hero-trust-item:nth-child(even) { border-right: none; }
+.hero-trust-item:nth-last-child(-n+2) { border-bottom: none; }
+
+.hero-trust-key {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--dos-accent);
+    margin-bottom: 2px;
+}
+.hero-trust-val {
+    font-size: 13px;
+    color: var(--dos-ink);
+}
+
+.hero-dos-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+/* Stat cluster */
+.hero-stat-row {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--dos-rule);
+}
+.hero-stat { display: flex; flex-direction: column; }
+.hero-stat-n {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--dos-ink);
+    line-height: 1;
+}
+.hero-stat-l {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dos-ink-faint);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ── Dossier / right column ── */
+.hero-dos-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-dossier-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--dos-accent);
+    margin-bottom: 10px;
+    padding-left: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   DOSSIER CARD — FULL
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.dossier-card {
+    background: var(--dos-surface);
+    border: 1px solid var(--dos-rule-heavy);
+    border-radius: var(--radius-md);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Watermark */
+.dossier-card::before {
+    content: 'CLASSIFIED';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--dos-stamp-ink);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 0;
+}
+
+.dossier-card > * { position: relative; z-index: 1; }
+
+/* Classification banner */
+.dos-class-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 14px;
+    background: var(--dos-ink);
+    color: var(--dos-bg);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+}
+
+.dos-stamp { color: var(--dos-accent-dim); }
+.dos-file-ref { color: rgba(245, 240, 232, 0.55); }
+
+/* Header block */
+.dos-header {
+    display: flex;
+    gap: 16px;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--dos-rule);
+}
+
+.dos-photo-frame {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.dos-photo {
+    width: 68px;
+    height: 80px;
+    background: var(--dos-surface-alt);
+    border: 1px solid var(--dos-rule-heavy);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--dos-ink-muted);
+    letter-spacing: 1px;
+}
+
+.dos-photo-stamp {
+    position: absolute;
+    bottom: -6px;
+    right: -8px;
+    background: var(--dos-accent);
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 2px 6px;
+    border-radius: 2px;
+}
+
+.dos-subject-info { flex: 1; min-width: 0; }
+
+.dos-subject-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--dos-ink-faint);
+    margin-bottom: 3px;
+}
+
+.dos-subject-name {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.15;
+    color: var(--dos-ink);
+    margin-bottom: 3px;
+}
+
+.dos-designation {
+    font-size: 13px;
+    color: var(--dos-ink-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dos-location {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dos-ink-faint);
+    margin-bottom: 6px;
+}
+
+.dos-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.dos-stars {
+    color: var(--dos-accent);
+    letter-spacing: 2px;
+}
+
+.dos-rating-val { color: var(--dos-ink); }
+.dos-reviews { color: var(--dos-ink-faint); }
+
+/* Field key label */
+.dos-field-key {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--dos-ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Divider */
+.dos-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: var(--dos-surface-alt);
+    border-top: 1px solid var(--dos-rule);
+    border-bottom: 1px solid var(--dos-rule);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--dos-ink-faint);
+}
+.dos-divider::before,
+.dos-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--dos-rule);
+}
+
+/* Intel grid */
+.dos-intel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--dos-rule);
+}
+
+.dos-intel-block {
+    padding: 4px 0;
+}
+.dos-intel-block + .dos-intel-block {
+    padding-left: 16px;
+    border-left: 1px solid var(--dos-rule);
+}
+
+.dos-full-width {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--dos-rule);
+    grid-column: 1 / -1;
+}
+
+/* Tags */
+.dos-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.dos-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    background: var(--dos-tag-bg);
+    color: var(--dos-tag-text);
+    border: 1px solid var(--dos-rule);
+    border-radius: 2px;
+}
+
+.dos-tag-sec {
+    background: transparent;
+    border-style: dashed;
+    color: var(--dos-ink-muted);
+}
+
+.dos-spec-list {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dos-ink-muted);
+    letter-spacing: 0.04em;
+    line-height: 1.9;
+}
+
+/* Session block */
+.dos-session-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--dos-rule);
+    gap: 0;
+}
+.dos-session-row .dos-intel-block + .dos-intel-block {
+    border-left: 1px solid var(--dos-rule);
+}
+
+.dos-session-val {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--dos-ink);
+}
+
+.dos-price-val {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--dos-ink);
+    line-height: 1;
+}
+.dos-per {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--dos-ink-faint);
+}
+
+/* Actions */
+.dos-actions {
+    display: flex;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--dos-surface-alt);
+}
+.dos-actions .dos-btn-primary,
+.dos-actions .dos-btn-ghost { flex: 1; text-align: center; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ROLODEX — flip / cycle mechanic
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.rolodex-root {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    user-select: none;
+}
+
+/* ── Controls (▲ counter ▼) ── */
+.rolodex-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+    flex-shrink: 0;
+}
+
+.rolodex-ctrl-btn {
+    width: 28px;
+    height: 28px;
+    background: var(--dos-surface-alt);
+    border: 1px solid var(--dos-rule-heavy);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 10px;
+    color: var(--dos-ink-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.12s, color 0.12s;
+    line-height: 1;
+}
+.rolodex-ctrl-btn:hover:not(:disabled) {
+    background: var(--dos-ink);
+    color: var(--dos-bg);
+    border-color: var(--dos-ink);
+}
+.rolodex-ctrl-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.rolodex-counter {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--dos-ink-faint);
+    text-align: center;
+}
+
+/* ── Spindle ── */
+.rolodex-spindle {
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+    flex-shrink: 0;
+}
+
+.rolodex-spindle-bar {
+    width: 6px;
+    height: 56px;
+    background: var(--dos-rule-heavy);
+    border-radius: 3px;
+    border: 1px solid var(--dos-rule);
+}
+
+/* ── Stack ── */
+.rolodex-stack {
+    flex: 1;
+    position: relative;
+    /* Height = card height + (VISIBLE_COUNT × peek offset) */
+    height: calc(56px + 4 * 10px);
+    perspective: 900px;
+    cursor: pointer;
+}
+
+/* ── Individual card ── */
+.rolodex-card-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: var(--dos-surface-alt);
+    border: 1px solid var(--dos-rule-heavy);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transform-origin: top center;
+    /* non-active cards use inline transform for peek stagger */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
+}
+
+/* Active (top) card */
+.rolodex-card-item--active {
+    background: var(--dos-ink);
+    border-color: var(--dos-ink);
+    box-shadow: 2px 4px 0 rgba(26, 23, 20, 0.25);
+    transform: none !important; /* override stagger inline style */
+}
+
+/* Flip forward — card rotates down around the top edge */
+.rolodex-card-item--flip-forward {
+    animation: flip-forward 360ms ease-in-out forwards;
+}
+
+/* Flip backward — card rotates up */
+.rolodex-card-item--flip-backward {
+    animation: flip-backward 360ms ease-in-out forwards;
+}
+
+@keyframes flip-forward {
+    0%   { transform: rotateX(0deg);    box-shadow: 2px 4px 0 rgba(26,23,20,0.25); }
+    40%  { transform: rotateX(-90deg);  box-shadow: none; }
+    60%  { transform: rotateX(-90deg);  box-shadow: none; }
+    100% { transform: rotateX(-180deg); box-shadow: none; opacity: 0; }
+}
+
+@keyframes flip-backward {
+    0%   { transform: rotateX(0deg);   box-shadow: 2px 4px 0 rgba(26,23,20,0.25); }
+    40%  { transform: rotateX(90deg);  box-shadow: none; }
+    60%  { transform: rotateX(90deg);  box-shadow: none; }
+    100% { transform: rotateX(180deg); box-shadow: none; opacity: 0; }
+}
+
+/* ── Card tab content ── */
+.rolodex-card-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    height: 100%;
+}
+
+.rolodex-card-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    background: var(--dos-surface);
+    border: 1px solid var(--dos-rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--dos-ink-muted);
+    flex-shrink: 0;
+}
+
+.rolodex-card-item--active .rolodex-card-avatar {
+    background: rgba(245, 240, 232, 0.15);
+    border-color: rgba(245, 240, 232, 0.28);
+    color: var(--dos-bg);
+}
+
+.rolodex-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rolodex-card-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--dos-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rolodex-card-item--active .rolodex-card-name { color: var(--dos-bg); }
+
+.rolodex-card-role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--dos-ink-faint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rolodex-card-item--active .rolodex-card-role { color: rgba(245, 240, 232, 0.52); }
+
+/* Active pip — small red indicator dot */
+.rolodex-card-active-pip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--dos-accent-dim);
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SECTION HEADERS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.dos-section-header {
+    margin-bottom: 3rem;
+}
+
+.dos-section-stamp {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--dos-accent);
+    border: 1px solid var(--dos-accent-dim);
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+}
+
+.dos-section-header h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--dos-ink);
+    margin-bottom: 8px;
+}
+
+.dos-section-sub {
+    font-size: 15px;
+    color: var(--dos-ink-muted);
+    max-width: 560px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   HOW IT WORKS — TIMELINE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.how-dos {
+    border-top: 1px solid var(--dos-rule);
+    border-bottom: 1px solid var(--dos-rule);
+    background: var(--dos-surface);
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 28px,
+        rgba(100, 90, 70, 0.05) 28px,
+        rgba(100, 90, 70, 0.05) 29px
+    );
+}
+
+.timeline-dos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--dos-rule-heavy);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.timeline-dos-step {
+    padding: 2rem 1.75rem;
+    border-right: 1px solid var(--dos-rule);
+    position: relative;
+}
+.timeline-dos-step:last-child { border-right: none; }
+
+.tds-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--dos-stamp-ink);
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.tds-connector {
+    position: absolute;
+    right: -13px;
+    top: 2.6rem;
+    width: 26px;
+    height: 1px;
+    background: var(--dos-rule-heavy);
+    z-index: 2;
+}
+.tds-connector::after {
+    content: '›';
+    position: absolute;
+    right: -4px;
+    top: -8px;
+    color: var(--dos-rule-heavy);
+    font-size: 14px;
+}
+
+.tds-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--dos-ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.tds-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--dos-ink-muted);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   USE CASES MOSAIC
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.usecase-dos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--dos-rule-heavy);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.usecase-dos-tile {
+    padding: 1.75rem;
+    border-right: 1px solid var(--dos-rule);
+    border-bottom: 1px solid var(--dos-rule);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.15s;
+}
+.usecase-dos-tile:hover { background: var(--dos-surface); }
+.usecase-dos-tile:nth-child(3n) { border-right: none; }
+.usecase-dos-tile:nth-last-child(-n+3) { border-bottom: none; }
+
+/* The 5th tile spans two columns */
+.usecase-dos-tile:nth-child(5) {
+    grid-column: span 2;
+}
+/* Hmm, but that makes 6 needed for 3×2. Keep all 5 in a 3+2 layout */
+.usecase-dos-tile:nth-child(4),
+.usecase-dos-tile:nth-child(5) {
+    border-bottom: none;
+}
+
+.usecase-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--dos-stamp-ink);
+    display: block;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.usecase-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--dos-ink);
+    margin-bottom: 8px;
+}
+
+.usecase-desc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--dos-ink-muted);
+    line-height: 1.6;
+}
+
+/* Decorative redacted bar */
+.usecase-redact {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    width: 50px;
+    height: 6px;
+    background: var(--dos-rule-heavy);
+    border-radius: 1px;
+    opacity: 0.35;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CTA SECTION
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.cta-dos {
+    border-top: 2px solid var(--dos-rule-heavy);
+    background: var(--dos-ink);
+}
+
+.cta-dos-topline {
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 2rem;
+    background: var(--dos-accent);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: white;
+}
+
+.cta-dos-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    flex-wrap: wrap;
+}
+
+.cta-dos-text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    color: var(--dos-bg);
+    margin-bottom: 12px;
+    max-width: 540px;
+}
+
+.cta-dos-text p {
+    font-size: 15px;
+    color: rgba(245, 240, 232, 0.65);
+    max-width: 480px;
+}
+
+.cta-dos-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.cta-dos-actions .dos-btn-primary {
+    background: var(--dos-bg);
+    color: var(--dos-ink);
+    border-color: var(--dos-bg);
+}
+.cta-dos-actions .dos-btn-primary:hover {
+    background: var(--dos-accent-dim);
+    color: white;
+    border-color: var(--dos-accent-dim);
+}
+
+.cta-dos-actions .dos-btn-ghost {
+    border-color: rgba(245, 240, 232, 0.4);
+    color: rgba(245, 240, 232, 0.8);
+}
+.cta-dos-actions .dos-btn-ghost:hover {
+    border-color: var(--dos-bg);
+    background: rgba(245, 240, 232, 0.08);
+    color: var(--dos-bg);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .hero-dos-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .hero-dos-right { max-width: 520px; }
+    .timeline-dos { grid-template-columns: 1fr; }
+    .tds-connector { display: none; }
+    .timeline-dos-step { border-right: none; border-bottom: 1px solid var(--dos-rule); }
+    .timeline-dos-step:last-child { border-bottom: none; }
+    .usecase-dos-grid { grid-template-columns: 1fr 1fr; }
+    .usecase-dos-tile:nth-child(5) { grid-column: span 2; }
+    .usecase-dos-tile:nth-child(3n) { border-right: 1px solid var(--dos-rule); }
+    .usecase-dos-tile:nth-child(2n) { border-right: none; }
+}
+
+@media (max-width: 640px) {
+    .hero-dos-topbar { display: none; }
+    .hero-trust-grid { grid-template-columns: 1fr; }
+    .hero-trust-item:nth-child(odd) { border-right: none; }
+    .hero-trust-item { border-bottom: 1px solid var(--dos-rule); }
+    .hero-trust-item:last-child { border-bottom: none; }
+    .hero-stat-row { gap: 1.5rem; }
+    .usecase-dos-grid { grid-template-columns: 1fr; }
+    .usecase-dos-tile:nth-child(n) { border-right: none; grid-column: span 1; }
+    .cta-dos-inner { flex-direction: column; }
+}

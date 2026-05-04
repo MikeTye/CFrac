@@ -8,7 +8,14 @@ A focused advisory booking platform where clients discover, evaluate, book, pay 
 ### Core product stance
 The platform must own the booking record, session room creation, consent capture, recording/transcription workflow, and post-session audit trail. It should **not** depend on the advisor or client bringing their own meeting link for standard sessions.
 
-### Why this matters
+### Key differentiators
+Beyond booking infrastructure, the platform differentiates through:
+- a tier-based advisor ranking system (Diamond → Platinum → Gold → Silver) grounded in verified credentials and outcomes, not algorithmic scoring
+- a structured pre-session intake and escrow flow that protects both parties before a session is accepted
+- context-aware matching using embeddings over advisor war stories and case records, not just keyword search
+- a durable session history and post-session artifact layer that turns each session into a persistent, actionable record
+
+### Why the trust infrastructure matters
 If the session happens outside the platform, the platform loses control over:
 - whether the correct participants joined
 - whether consent was shown and captured before recording
@@ -253,14 +260,48 @@ The platform database remains the source of truth for:
 - advisors can define session offerings and pricing
 - advisors can define availability
 - advisors can optionally connect external calendar for conflict blocking
+- advisors can upload supporting documents (CV, board credentials, press, case studies)
+- advisors can author structured case records: problem context, approach, measurable outcome, timeframe
+- case records can optionally be corroborated by a named counterparty (former CEO, board member, co-founder)
+- profile content — including case records and war stories — is embedded for semantic matching at ingestion
+
+## 7.2a Advisor tier system
+Advisors are assigned a tier based on verified credentials reviewed during onboarding and updated as session history accrues.
+
+### Tier definitions
+- **Diamond** — multiple successful exits or IPO experience; active board seats; minimum VP-level verified track record across two or more institutions
+- **Platinum** — full P&L ownership; Series C or later operator; significant institutional role with documented outcomes
+- **Gold** — C-suite or equivalent at Series B or later; at least one verifiable outcome in their domain
+- **Silver** — VP-level or equivalent; minimum one institutional role; strong domain specialisation
+
+### Tier rules
+- tier is assigned by the platform moderation team at onboarding, not self-reported
+- tier can be upgraded as verified session history, review scores, and case record corroboration accumulate
+- tier is visible on the advisor card and filters in search
+- Diamond and Platinum advisors have access to higher escrow deposit requirements, giving them stronger intake filtering
+- tier does not affect session pricing — advisors set their own rates
 
 ## 7.3 Search and discovery
 - clients can search by keyword and structured filters
-- results show experience depth, advisory topics, pricing, rating, and near-term availability
-- profile content supports later semantic search
+- results show tier, experience depth, advisory topics, pricing, rating, and near-term availability
+- profile content supports semantic search via embeddings over case records, war stories, and uploaded documents
+- clients can describe their problem in plain language; the platform surfaces advisors whose documented experience most closely matches the situation — not just title or topic keywords
+- search results can be filtered by tier, function, industry, price range, and availability window
+- before submitting a case, clients see a preview of likely-matching advisors to set expectations and reduce low-quality submissions
 
-## 7.4 Booking
-- client selects session type and slot
+## 7.4 Booking and pre-session intake
+- client selects session type and target advisor
+- before slot selection, client submits a structured case intake:
+  - problem statement (guided, short-form)
+  - company stage and context
+  - what a good outcome looks like
+  - up to one supporting document upload
+- on submission, a platform-level mutual NDA auto-executes covering both parties for the pre-session disclosure period — not negotiable, not custom, standard platform confidentiality
+- a deposit is collected at intake submission and held in escrow (amount scales by advisor tier)
+- the advisor receives the case intake and has a defined acceptance window (default: 48 hours) to accept or decline
+- if the advisor does not respond within the window, the case is auto-declined and the full deposit is returned to the client
+- if the advisor declines, the client receives a full deposit refund plus a brief written reason from the advisor; the platform auto-suggests alternative advisors and the deposit can roll over to a new submission rather than reverting
+- if the advisor accepts, the client is prompted to select a slot and complete payment; the deposit applies toward the session fee
 - slot is temporarily locked during checkout
 - booking is confirmed only after successful payment
 - booking owns the session room and trust workflow
@@ -279,6 +320,18 @@ The platform database remains the source of truth for:
 - recording and transcript artifacts are linked to booking
 - transcript access is restricted to participants and admins
 - admin tools allow audit/review for disputes
+
+## 7.6a Post-session artifacts and session history
+- after each session, the platform generates a structured post-session artifact attached to the booking record:
+  - AI-assisted summary of the session
+  - named decisions or conclusions reached
+  - action items with owners and suggested timeframes
+  - named risks or open questions flagged during the session
+- the artifact is reviewed and optionally annotated by the client before being finalised
+- the artifact — not just the transcript — forms part of the advisor's verifiable track record over time
+- advisors with consistently high-quality session artifacts (as reflected in reviews) receive a signal distinct from star ratings, visible on their profile
+- clients accumulate a running session history: past advisors, topics covered, decisions made, follow-up actions — accessible from the client dashboard
+- if a client books a repeat session with the same advisor, the platform surfaces a brief from prior sessions so the advisor can prepare with context
 
 ## 7.7 Notifications
 - booking confirmation
@@ -301,6 +354,10 @@ The platform database remains the source of truth for:
 
 ### Booking states
 - draft
+- intake_submitted
+- intake_pending_advisor_review
+- intake_declined
+- intake_accepted
 - slot_held
 - payment_pending
 - confirmed
@@ -317,6 +374,10 @@ The platform database remains the source of truth for:
 - dispute_resolved
 
 ### Important notes
+- `intake_submitted` means the case brief and deposit have been received; NDA has auto-executed
+- `intake_pending_advisor_review` is active during the 48-hour acceptance window
+- `intake_declined` triggers full deposit refund and written reason from advisor
+- `intake_accepted` means advisor has accepted; client proceeds to slot selection and payment
 - `confirmed` means payment succeeded and meeting room exists
 - `awaiting_consent` applies when pre-join consent is still outstanding
 - `ready_to_join` means the session is joinable under policy
@@ -334,6 +395,16 @@ For standard platform-hosted sessions, the platform can provide:
 - auditable consent record
 - auditable recording/transcript status
 - evidence for refund/dispute review
+- escrow-held deposit with clear refund policy on advisor decline
+- platform-level mutual NDA covering pre-session disclosure
+
+## 9.1a Escrow policy
+- deposit amount is set per advisor tier (Diamond highest, Silver lowest)
+- deposit is held by the platform from intake submission until session completion or decline
+- on advisor decline: full deposit refunded, written reason required from advisor, alternative advisors suggested
+- on advisor acceptance followed by client cancellation: deposit handling follows the standard cancellation policy
+- on session completion: deposit is applied toward the session fee
+- advisors who decline an excessive proportion of intakes without written reason may be reviewed by admin
 
 ## 9.2 Recording policy
 - default policy should be explicit and visible before checkout
@@ -385,27 +456,39 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 
 ## Must-have
 - advisor/client auth
-- rich advisor profiles
-- search and filters
+- rich advisor profiles with document upload and case records
+- advisor tier assignment and moderation
+- search and filters including tier filter
+- semantic search over case records and war stories
 - session offerings and pricing
 - native availability management
 - optional external calendar busy-sync
+- structured client case intake form
+- platform-level auto-executing mutual NDA on intake submission
+- escrow deposit collection and management
+- 48-hour advisor acceptance window with auto-decline
+- written decline reason requirement
+- alternative advisor suggestion on decline
 - booking and slot locking
-- Stripe payment
+- Stripe payment with deposit offset
 - platform-created meeting room
 - pre-join consent capture
 - recording/transcript workflow
-- post-session summary record
+- structured post-session artifact (summary, decisions, actions, risks)
+- client session history dashboard
 - review flow
 - admin dispute and moderation tools
+- advisor tier moderation queue
 
 ## Nice-to-have
 - Google OAuth
-- advisor verification badge
-- semantic search
+- pre-session advisor brief for repeat bookings
+- deposit rollover to alternative advisor on decline
+- artifact quality signal on advisor profile (distinct from star rating)
+- case record corroboration by named counterparty
+- semantic matching preview before intake submission
 - rescheduling flow
 - saved advisors
-- AI-generated summaries
 - calendar write-back
 - multi-currency
 
@@ -422,32 +505,35 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 
 ## Public
 1. Landing page
-2. Advisor search page
-3. Advisor profile page
+2. Advisor search page (with tier filter and semantic search)
+3. Advisor profile page (with tier badge, case records, session artifact quality signal)
 4. Sign in / sign up
 
 ## Advisor authenticated
-5. Advisor onboarding
-6. Advisor profile editor
+5. Advisor onboarding (including tier evidence submission)
+6. Advisor profile editor (including case record authoring and document upload)
 7. Session offerings and pricing
 8. Availability manager
 9. Calendar connections
 10. Advisor bookings dashboard
-11. Booking detail with join flow, consent state, transcript state
+11. Intake review queue (incoming case briefs with accept/decline + written reason)
+12. Booking detail with join flow, consent state, transcript state
 
 ## Client authenticated
-12. Client dashboard
-13. Checkout page
-14. Booking detail page
-15. Join session page
-16. Past session details, summary, review
+13. Client dashboard with session history (past advisors, topics, decisions, actions)
+14. Case intake form and intake status tracker
+15. Checkout page
+16. Booking detail page
+17. Join session page
+18. Past session details — full artifact (summary, decisions, actions, risks), transcript, review
 
 ## Admin
-17. Admin dashboard
-18. Advisor moderation queue
-19. Booking operations
-20. Dispute review console
-21. Recording/transcript audit view
+19. Admin dashboard
+20. Advisor moderation queue (including tier assignment and upgrade review)
+21. Booking operations (including intake and escrow state)
+22. Dispute review console
+23. Recording/transcript audit view
+24. Advisor decline-rate monitoring
 
 ---
 
@@ -456,14 +542,22 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 ## Assumptions
 - advisors will accept platform-hosted sessions if the UX is simple
 - native availability plus optional busy-sync is sufficient for MVP
-- manual moderation is acceptable in early stage
+- manual moderation is acceptable in early stage for tier assignment
 - summaries and transcript generation can be asynchronous
+- a platform-level standard mutual NDA is legally sufficient for pre-session disclosure in primary target markets
+- advisors will provide a written decline reason if the UX makes it easy and non-punitive
+- early advisor cohort sourced from founders' own networks provides sufficient seed quality to establish tier credibility
 
 ## Risks
 - meeting infrastructure adds cost and engineering complexity
 - consent and recording rules vary by region and must be handled carefully
 - calendar edge cases can still cause support tickets
 - advisors may resist a fully platform-controlled experience if onboarding is too rigid
+- escrow deposit may deter early clients if amount is perceived as high relative to session cost
+- intake form quality depends on client effort; poorly written briefs reduce advisor willingness to accept
+- tier assignment is a manual bottleneck at scale; criteria must be documented clearly to ensure consistency
+- advisors who decline frequently may be gaming the intake system; monitoring required
+- NDA enforceability varies by jurisdiction; legal review required before launch in markets outside primary geography
 
 ## Risk mitigation
 - make external meeting links unavailable by default
@@ -471,6 +565,11 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 - start with one supported meeting provider
 - start with one supported calendar provider set
 - define a clear dispute policy for hosted vs non-hosted sessions
+- calibrate deposit amounts by tier with early advisors before launch
+- design intake form with guided fields and a character limit to keep submissions triage-friendly
+- document tier criteria explicitly and publish them to advisors and clients for transparency
+- implement advisor decline-rate monitoring and admin review threshold from day one
+- seek legal review on platform NDA template before launch; flag jurisdiction-specific risks
 
 ---
 
@@ -479,16 +578,17 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 ## Phase 1 — foundation
 - auth
 - roles
-- advisor profile CRUD
-- public profiles
+- advisor profile CRUD with document upload and case record authoring
+- public profiles with tier badge display
 - session offerings
 - pricing
 
 ## Phase 2 — discovery
-- search
-- filters
+- search with tier filter
+- structured filters
 - ranking
-- seed data
+- semantic search embeddings over case records and profile content
+- seed data from founding network
 
 ## Phase 3 — scheduling
 - native availability
@@ -497,21 +597,34 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 - blackout dates
 - optional calendar busy-sync
 
-## Phase 4 — transaction + meeting orchestration
-- slot hold
-- Stripe checkout
+## Phase 4 — intake and escrow
+- structured client case intake form
+- platform-level auto-executing mutual NDA
+- escrow deposit collection
+- advisor intake review queue with accept/decline and written reason
+- 48-hour acceptance window with auto-decline and auto-refund
+- alternative advisor suggestion on decline
+- matching preview before intake submission
+
+## Phase 5 — transaction and meeting orchestration
+- slot hold post-acceptance
+- Stripe checkout with deposit offset
 - booking confirmation
 - platform-created room
-- join tokens/access rules
+- join tokens and access rules
 
-## Phase 5 — trust workflow
+## Phase 6 — trust workflow
 - consent capture
 - recording/transcript pipeline
-- summary records
+- structured post-session artifact generation (summary, decisions, actions, risks)
+- client session history
+- repeat-booking advisor brief
 - review flow
 
-## Phase 6 — operations
+## Phase 7 — operations and tier management
 - admin moderation
+- advisor tier assignment and upgrade queue
+- advisor decline-rate monitoring
 - disputes
 - refund handling
 - analytics
@@ -520,9 +633,11 @@ A scheduler product can accelerate UI or calendar sync, but should not replace y
 
 ## 15. Final Product Recommendation
 
-For this marketplace, the product should be designed around this principle:
+For this marketplace, the product should be designed around two principles:
 
 **If the platform takes payment and promises trust, it should also control the session environment for standard bookings.**
+
+**If the platform promises quality, it should verify credentials, structure the intake, and make outcomes visible — not just surface profiles.**
 
 That means:
 - build your own booking/scheduling domain
@@ -532,3 +647,9 @@ That means:
 - capture consent in-product
 - store the session audit trail against the booking
 - use external meeting links only as an exception, not the default
+- assign advisor tiers through a human-reviewed moderation process, not self-reporting
+- run a structured intake and escrow flow before any slot is confirmed
+- auto-execute a platform-level mutual NDA on case submission to protect pre-session disclosure
+- enforce an advisor acceptance window to protect clients from limbo
+- generate and store structured post-session artifacts so each session compounds into verifiable track record
+- use embeddings over war stories and case records to match on situation, not just title

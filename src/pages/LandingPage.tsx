@@ -37,7 +37,7 @@ const USE_CASES = [
 ];
 
 export function LandingPage() {
-    const featured = advisors.slice(0, 3);
+    const featured = advisors.slice(0, 4);
 
     return (
         <div className="landing">
@@ -67,10 +67,29 @@ export function LandingPage() {
                         <span className="stat-giant">340<sup>+</sup></span>
                         <span className="stat-caption">vetted advisors across 18 functions</span>
                     </div>
+
+                    {/* NEW: mini advisor preview */}
+                    <div className="hero-advisor-preview">
+                        {featured.slice(0, 2).map((a) => (
+                            <div key={a.id} className="hero-advisor-row">
+                                <div className="hero-avatar">
+                                    {a.fullName.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                    <div className="hero-advisor-name">{a.fullName}</div>
+                                    <div className="hero-advisor-headline">{a.headline}</div>
+                                </div>
+                            </div>
+                        ))}
+                        <Link to="/advisors" className="hero-preview-link">
+                            View all advisors →
+                        </Link>
+                    </div>
+
                     <ul className="trust-list">
                         {TRUST_ITEMS.map((t) => (
                             <li key={t} className="trust-item">
-                                <span className="trust-tick" aria-hidden="true" />
+                                <span className="trust-tick" />
                                 {t}
                             </li>
                         ))}
@@ -84,16 +103,10 @@ export function LandingPage() {
                     title="Featured Advisors"
                     subtitle="Every advisor is manually verified — minimum VP-level with at least one successful exit or institutional role."
                 />
-                <div className="advisor-mosaic">
-                    {/* feature card — wider */}
-                    <div className="advisor-feature">
-                        <AdvisorCard advisor={featured[0]} />
-                    </div>
-                    {/* compact pair */}
-                    <div className="advisor-compact-col">
-                        <AdvisorCard advisor={featured[1]} />
-                        <AdvisorCard advisor={featured[2]} />
-                    </div>
+                <div className="advisor-grid-balanced">
+                    {featured.map((advisor) => (
+                        <AdvisorCard key={advisor.id} advisor={advisor} />
+                    ))}
                 </div>
                 <div className="browse-link-row">
                     <Link className="btn ghost" to="/advisors">View all advisors →</Link>
@@ -127,7 +140,7 @@ export function LandingPage() {
                 />
                 <div className="use-case-mosaic">
                     {USE_CASES.map((uc, i) => (
-                        <div key={uc.title} className={`use-case-tile ${i === 0 ? 'tile-wide' : ''}`}>
+                        <div key={uc.title} className="use-case-tile">
                             <span className="tile-index">{String(i + 1).padStart(2, '0')}</span>
                             <h3 className="tile-title">{uc.title}</h3>
                             <p className="tile-desc">{uc.desc}</p>
