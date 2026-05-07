@@ -1,0 +1,462 @@
+/* ═══════════════════════════════════════════════════════════
+   DASHBOARD PAGE
+   ═══════════════════════════════════════════════════════════ */
+
+/* Demo toggle */
+.dash-demo-toggle {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    border: 1px solid #dee5f2;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+/* ── Main layout: primary + secondary panel ── */
+.dash-layout-main {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.dash-primary {
+    display: grid;
+    gap: 2rem;
+}
+
+.dash-secondary {
+    top: calc(57px + 1.75rem);
+    /* topbar height + content padding */
+}
+
+/* ── Stat strip ── */
+.dash-stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #fff;
+    border: 1px solid #d9e1ef;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(16, 32, 50, 0.04);
+}
+
+.dash-stat-cell {
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    border-right: 1px solid #dee5f2;
+}
+
+.dash-stat-cell:last-child {
+    border-right: none;
+}
+
+.dash-stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: #102032;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.dash-stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #102032;
+    margin-top: 0.15rem;
+}
+
+.dash-stat-sub {
+    font-size: 0.68rem;
+}
+
+/* ── Section wrapper ── */
+.dash-section {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.dash-section-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.dash-section-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1d4ed8;
+    text-decoration: none;
+    padding-top: 0.2rem;
+}
+
+.dash-section-link:hover {
+    text-decoration: underline;
+}
+
+/* ── Appointment list ── */
+.dash-appt-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.dash-past-list {
+    display: grid;
+    gap: 0.5rem;
+}
+
+/* ── Suggested advisors ── */
+.dash-suggested-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.dash-suggested-card {
+    background: #fff;
+    border: 1px solid #d9e1ef;
+    border-left: 3px solid #dee5f2;
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1rem 1rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: border-left-color 0.15s, box-shadow 0.15s;
+}
+
+.dash-suggested-card:hover {
+    border-left-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(16, 32, 50, 0.07);
+}
+
+.dash-suggested-top {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.dash-suggested-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e8eefc;
+    color: #1d4ed8;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.dash-suggested-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #102032;
+}
+
+.dash-suggested-title {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.3;
+}
+
+.dash-suggested-reason {
+    font-size: 0.74rem;
+    color: #1d4ed8;
+    font-weight: 500;
+    margin-top: 0.2rem;
+}
+
+.dash-suggested-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.25rem;
+}
+
+.dash-suggested-rate {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #102032;
+}
+
+.dash-suggested-rating {
+    font-size: 0.75rem;
+    color: #92400e;
+    background: #fef3c7;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.dash-suggested-avail {
+    font-size: 0.72rem;
+    margin-top: 0.1rem;
+}
+
+/* ── Right panel ── */
+.dash-panel {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-panel-section {
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.dash-panel-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8a9bb0;
+}
+
+.dash-panel-divider {
+    height: 1px;
+    background: #dee5f2;
+}
+
+.dash-panel-appt-mini {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+}
+
+.dash-panel-appt-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+}
+
+.dash-panel-appt-who {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #102032;
+}
+
+.dash-panel-appt-when {
+    font-size: 0.73rem;
+}
+
+.dash-panel-link {
+    font-size: 0.77rem;
+    font-weight: 600;
+    color: #1d4ed8;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.dash-panel-link:hover {
+    text-decoration: underline;
+}
+
+.dash-panel-review-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.dash-panel-review-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #102032;
+}
+
+/* Progress bar */
+.dash-panel-progress-bar {
+    height: 4px;
+    background: #e1e7f1;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.dash-panel-progress-fill {
+    height: 100%;
+    background: #1d4ed8;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+}
+
+.dash-panel-progress-label {
+    font-size: 0.72rem;
+    line-height: 1.4;
+}
+
+/* Panel CTA */
+.dash-panel-cta {
+    margin: 0;
+    border-radius: 0;
+}
+
+.dash-panel-cta-text {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+}
+
+/* ── Empty state ── */
+.dash-empty {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.dash-empty-inner {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+    max-width: 860px;
+    width: 100%;
+}
+
+.dash-empty-numeral {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(5rem, 14vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -4px;
+    color: #dee5f2;
+    margin-bottom: -0.5rem;
+    user-select: none;
+}
+
+.dash-empty-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    margin-bottom: 0.5rem;
+}
+
+.dash-empty-title em {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.dash-empty-sub {
+    font-size: 0.87rem;
+    line-height: 1.65;
+    max-width: 44ch;
+}
+
+.dash-empty-checklist {
+    padding: 1.25rem;
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+}
+
+.dash-empty-checklist-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8a9bb0;
+    margin-bottom: 0.25rem;
+}
+
+.dash-empty-check-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.dash-empty-check-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid #cad5ea;
+    display: grid;
+    place-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #8a9bb0;
+    flex-shrink: 0;
+    background: #fff;
+}
+
+.dash-empty-check-dot--done {
+    border-color: #1f7a43;
+    background: #ddf7e8;
+    color: #1f7a43;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+    .dash-layout-main {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-secondary {
+        position: static;
+    }
+
+    .dash-stat-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dash-stat-cell:nth-child(2) {
+        border-right: none;
+    }
+
+    .dash-stat-cell:nth-child(3) {
+        border-top: 1px solid #dee5f2;
+    }
+
+    .dash-stat-cell:nth-child(4) {
+        border-top: 1px solid #dee5f2;
+    }
+
+    .dash-suggested-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dash-empty-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .app-content {
+        padding: 1rem;
+    }
+
+    .dash-stat-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dash-suggested-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dash-page-head {
+    margin-bottom: 1.25rem;
+}
+
+.dash-page-title {
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    margin: 0.15rem 0 0.35rem;
+    letter-spacing: -0.5px;
+}

@@ -1,0 +1,59 @@
+.logo {
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #d9e1ef;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(16, 32, 50, .05);
+}
+
+.premium {
+  background: linear-gradient(160deg, #12243f, #1d3a65);
+  color: #f4f8ff;
+}
+
+.btn {
+  border: none;
+  background: #1d4ed8;
+  color: white;
+  border-radius: 10px;
+  padding: .6rem .95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.ghost {
+  background: #e8eefc;
+  color: #1d4ed8;
+}
+
+.badge {
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  background: #eef2f7;
+  font-size: .75rem;
+}
+
+.badge.success {
+  background: #ddf7e8;
+  color: #1f7a43;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 14, 26, .6);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 7;
+}
+
+.modal {
+  max-width: 680px;
+  width: 100%;
+}

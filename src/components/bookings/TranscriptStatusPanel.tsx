@@ -2,7 +2,7 @@ export function TranscriptStatusPanel({ status }: { status?: 'not_started' | 'pr
   return (
     <div className="card">
       <h3>Transcript Status</h3>
-      <p>{status?.replaceAll('_', ' ') ?? 'not started'}</p>
+      <p>{status?.replace('_', ' ') ?? 'not started'}</p>
     </div>
   );
 }

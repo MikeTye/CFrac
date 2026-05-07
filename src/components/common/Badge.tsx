@@ -1,5 +1,13 @@
-import type { ReactNode } from 'react';
+type BadgeProps = {
+  children: React.ReactNode;
+  tone?: "success" | "default" | "warning" | "danger";
+  className?: string;
+};
 
-export function Badge({ children, tone = 'default' }: { children: ReactNode; tone?: 'default' | 'success' | 'warning' | 'danger' }) {
-  return <span className={`badge ${tone}`}>{children}</span>;
+export function Badge({ children, tone = "default", className = "" }: BadgeProps) {
+  return (
+    <span className={`badge badge-${tone} ${className}`}>
+      {children}
+    </span>
+  );
 }

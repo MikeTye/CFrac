@@ -1,0 +1,59 @@
+.ac-impact-headline {
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #102032;
+  margin: 0.25rem 0;
+}
+
+.ac-impact-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.ac-metric {
+  background: #f7f9fc;
+  border: 1px solid #dee5f2;
+  border-radius: 12px;
+  padding: 0.7rem;
+}
+
+.ac-metric strong {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.1;
+  color: #1d4ed8;
+}
+
+.ac-metric span {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  color: #607089;
+}
+
+.ac-impact-highlights {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: #40516a;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.profile-proof-metric {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.profile-proof-metric span {
+  color: rgba(244, 248, 255, 0.72);
+}
+
+@media (max-width: 720px) {
+  .ac-impact-metrics {
+    grid-template-columns: 1fr;
+  }
+}
