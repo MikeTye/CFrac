@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "advisor_id": "adv_1001",
+  "payments": [
+    {
+      "appointment_id": "apt_happy_01",
+      "invoice_id": "inv_01",
+      "amount_cents": 45000,
+      "currency": "USD",
+      "status": "confirmed",
+      "payout_eta": "2026-05-08",
+      "updated_at": "2026-05-06T17:00:00Z"
+    }
+  ]
+}
