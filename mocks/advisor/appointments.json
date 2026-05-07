@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "advisor_id": "adv_1001",
+  "appointments": [
+    {
+      "appointment_id": "apt_happy_01",
+      "client_id": "cli_2001",
+      "advisor_status": "payment_confirmed",
+      "booking_state": "completed",
+      "payment_status": "confirmed",
+      "session": { "starts_at": "2026-05-06T15:00:00Z", "ends_at": "2026-05-06T16:00:00Z" }
+    }
+  ]
+}

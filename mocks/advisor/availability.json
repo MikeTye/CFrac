@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "advisor_id": "adv_1001",
+  "slot_interval_min": 30,
+  "minimum_notice_hours": 24,
+  "buffers": { "pre_min": 15, "post_min": 15 },
+  "max_daily_bookings": 4,
+  "weekly_windows": [
+    { "weekday": "monday", "start_local": "09:00", "end_local": "17:00" },
+    { "weekday": "wednesday", "start_local": "10:00", "end_local": "16:00" }
+  ],
+  "blackout_dates": ["2026-05-20"],
+  "vacation_ranges": [
+    { "start_date": "2026-06-01", "end_date": "2026-06-07" }
+  ],
+  "calendar_sync": { "connected": true, "provider": "google", "mode": "busy_read_only" }
+}

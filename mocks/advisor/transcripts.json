@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "appointment_id": "apt_happy_01",
+  "transcript": {
+    "status": "ready_for_review",
+    "session_state_required_for_finalize": "session_completed",
+    "language": "en",
+    "segments": [
+      { "speaker": "advisor", "start_ms": 120000, "end_ms": 180000, "text": "Let's align on priorities." }
+    ],
+    "edits_required": false
+  }
+}

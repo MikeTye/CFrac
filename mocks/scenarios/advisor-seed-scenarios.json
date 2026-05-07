@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "scenarios": [
+    {"scenario_id":"happy_path","appointment_id":"apt_happy_01","advisor_status":"closed","payment_status":"confirmed","transcript_status":"finalized"},
+    {"scenario_id":"payment_delayed","appointment_id":"apt_pay_delay_01","advisor_status":"payment_pending","payment_status":"pending","closure_blocked":true},
+    {"scenario_id":"cancellation_reschedule","appointment_id":"apt_cancel_01","booking_state":"cancelled_by_client","reschedule_eligible":true},
+    {"scenario_id":"no_show","appointment_id":"apt_no_show_01","booking_state":"no_show","requires_resolution":true},
+    {"scenario_id":"transcript_needs_edits","appointment_id":"apt_transcript_edit_01","advisor_status":"session_completed","transcript_status":"ready_for_review","edits_required":true}
+  ]
+}
