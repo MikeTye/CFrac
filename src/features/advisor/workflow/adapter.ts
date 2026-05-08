@@ -12,6 +12,12 @@ import {
   type NormalizedTranscript,
 } from './types';
 
+const OVERLAY_STATES = new Set<keyof typeof OVERLAY_ROUTE_HINTS>([
+  BOOKING_STATE.cancelled,
+  BOOKING_STATE.no_show,
+  BOOKING_STATE.disputed,
+]);
+
 function asEnumValue<T extends Record<string, string>>(value: unknown, enumMap: T, fieldName: string): T[keyof T] {
   if (typeof value !== 'string' || !Object.values(enumMap).includes(value)) {
     throw new Error(`Invalid ${fieldName}: ${String(value)}`);
@@ -92,6 +98,48 @@ export function canFinalizeTranscript(appointment: NormalizedAppointment, transc
 
 export function canCloseAppointment(appointment: NormalizedAppointment, payment: NormalizedPayment): boolean {
   return appointment.appointment_id === payment.appointment_id && payment.status === PAYMENT_STATUS.confirmed;
+}
+
+export function getOverlayState(appointment: NormalizedAppointment): (typeof BOOKING_STATE)[keyof typeof BOOKING_STATE] | null {
+  return OVERLAY_STATES.has(appointment.booking_state) ? appointment.booking_state : null;
+}
+
+export function getOverlayRoute(appointment: NormalizedAppointment): string | null {
+  const overlayState = getOverlayState(appointment);
+  if (!overlayState) {
+    return null;
+  }
+  return OVERLAY_ROUTE_HINTS[overlayState] ?? null;
+}
+
+export function getTranscriptFinalizeGate(appointment: NormalizedAppointment, transcript: NormalizedTranscript): { enabled: boolean; reason: string; helperText: string } {
+  const enabled = canFinalizeTranscript(appointment, transcript);
+  if (enabled) {
+    return {
+      enabled,
+      reason: 'Transcript can be finalized.',
+      helperText: `Required state: ${transcript.session_state_required_for_finalize}. Current state: ${appointment.advisor_status}.`,
+    };
+  }
+
+  return {
+    enabled,
+    reason: 'Finalize disabled until session is completed.',
+    helperText: `Required state: ${transcript.session_state_required_for_finalize}. Current state: ${appointment.advisor_status}.`,
+  };
+}
+
+export function getClosureGate(appointment: NormalizedAppointment, payment: NormalizedPayment): { enabled: boolean; reason: string; nextAction: string } {
+  const enabled = canCloseAppointment(appointment, payment);
+  if (enabled) {
+    return { enabled, reason: 'Appointment can be closed.', nextAction: 'Close appointment now.' };
+  }
+
+  if (payment.status === PAYMENT_STATUS.pending) {
+    return { enabled, reason: 'Closure disabled while payment is pending.', nextAction: 'Wait for settlement.' };
+  }
+
+  return { enabled, reason: 'Closure disabled because payout failed.', nextAction: 'Resolve payout issue.' };
 }
 
 export const STATUS_BADGE_VARIANTS: Record<string, BadgeVariant> = {
