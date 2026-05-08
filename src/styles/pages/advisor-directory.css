@@ -1,0 +1,380 @@
+/* ═══════════════════════════════════════════════
+   ADVISOR DIRECTORY + PROFILE v2
+   ═══════════════════════════════════════════════ */
+
+.advisor-directory-page,
+.advisor-profile-page {
+    display: grid;
+    gap: 0;
+}
+
+/* ── Directory hero ── */
+.advisor-directory-hero {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr 320px;
+    gap: 0 2.5rem;
+    padding: 4rem 2rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.directory-hero-panel {
+    display: grid;
+    gap: 1rem;
+}
+
+.directory-hero-list {
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: #607089;
+}
+
+/* ── Directory body ── */
+.advisor-directory-body {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.directory-feature-row {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #dee5f2;
+    border-radius: 16px;
+}
+
+.directory-feature-row h2 {
+    margin: 0.25rem 0 0.5rem;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    letter-spacing: -0.3px;
+}
+
+.directory-results-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.directory-sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: #607089;
+}
+
+.directory-sort select {
+    min-width: 190px;
+    margin: 0;
+}
+
+.directory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1rem;
+}
+
+/* ── Profile hero ── */
+.advisor-profile-hero {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 2rem;
+    padding: 3.5rem 2rem;
+    align-items: center;
+}
+
+.advisor-profile-copy {
+    max-width: 760px;
+}
+
+.profile-back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.82rem;
+    opacity: 0.7;
+}
+
+.advisor-profile-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    margin: 0.2rem 0 0.75rem;
+    letter-spacing: -1px;
+}
+
+.advisor-profile-headline {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 58ch;
+}
+
+.advisor-profile-meta {
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+
+.advisor-profile-bio {
+    max-width: 62ch;
+    line-height: 1.65;
+    opacity: 0.9;
+}
+
+.advisor-profile-impact-headline {
+    max-width: 720px;
+    margin: 12px 0 16px;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+/* ── Advisor video card ── */
+.advisor-video-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    padding: 1rem;
+}
+
+.advisor-video-frame {
+    min-height: 240px;
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 34%),
+        rgba(255, 255, 255, 0.08);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.advisor-video-play {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #fff;
+    color: #102032;
+    display: grid;
+    place-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.advisor-video-frame p {
+    font-weight: 700;
+    margin: 0;
+}
+
+.advisor-video-frame span {
+    opacity: 0.65;
+    font-size: 0.78rem;
+}
+
+/* ── Profile shell ── */
+.advisor-profile-shell {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.advisor-profile-main {
+    display: grid;
+    gap: 1rem;
+}
+
+/* ── Profile tabs ── */
+.profile-tabs {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid #dee5f2;
+    border-radius: 14px;
+    padding: 0.45rem;
+    position: sticky;
+    top: 80px;
+    z-index: 2;
+}
+
+.profile-tab {
+    border: none;
+    background: transparent;
+    color: #607089;
+    border-radius: 10px;
+    padding: 0.55rem 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.82rem;
+}
+
+.profile-tab.active {
+    background: #e8eefc;
+    color: #1d4ed8;
+}
+
+.profile-tab-panel {
+    display: grid;
+    gap: 1rem;
+}
+
+/* ── Profile metrics ── */
+.profile-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.profile-metric-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.profile-metric-label {
+    display: block;
+    color: #607089;
+    font-size: 0.8rem;
+}
+
+.profile-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+}
+
+/* ── Profile chips ── */
+.profile-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.profile-chip {
+    border: 1px solid #dee5f2;
+    background: #f7f9fc;
+    border-radius: 999px;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ── Profile stories & offerings ── */
+.profile-story-list,
+.profile-offering-list {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.profile-story,
+.profile-offering {
+    border: 1px solid #e1e7f1;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #f7f9fc;
+}
+
+.profile-story h3,
+.profile-offering h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+}
+
+.profile-offering {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+/* ── Profile media grid ── */
+.profile-media-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 0.8rem;
+}
+
+.profile-media-tile {
+    border: 1px solid #e1e7f1;
+    border-radius: 14px;
+    padding: 1rem;
+    background: #f7f9fc;
+    min-height: 140px;
+    display: grid;
+    align-content: end;
+    gap: 0.35rem;
+}
+
+.profile-media-tile.large {
+    grid-row: span 2;
+    min-height: 290px;
+    background: linear-gradient(160deg, #12243f, #1d3a65);
+    color: #f4f8ff;
+}
+
+.profile-media-tile span {
+    font-size: 1.5rem;
+}
+
+/* ── Booking panel ── */
+.advisor-booking-panel {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.advisor-booking-panel h3 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.advisor-booking-btn {
+    width: 100%;
+}
+
+.advisor-trust-box {
+    border-top: 1px solid #dee5f2;
+    padding-top: 0.85rem;
+}
+
+.advisor-trust-box p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+    .advisor-directory-hero,
+    .advisor-directory-body,
+    .advisor-profile-hero,
+    .advisor-profile-shell,
+    .directory-feature-row {
+        grid-template-columns: 1fr;
+    }
+
+    .advisor-directory-hero .hero-rail {
+        display: none;
+    }
+
+    .profile-tabs {
+        position: static;
+    }
+
+    .profile-metric-grid,
+    .profile-media-grid,
+    .profile-proof-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-offering {
+        display: grid;
+    }
+}

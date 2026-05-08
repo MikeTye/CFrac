@@ -1,3 +1,104 @@
+/* ── Card shell ── */
+.advisor-card-v2 {
+    display: grid;
+    gap: 0.65rem;
+    padding: 1rem 1rem 1rem 1.25rem;
+    border-left: 3px solid #dee5f2;
+    border-top: 1px solid #dee5f2;
+    border-right: 1px solid #dee5f2;
+    border-bottom: 1px solid #dee5f2;
+    border-radius: 0 14px 14px 0;
+    background: #fff;
+    transition: border-left-color 0.15s;
+}
+
+.advisor-card-v2:hover {
+    border-left-color: #1d4ed8;
+}
+
+.ac-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.ac-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e8eefc;
+    color: #1d4ed8;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.ac-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.ac-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 1px;
+}
+
+.ac-headline {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.ac-location {
+    font-size: 0.78rem;
+}
+
+.ac-tags {
+    gap: 0.35rem;
+}
+
+.ac-details {
+    display: grid;
+    gap: 0.25rem;
+    font-size: 0.82rem;
+}
+
+.ac-detail-label {
+    font-weight: 600;
+    margin-right: 0.3rem;
+}
+
+.ac-footer {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.ac-price-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.ac-price {
+    font-size: 0.95rem;
+}
+
+.ac-rating {
+    font-size: 0.78rem;
+}
+
+.ac-avail {
+    font-size: 0.78rem;
+}
+
+.ac-actions {
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+/* ── Impact content ── */
 .ac-impact-headline {
   font-size: 1rem;
   line-height: 1.45;

@@ -34,101 +34,102 @@ import { AdminRecordingAuditPage } from './pages/Admin/AdminRecordingAuditPage';
 import { AdminDeclineMonitoringPage } from './pages/Admin/AdminDeclineMonitoringPage';
 import { DemoStartPage } from './pages/DemoStartPage';
 import {
-  AdvisorAppointmentClosurePage,
-  AdvisorAppointmentDetailPage,
-  AdvisorAppointmentsListPage,
-  AdvisorAvailabilitySetupPage,
-  AdvisorCalendarPage,
-  AdvisorEmailVerificationPage,
-  AdvisorHistoricalRecordsPage,
-  AdvisorHomeDashboardPage,
-  AdvisorInvoiceOrPaymentStatusPage,
-  AdvisorKYCOrIdentityPage,
-  AdvisorOnboardingChecklistPage,
-  AdvisorPreSessionChecklistPage,
-  AdvisorProfileSetupPage,
-  AdvisorSessionNotesEditorPage,
-  AdvisorSessionRoomPage,
-  AdvisorSessionSummaryPage,
-  AdvisorSignupPage,
-  AdvisorTranscriptReviewPage,
-  DisputeOrEscalationPage,
-  NoShowResolutionPage,
-  RescheduleOrCancellationPage,
+    AdvisorAppointmentClosurePage,
+    AdvisorAppointmentDetailPage,
+    AdvisorAppointmentsListPage,
+    AdvisorAvailabilitySetupPage,
+    AdvisorCalendarPage,
+    AdvisorEmailVerificationPage,
+    AdvisorHistoricalRecordsPage,
+    AdvisorHomeDashboardPage,
+    AdvisorInvoiceOrPaymentStatusPage,
+    AdvisorKYCOrIdentityPage,
+    AdvisorOnboardingChecklistPage,
+    AdvisorPreSessionChecklistPage,
+    AdvisorProfileSetupPage,
+    AdvisorSessionNotesEditorPage,
+    AdvisorSessionRoomPage,
+    AdvisorSessionSummaryPage,
+    AdvisorSignupPage,
+    AdvisorTranscriptReviewPage,
+    DisputeOrEscalationPage,
+    NoShowResolutionPage,
+    RescheduleOrCancellationPage,
 } from './pages/AdvisorWireframes/AdvisorWireframePages';
 
 export function App() {
-  return (
-    <Routes>
-      <Route element={<PublicLayout />}>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/landing2" element={<LandingPage2 />} />
-        <Route path="/landing3" element={<LandingPage3 />} />
-        <Route path="/advisors" element={<AdvisorsPage />} />
-        <Route path="/advisors/:advisorId" element={<AdvisorProfilePage />} />
-        <Route path="/demo-start" element={<DemoStartPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<SignupPage />} />
-        <Route path="/verify-code" element={<VerifyCodePage />} />
-        <Route path="/onboarding" element={<OnboardingPage />} />
-      </Route>
+    return (
+        <Routes>
+            <Route element={<PublicLayout />}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/landing2" element={<LandingPage2 />} />
+                <Route path="/landing3" element={<LandingPage3 />} />
+                <Route path="/advisors" element={<AdvisorsPage />} />
+                <Route path="/advisors/:advisorId" element={<AdvisorProfilePage />} />
+                <Route path="/demo-start" element={<DemoStartPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<SignupPage />} />
+                <Route path="/verify-code" element={<VerifyCodePage />} />
+                <Route path="/onboarding" element={<OnboardingPage />} />
+            </Route>
 
-      <Route path="/client" element={<DashboardLayout role="client" />}>
-        <Route path="dashboard" element={<ClientDashboardPage />} />
-        <Route path="intake/new" element={<ClientIntakeNewPage />} />
-        <Route path="intake/:intakeId/status" element={<ClientIntakeStatusPage />} />
-        <Route path="checkout/:bookingId" element={<ClientCheckoutPage />} />
-        <Route path="booking/:bookingId" element={<ClientBookingDetailPage />} />
-        <Route path="join/:bookingId" element={<ClientJoinSessionPage />} />
-        <Route path="sessions/:bookingId" element={<ClientSessionDetailsPage />} />
-        <Route index element={<Navigate to="/client/dashboard" replace />} />
-      </Route>
+            <Route path="/client" element={<DashboardLayout role="client" />}>
+                <Route path="dashboard" element={<ClientDashboardPage />} />
+                <Route path="intake/new" element={<ClientIntakeNewPage />} />
+                <Route path="intake/:intakeId/status" element={<ClientIntakeStatusPage />} />
+                <Route path="checkout/:bookingId" element={<ClientCheckoutPage />} />
+                <Route path="booking/:bookingId" element={<ClientBookingDetailPage />} />
+                <Route path="join/:bookingId" element={<ClientJoinSessionPage />} />
+                <Route path="sessions/:bookingId" element={<ClientSessionDetailsPage />} />
+                <Route index element={<Navigate to="/client/dashboard" replace />} />
+            </Route>
 
-      <Route path="/advisor" element={<DashboardLayout role="advisor" />}>
-        <Route index element={<AdvisorDashboardPage />} />
-        <Route path="profile" element={<AdvisorProfileEditorPage />} />
-        <Route path="availability" element={<AdvisorAvailabilityPage />} />
-        <Route path="offerings" element={<AdvisorOfferingsPage />} />
-        <Route path="calendar" element={<AdvisorCalendarConnectionsPage />} />
-        <Route path="intakes" element={<AdvisorIntakeQueuePage />} />
-        <Route path="intakes/:intakeId" element={<AdvisorIntakeQueuePage />} />
-        <Route path="bookings" element={<AdvisorBookingsPage />} />
-        <Route path="bookings/:bookingId" element={<AdvisorBookingDetailPage />} />
-      </Route>
-      <Route path="/advisor-wireframe" element={<DashboardLayout role="advisor" />}>
-        <Route path="signup" element={<AdvisorSignupPage />} />
-        <Route path="email-verification" element={<AdvisorEmailVerificationPage />} />
-        <Route path="kyc-identity" element={<AdvisorKYCOrIdentityPage />} />
-        <Route path="profile-setup" element={<AdvisorProfileSetupPage />} />
-        <Route path="availability-setup" element={<AdvisorAvailabilitySetupPage />} />
-        <Route path="onboarding-checklist" element={<AdvisorOnboardingChecklistPage />} />
-        <Route path="home-dashboard" element={<AdvisorHomeDashboardPage />} />
-        <Route path="calendar" element={<AdvisorCalendarPage />} />
-        <Route path="appointments-list" element={<AdvisorAppointmentsListPage />} />
-        <Route path="appointment-detail" element={<AdvisorAppointmentDetailPage />} />
-        <Route path="pre-session-checklist" element={<AdvisorPreSessionChecklistPage />} />
-        <Route path="session-room" element={<AdvisorSessionRoomPage />} />
-        <Route path="session-notes-editor" element={<AdvisorSessionNotesEditorPage />} />
-        <Route path="transcript-review" element={<AdvisorTranscriptReviewPage />} />
-        <Route path="session-summary" element={<AdvisorSessionSummaryPage />} />
-        <Route path="invoice-payment-status" element={<AdvisorInvoiceOrPaymentStatusPage />} />
-        <Route path="appointment-closure" element={<AdvisorAppointmentClosurePage />} />
-        <Route path="historical-records" element={<AdvisorHistoricalRecordsPage />} />
-        <Route path="reschedule-cancellation" element={<RescheduleOrCancellationPage />} />
-        <Route path="no-show-resolution" element={<NoShowResolutionPage />} />
-        <Route path="dispute-escalation" element={<DisputeOrEscalationPage />} />
-      </Route>
+            <Route path="/advisor" element={<DashboardLayout role="advisor" />}>
+                <Route index element={<AdvisorDashboardPage />} />
+                <Route path="profile" element={<AdvisorProfileEditorPage />} />
+                <Route path="availability" element={<AdvisorAvailabilityPage />} />
+                <Route path="offerings" element={<AdvisorOfferingsPage />} />
+                <Route path="calendar" element={<AdvisorCalendarConnectionsPage />} />
+                <Route path="intakes" element={<AdvisorIntakeQueuePage />} />
+                <Route path="intakes/:intakeId" element={<AdvisorIntakeQueuePage />} />
+                <Route path="bookings" element={<AdvisorBookingsPage />} />
+                <Route path="bookings/:bookingId" element={<AdvisorBookingDetailPage />} />
+            </Route>
+            <Route path="/advisor-wireframe" element={<DashboardLayout role="advisor" />}>
+                <Route index element={<Navigate to="/advisor-wireframe/home-dashboard" replace />} />
+                <Route path="signup" element={<AdvisorSignupPage />} />
+                <Route path="email-verification" element={<AdvisorEmailVerificationPage />} />
+                <Route path="kyc-identity" element={<AdvisorKYCOrIdentityPage />} />
+                <Route path="profile-setup" element={<AdvisorProfileSetupPage />} />
+                <Route path="availability-setup" element={<AdvisorAvailabilitySetupPage />} />
+                <Route path="onboarding-checklist" element={<AdvisorOnboardingChecklistPage />} />
+                <Route path="home-dashboard" element={<AdvisorHomeDashboardPage />} />
+                <Route path="calendar" element={<AdvisorCalendarPage />} />
+                <Route path="appointments-list" element={<AdvisorAppointmentsListPage />} />
+                <Route path="appointment-detail" element={<AdvisorAppointmentDetailPage />} />
+                <Route path="pre-session-checklist" element={<AdvisorPreSessionChecklistPage />} />
+                <Route path="session-room" element={<AdvisorSessionRoomPage />} />
+                <Route path="session-notes-editor" element={<AdvisorSessionNotesEditorPage />} />
+                <Route path="transcript-review" element={<AdvisorTranscriptReviewPage />} />
+                <Route path="session-summary" element={<AdvisorSessionSummaryPage />} />
+                <Route path="invoice-payment-status" element={<AdvisorInvoiceOrPaymentStatusPage />} />
+                <Route path="appointment-closure" element={<AdvisorAppointmentClosurePage />} />
+                <Route path="historical-records" element={<AdvisorHistoricalRecordsPage />} />
+                <Route path="reschedule-cancellation" element={<RescheduleOrCancellationPage />} />
+                <Route path="no-show-resolution" element={<NoShowResolutionPage />} />
+                <Route path="dispute-escalation" element={<DisputeOrEscalationPage />} />
+            </Route>
 
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboardPage />} />
-        <Route path="moderation/advisors" element={<AdminModerationAdvisorsPage />} />
-        <Route path="bookings" element={<AdminBookingsPage />} />
-        <Route path="disputes/:disputeId" element={<AdminDisputeReviewPage />} />
-        <Route path="audit/recordings/:bookingId" element={<AdminRecordingAuditPage />} />
-        <Route path="monitoring/declines" element={<AdminDeclineMonitoringPage />} />
-      </Route>
+            <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboardPage />} />
+                <Route path="moderation/advisors" element={<AdminModerationAdvisorsPage />} />
+                <Route path="bookings" element={<AdminBookingsPage />} />
+                <Route path="disputes/:disputeId" element={<AdminDisputeReviewPage />} />
+                <Route path="audit/recordings/:bookingId" element={<AdminRecordingAuditPage />} />
+                <Route path="monitoring/declines" element={<AdminDeclineMonitoringPage />} />
+            </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  );
+            <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+    );
 }

@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const items = {
   client: [
@@ -26,10 +26,21 @@ export function DashboardLayout({ role }: { role: 'client' | 'advisor' }) {
   return (
     <div className="dash-layout">
       <aside>
-        <h3>{role.toUpperCase()} NAV</h3>
-        {items[role].map(([label, path]) => <Link key={path} to={path}>{label}</Link>)}
+        <h3>{role} nav</h3>
+        {items[role].map(([label, path]) => (
+          <NavLink
+            key={path}
+            to={path}
+            className={({ isActive }) => isActive ? 'active' : undefined}
+            end
+          >
+            {label}
+          </NavLink>
+        ))}
       </aside>
-      <section><Outlet /></section>
+      <section>
+        <Outlet />
+      </section>
     </div>
   );
 }

@@ -451,6 +451,24 @@
     }
 }
 
+
+/* ── Appointment dot accent colors (used in QuickActionsPanel) ── */
+.appt-accent--upcoming {
+  background: #1d4ed8;
+}
+
+.appt-accent--pending {
+  background: #d97706;
+}
+
+.appt-accent--completed {
+  background: #1f7a43;
+}
+
+.appt-accent--cancelled {
+  background: #b91c1c;
+}
+
 .dash-page-head {
     margin-bottom: 1.25rem;
 }

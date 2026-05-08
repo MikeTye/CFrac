@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════════════════════════
+   DASHBOARD LAYOUT  —  sidebar + content shell
+   ═══════════════════════════════════════════════════════════ */
+
+.dash-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+  align-items: start;
+}
+
+/* ── Sidebar ── */
+.dash-layout aside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: #fff;
+  border-right: 1px solid #d9e1ef;
+  padding: 1.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Role label (the h3) */
+.dash-layout aside h3 {
+  margin: 0 0 1rem 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8a9bb0;
+}
+
+/* Nav links */
+.dash-layout aside a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #40516a;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+
+.dash-layout aside a:hover {
+  background: #f0f4fc;
+  color: #102032;
+}
+
+.dash-layout aside a.active {
+  background: #e8eefc;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* ── Main content ── */
+.dash-layout section {
+  padding: 1.75rem;
+  min-width: 0; /* prevent grid blowout */
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .dash-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-layout aside {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    border-right: none;
+    border-bottom: 1px solid #d9e1ef;
+    overflow-x: auto;
+  }
+
+  .dash-layout aside h3 {
+    display: none; /* too cramped on mobile */
+  }
+
+  .dash-layout aside a {
+    white-space: nowrap;
+  }
+
+  .dash-layout section {
+    padding: 1rem;
+  }
+}
