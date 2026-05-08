@@ -48,6 +48,7 @@ export type DisputeStatus = (typeof DISPUTE_STATUS)[keyof typeof DISPUTE_STATUS]
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger';
 
 export interface NormalizedAppointment {
+  schema_version: string;
   appointment_id: string;
   advisor_status: AdvisorStatus;
   booking_state: BookingState;
@@ -56,6 +57,7 @@ export interface NormalizedAppointment {
 }
 
 export interface NormalizedPayment {
+  schema_version: string;
   appointment_id: string;
   status: PaymentStatus;
   invoice_id?: string;
@@ -64,6 +66,7 @@ export interface NormalizedPayment {
 }
 
 export interface NormalizedTranscript {
+  schema_version: string;
   status: TranscriptStatus;
   session_state_required_for_finalize: AdvisorStatus;
   language?: string;
@@ -72,6 +75,7 @@ export interface NormalizedTranscript {
 }
 
 export interface NormalizedDispute {
+  schema_version: string;
   dispute_id: string;
   appointment_id: string;
   status: DisputeStatus;
