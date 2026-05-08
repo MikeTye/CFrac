@@ -1,0 +1,75 @@
+/* ═══════════════════════════════════════════════════════════
+   ADVISOR WORKFLOW PAGE
+   ═══════════════════════════════════════════════════════════ */
+
+.awf-page {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.awf-page-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1rem;
+    align-items: start;
+}
+
+.awf-timeline {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.awf-timeline-row {
+    background: #fff;
+    border: 1px solid #d9e1ef;
+    border-left: 3px solid #dee5f2;
+    border-radius: 0 12px 12px 0;
+    padding: 0.85rem 1rem;
+    box-shadow: 0 2px 8px rgba(16, 32, 50, 0.04);
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr) auto;
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.awf-timeline-time {
+    font-size: 0.73rem;
+    font-weight: 600;
+    color: #40516a;
+}
+
+.awf-timeline-title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #102032;
+}
+
+.awf-timeline-note {
+    font-size: 0.74rem;
+    color: #607089;
+}
+
+.awf-timeline-cta {
+    color: #1d4ed8;
+    font-size: 0.76rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.awf-timeline-cta:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1100px) {
+    .awf-page-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .awf-timeline-row {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+    }
+}
