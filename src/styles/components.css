@@ -57,3 +57,102 @@
   max-width: 680px;
   width: 100%;
 }
+/* Advisor UI scaffolding */
+.advisor-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.advisor-page-header h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+.advisor-page-header p {
+  margin: 0.35rem 0 0;
+}
+
+.advisor-primary-panel,
+.advisor-right-rail,
+.advisor-timeline {
+  background: #fff;
+  border: 1px solid #d9e1ef;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(16, 32, 50, .05);
+}
+
+.advisor-primary-panel__title,
+.advisor-right-rail__title,
+.advisor-timeline__title {
+  margin: 0 0 0.9rem;
+  font-size: 1rem;
+}
+
+.advisor-right-rail {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.advisor-timeline__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.advisor-timeline__item {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.advisor-timeline__item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.advisor-timeline__time { color: #607089; font-size: 0.8rem; }
+
+.advisor-state {
+  display: grid;
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.advisor-state__title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.advisor-state__message {
+  color: #607089;
+  margin: 0;
+}
+
+.advisor-skeleton {
+  border-radius: 10px;
+  background: linear-gradient(90deg, #eef2f7 20%, #f5f8fc 40%, #eef2f7 60%);
+  background-size: 180% 100%;
+  animation: advisor-skeleton-loading 1.2s infinite;
+}
+
+@keyframes advisor-skeleton-loading {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.badge-default,
+.badge-success,
+.badge-warning,
+.badge-danger {
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-default { background: #eef2f7; color: #607089; }
+.badge-success { background: #ddf7e8; color: #1f7a43; }
+.badge-warning { background: #fef3c7; color: #92400e; }
+.badge-danger { background: #fef2f2; color: #b91c1c; }
