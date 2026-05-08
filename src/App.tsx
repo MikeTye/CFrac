@@ -33,6 +33,29 @@ import { AdminDisputeReviewPage } from './pages/Admin/AdminDisputeReviewPage';
 import { AdminRecordingAuditPage } from './pages/Admin/AdminRecordingAuditPage';
 import { AdminDeclineMonitoringPage } from './pages/Admin/AdminDeclineMonitoringPage';
 import { DemoStartPage } from './pages/DemoStartPage';
+import {
+  AdvisorAppointmentClosurePage,
+  AdvisorAppointmentDetailPage,
+  AdvisorAppointmentsListPage,
+  AdvisorAvailabilitySetupPage,
+  AdvisorCalendarPage,
+  AdvisorEmailVerificationPage,
+  AdvisorHistoricalRecordsPage,
+  AdvisorHomeDashboardPage,
+  AdvisorInvoiceOrPaymentStatusPage,
+  AdvisorKYCOrIdentityPage,
+  AdvisorOnboardingChecklistPage,
+  AdvisorPreSessionChecklistPage,
+  AdvisorProfileSetupPage,
+  AdvisorSessionNotesEditorPage,
+  AdvisorSessionRoomPage,
+  AdvisorSessionSummaryPage,
+  AdvisorSignupPage,
+  AdvisorTranscriptReviewPage,
+  DisputeOrEscalationPage,
+  NoShowResolutionPage,
+  RescheduleOrCancellationPage,
+} from './pages/AdvisorWireframes/AdvisorWireframePages';
 
 export function App() {
   return (
@@ -71,6 +94,29 @@ export function App() {
         <Route path="intakes/:intakeId" element={<AdvisorIntakeQueuePage />} />
         <Route path="bookings" element={<AdvisorBookingsPage />} />
         <Route path="bookings/:bookingId" element={<AdvisorBookingDetailPage />} />
+      </Route>
+      <Route path="/advisor-wireframe" element={<DashboardLayout role="advisor" />}>
+        <Route path="signup" element={<AdvisorSignupPage />} />
+        <Route path="email-verification" element={<AdvisorEmailVerificationPage />} />
+        <Route path="kyc-identity" element={<AdvisorKYCOrIdentityPage />} />
+        <Route path="profile-setup" element={<AdvisorProfileSetupPage />} />
+        <Route path="availability-setup" element={<AdvisorAvailabilitySetupPage />} />
+        <Route path="onboarding-checklist" element={<AdvisorOnboardingChecklistPage />} />
+        <Route path="home-dashboard" element={<AdvisorHomeDashboardPage />} />
+        <Route path="calendar" element={<AdvisorCalendarPage />} />
+        <Route path="appointments-list" element={<AdvisorAppointmentsListPage />} />
+        <Route path="appointment-detail" element={<AdvisorAppointmentDetailPage />} />
+        <Route path="pre-session-checklist" element={<AdvisorPreSessionChecklistPage />} />
+        <Route path="session-room" element={<AdvisorSessionRoomPage />} />
+        <Route path="session-notes-editor" element={<AdvisorSessionNotesEditorPage />} />
+        <Route path="transcript-review" element={<AdvisorTranscriptReviewPage />} />
+        <Route path="session-summary" element={<AdvisorSessionSummaryPage />} />
+        <Route path="invoice-payment-status" element={<AdvisorInvoiceOrPaymentStatusPage />} />
+        <Route path="appointment-closure" element={<AdvisorAppointmentClosurePage />} />
+        <Route path="historical-records" element={<AdvisorHistoricalRecordsPage />} />
+        <Route path="reschedule-cancellation" element={<RescheduleOrCancellationPage />} />
+        <Route path="no-show-resolution" element={<NoShowResolutionPage />} />
+        <Route path="dispute-escalation" element={<DisputeOrEscalationPage />} />
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>
