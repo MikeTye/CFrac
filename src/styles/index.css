@@ -1,14 +1,16 @@
 @import './base.css';
 @import './utilities.css';
+
 @import './components.css';
+@import './components/advisor-card.css';
+@import './components/appointment-card.css';
+@import './components/advisor-workflow.css';
 
 @import './layouts/app-layout.css';
 @import './layouts/dashboard-layout.css';
-
-@import './components/advisor-card.css';
-@import './components/appointment-card.css';
 
 @import './pages/landing.css';
 @import './pages/auth.css';
 @import './pages/onboarding.css';
 @import './pages/dashboard.css';
+@import './pages/advisor-workflow.css';

@@ -1,0 +1,173 @@
+/* ═══════════════════════════════════════════════════════════
+   ADVISOR WORKFLOW COMPONENTS
+   ═══════════════════════════════════════════════════════════ */
+
+.awf-workflow-rail {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.awf-rail-card {
+    background: #fff;
+    border: 1px solid #d9e1ef;
+    border-left: 3px solid #dee5f2;
+    border-radius: 0 12px 12px 0;
+    padding: 0.9rem 1rem;
+    box-shadow: 0 2px 8px rgba(16, 32, 50, 0.04);
+    display: grid;
+    gap: 0.45rem;
+}
+
+.awf-rail-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.6rem;
+}
+
+.awf-rail-card-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #102032;
+}
+
+.awf-rail-card-meta {
+    font-size: 0.76rem;
+    color: #607089;
+}
+
+.awf-checklist {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.awf-checklist-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.7rem 0.8rem;
+    background: #fff;
+    border: 1px solid #dee5f2;
+    border-left: 3px solid #dee5f2;
+    border-radius: 0 10px 10px 0;
+}
+
+.awf-checklist-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid #cad5ea;
+    background: #fff;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+}
+
+.awf-checklist-content {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.awf-checklist-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #102032;
+}
+
+.awf-checklist-note {
+    font-size: 0.74rem;
+    color: #607089;
+}
+
+.awf-gate-banner {
+    background: linear-gradient(135deg, #102032 0%, #1a2f49 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f4f8ff;
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    display: grid;
+    gap: 0.3rem;
+    box-shadow: 0 8px 24px rgba(16, 32, 50, 0.16);
+}
+
+.awf-gate-banner-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.awf-gate-banner-copy {
+    font-size: 0.75rem;
+    color: rgba(244, 248, 255, 0.8);
+}
+
+.awf-overlay-callout {
+    background: #f7f9fc;
+    border: 1px solid #d9e1ef;
+    border-left: 3px solid #1d4ed8;
+    border-radius: 0 12px 12px 0;
+    padding: 0.8rem 0.9rem;
+    display: grid;
+    gap: 0.25rem;
+}
+
+.awf-overlay-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #102032;
+}
+
+.awf-overlay-copy {
+    font-size: 0.73rem;
+    color: #607089;
+}
+
+/* ── Lifecycle / overlay status variants ── */
+.awf-status--available,
+.awf-status--booked,
+.awf-status--in_session,
+.awf-status--session_completed,
+.awf-status--payment_pending,
+.awf-status--payment_confirmed,
+.awf-status--closed,
+.awf-status--cancelled,
+.awf-status--no_show,
+.awf-status--disputed {
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+}
+
+.awf-status--available { border-left-color: #1d4ed8; }
+.awf-status--booked { border-left-color: #2563eb; }
+.awf-status--in_session { border-left-color: #16a34a; }
+.awf-status--session_completed { border-left-color: #8a9bb0; }
+.awf-status--payment_pending { border-left-color: #d97706; }
+.awf-status--payment_confirmed { border-left-color: #15803d; }
+.awf-status--closed { border-left-color: #607089; }
+.awf-status--cancelled { border-left-color: #e74c3c; }
+.awf-status--no_show { border-left-color: #b45309; }
+.awf-status--disputed { border-left-color: #7c3aed; }
+
+.awf-overlay-callout.awf-status--cancelled,
+.awf-overlay-callout.awf-status--no_show,
+.awf-overlay-callout.awf-status--disputed {
+    background: #fef2f2;
+    border-color: #f5d4d0;
+}
+
+.awf-overlay-callout.awf-status--payment_pending {
+    background: #fffbeb;
+    border-color: #f7e7b2;
+}
+
+.awf-overlay-callout.awf-status--payment_confirmed,
+.awf-overlay-callout.awf-status--in_session {
+    background: #ecfdf3;
+    border-color: #ccefd9;
+}
+
+@media (max-width: 720px) {
+    .awf-rail-card,
+    .awf-checklist-row,
+    .awf-gate-banner,
+    .awf-overlay-callout {
+        padding: 0.75rem 0.8rem;
+    }
+}
