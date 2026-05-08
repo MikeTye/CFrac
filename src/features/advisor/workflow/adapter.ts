@@ -32,11 +32,41 @@ function requireString(value: unknown, fieldName: string): string {
   return value;
 }
 
+function requireSchemaVersion(source: Record<string, unknown>, payloadName: string): string {
+  return requireString(source.schema_version, `${payloadName}.schema_version`);
+}
+
+export function parseUtcTimestamp(value: string, fieldName: string): Date {
+  if (!value.endsWith('Z')) {
+    throw new Error(`Invalid ${fieldName}: expected UTC ISO-8601 timestamp ending with Z`);
+  }
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    throw new Error(`Invalid ${fieldName}: ${value}`);
+  }
+  return parsed;
+}
+
+export function formatTimestampForUser(utcTimestamp: string, userTimeZone: string): string {
+  const parsed = parseUtcTimestamp(utcTimestamp, 'timestamp');
+  return new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: userTimeZone,
+    timeZoneName: 'short',
+  }).format(parsed);
+}
+
+export function formatMoneyFromCents(amountCents: number, currency: string): string {
+  return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(amountCents / 100);
+}
+
 export function normalizeAppointment(raw: unknown): NormalizedAppointment {
   const source = raw as Record<string, unknown>;
   const session = (source.session ?? {}) as Record<string, unknown>;
 
   return {
+    schema_version: requireSchemaVersion(source, 'appointment'),
     appointment_id: requireString(source.appointment_id, 'appointment_id'),
     advisor_status: asEnumValue(source.advisor_status, ADVISOR_STATUS, 'advisor_status'),
     booking_state: asEnumValue(source.booking_state, BOOKING_STATE, 'booking_state'),
@@ -52,6 +82,7 @@ export function normalizeAppointment(raw: unknown): NormalizedAppointment {
 export function normalizePayment(raw: unknown): NormalizedPayment {
   const source = raw as Record<string, unknown>;
   return {
+    schema_version: requireSchemaVersion(source, 'payment'),
     appointment_id: requireString(source.appointment_id, 'appointment_id'),
     status: asEnumValue(source.status, PAYMENT_STATUS, 'payment.status'),
     invoice_id: typeof source.invoice_id === 'string' ? source.invoice_id : undefined,
@@ -63,6 +94,7 @@ export function normalizePayment(raw: unknown): NormalizedPayment {
 export function normalizeTranscript(raw: unknown): NormalizedTranscript {
   const source = raw as Record<string, unknown>;
   return {
+    schema_version: requireSchemaVersion(source, 'transcript'),
     status: asEnumValue(source.status, TRANSCRIPT_STATUS, 'transcript.status'),
     session_state_required_for_finalize: asEnumValue(
       source.session_state_required_for_finalize,
@@ -78,6 +110,7 @@ export function normalizeTranscript(raw: unknown): NormalizedTranscript {
 export function normalizeDispute(raw: unknown): NormalizedDispute {
   const source = raw as Record<string, unknown>;
   return {
+    schema_version: requireSchemaVersion(source, 'dispute'),
     dispute_id: requireString(source.dispute_id, 'dispute_id'),
     appointment_id: requireString(source.appointment_id, 'appointment_id'),
     status: asEnumValue(source.status, DISPUTE_STATUS, 'dispute.status'),
