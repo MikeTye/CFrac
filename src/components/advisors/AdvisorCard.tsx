@@ -2,54 +2,90 @@ import { Link } from 'react-router-dom';
 import type { Advisor } from '../../mocks/advisors';
 import { Badge } from '../common/Badge';
 
+const fallbackAchievements = [
+    'Raised institutional capital',
+    'Led regional expansion',
+    'Scaled executive teams',
+];
+
 export function AdvisorCard({ advisor }: { advisor: Advisor }) {
     const startingPrice = Math.min(...advisor.sessionOfferings.map((s) => s.price));
 
+    const fallbackAchievements: Advisor['achievements'] = [
+        {
+            title: 'Raised institutional capital',
+            description: 'Supported fundraising preparation and investor materials.',
+        },
+        {
+            title: 'Led regional expansion',
+            description: 'Helped companies enter new markets and build operating teams.',
+        },
+        {
+            title: 'Scaled executive teams',
+            description: 'Designed leadership structure for growth-stage companies.',
+        },
+    ];
+
+    const achievements =
+        advisor.achievements?.length
+            ? advisor.achievements.slice(0, 3)
+            : fallbackAchievements;
+
     return (
         <article className="advisor-card-v2">
-            <div className="ac-header">
-                <div className="ac-avatar" aria-hidden="true">
-                    {advisor.fullName.split(' ').map((n) => n[0]).slice(0, 2).join('')}
-                </div>
-
-                <div className="ac-meta">
-                    <h3 className="ac-name">{advisor.fullName}</h3>
-                    <p className="ac-headline muted">{advisor.headline}</p>
-                </div>
-
-                {advisor.verified ? (
-                    <Badge tone="success" className="ac-verified">Verified</Badge>
-                ) : null}
-            </div>
-
-            <p className="ac-impact-headline">{advisor.impact.headlineOutcome}</p>
-
-            <div className="ac-impact-metrics">
-                {advisor.impact.metrics.slice(0, 3).map((metric) => (
-                    <div className="ac-metric" key={metric.label}>
-                        <strong>{metric.value}</strong>
-                        <span>{metric.label}</span>
+            <div className="ac-media">
+                {advisor.profilePhotoUrl ? (
+                    <img src={advisor.profilePhotoUrl} alt={advisor.fullName} />
+                ) : (
+                    <div className="ac-media-placeholder">
+                        {advisor.fullName.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                     </div>
-                ))}
+                )}
+
+                {advisor.introVideoUrl && (
+                    <span className="ac-video-pill">15s intro</span>
+                )}
             </div>
 
-            <ul className="ac-impact-highlights">
-                {advisor.impact.highlights.slice(0, 2).map((item) => (
-                    <li key={item}>{item}</li>
-                ))}
-            </ul>
+            <div className="ac-body">
+                <div className="ac-header">
+                    <div className="ac-meta">
+                        <h3 className="ac-name">{advisor.fullName}</h3>
+                        <p className="ac-headline muted">{advisor.headline}</p>
+                    </div>
 
-            <div className="ac-footer stack-row row-between">
-                <div className="ac-price-row">
-                    <strong className="ac-price">From ${startingPrice}</strong>
-                    <span className="muted ac-rating">★ {advisor.rating} ({advisor.reviewCount})</span>
+                    {advisor.verified && (
+                        <span className="ac-verified">
+                            <Badge tone="success">Verified</Badge>
+                        </span>
+                    )}
                 </div>
-                <p className="muted ac-avail">Next: {advisor.availabilityPreview[0]}</p>
-            </div>
 
-            <div className="stack-row ac-actions">
-                <Link className="btn" to={`/advisors/${advisor.id}`}>View Proof</Link>
-                <Link className="btn ghost" to={`/advisors/${advisor.id}`}>Book Intro</Link>
+                <p className="ac-location muted">{advisor.location} · {advisor.timezone}</p>
+
+                <div className="ac-achievements">
+                    {achievements.map((item) => (
+                        <div key={item.title} className="ac-achievement">
+                            <strong>{item.metric ? `${item.metric} ` : ''}{item.title}</strong>
+                            <p>{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="stack-row ac-tags">
+                    {advisor.executiveTags.slice(0, 3).map((tag) => (
+                        <Badge key={tag}>{tag}</Badge>
+                    ))}
+                </div>
+
+                <div className="ac-footer">
+                    <div>
+                        <strong className="ac-price">From ${startingPrice}</strong>
+                        <p className="muted ac-footnote">Book a focused operator session</p>
+                    </div>
+
+                    <Link className="btn" to={`/advisors/${advisor.id}`}>View Profile</Link>
+                </div>
             </div>
         </article>
     );

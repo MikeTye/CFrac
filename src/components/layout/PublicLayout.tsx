@@ -1,20 +1,30 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { DemoNav } from './DemoNav';
 
 export function PublicLayout() {
-  return (
-    <div>
-      <nav className="top-nav">
-        <Link to="/" className="logo">CFrac</Link>
-        <div>
-          <Link to="/advisors">Browse Advisors</Link>
-          <Link to="/register">Join as Advisor</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+    return (
+        <div className="public-shell">
+            <nav className="top-nav public-top-nav">
+                <Link to="/" className="logo">Operator</Link>
+
+                <div className="public-nav-links">
+                    <NavLink to="/advisors" className={({ isActive }) => isActive ? 'public-nav-link public-nav-link--active' : 'public-nav-link'}>
+                        Search Advisors
+                    </NavLink>
+                    <NavLink to="/register" className={({ isActive }) => isActive ? 'public-nav-link public-nav-link--active' : 'public-nav-link'}>
+                        Join as Advisor
+                    </NavLink>
+                    <NavLink to="/login" className={({ isActive }) => isActive ? 'public-nav-link public-nav-link--active' : 'public-nav-link'}>
+                        Login
+                    </NavLink>
+                </div>
+            </nav>
+
+            <DemoNav />
+
+            <main className="public-main">
+                <Outlet />
+            </main>
         </div>
-      </nav>
-      <DemoNav />
-      <main className="page-wrap"><Outlet /></main>
-    </div>
-  );
+    );
 }

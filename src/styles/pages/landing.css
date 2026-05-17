@@ -1,54 +1,74 @@
-/* ═══════════════════════════════════════════════
-   LANDING PAGE v2
-   ═══════════════════════════════════════════════ */
+/* ─────────────────────────────────────────────
+   LAYOUT PRIMITIVES
+───────────────────────────────────────────── */
 
-/* ── Shared ── */
-.landing {
-    display: grid;
-    gap: 0;
-}
-
+/*
+  Consistent vertical rhythm for every section below the hero.
+  Use padding-block so the divider ::before sits flush at the top edge.
+*/
 .section-gap {
-    padding: 2.2rem 0;
+    position: relative;
+    padding-block: 4rem;
 }
 
-/* ── Section header v2 ── */
-.section-header-v2 {
-    margin-bottom: 2rem;
+/* Hairline divider that fades in from both edges — applied to every section */
+.section-gap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100%, 1120px);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.12), transparent);
+    pointer-events: none;
 }
 
-.sh-rule {
-    width: 2.5rem;
-    height: 3px;
-    background: currentColor;
-    opacity: 0.18;
-    border-radius: 99px;
-    margin-bottom: 0.75rem;
+
+/* ─────────────────────────────────────────────
+   LANDING ROOT
+───────────────────────────────────────────── */
+
+.landing {
+    background:
+        radial-gradient(circle at top left, rgba(32, 88, 255, 0.08), transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
-.sh-title {
-    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-    font-weight: 700;
-    margin-bottom: 0.35rem;
-}
 
-.sh-subtitle {
-    color: #607089;
-    max-width: 52ch;
-    line-height: 1.6;
-    font-size: 0.92rem;
-}
+/* ─────────────────────────────────────────────
+   HERO — asymmetric two-column
+   Pattern (radial glow + dot grid) lives here ONLY.
+───────────────────────────────────────────── */
 
-/* ── Hero split ── */
 .hero-split {
     display: grid;
     grid-template-columns: 2.5rem 1fr 340px;
-    grid-template-rows: auto;
     gap: 0 2.5rem;
-    padding: 3rem 2rem 2.5rem;
+    padding: 4rem 2rem 3.5rem;
     max-width: 1200px;
     margin: 0 auto;
     align-items: start;
+
+    /* Background: image wash + hero-only decorative pattern */
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78)),
+        url('../assets/landing/hero-bg.jpg') center / cover no-repeat;
+}
+
+/* Hero-only: radial glow + dot grid overlay — not used anywhere else */
+.hero-split::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.18), transparent 18rem),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.04) 25%, transparent 25%) 0 0 / 22px 22px;
+    pointer-events: none;
 }
 
 .hero-rail {
@@ -94,7 +114,7 @@
 .hero-sub {
     max-width: 48ch;
     line-height: 1.65;
-    color: #607089;
+    color: var(--color-ink-soft);
     margin-bottom: 1.75rem;
 }
 
@@ -108,129 +128,129 @@
     gap: 1.5rem;
 }
 
-.hero-stat-block {
-    border-left: 3px solid currentColor;
-    opacity: 0.9;
-    padding-left: 1rem;
+/* Ask card */
+.hero-ask-card {
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-surface);
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
 }
 
-.stat-giant {
-    display: block;
-    font-size: 3.5rem;
+.hero-ask-label,
+.match-kicker {
+    font-size: 0.68rem;
     font-weight: 800;
-    line-height: 1;
-    letter-spacing: -2px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.45;
 }
 
-.stat-giant sup {
-    font-size: 1.5rem;
-    font-weight: 700;
-    vertical-align: super;
-}
-
-.stat-caption {
-    font-size: 0.8rem;
-    color: #607089;
-    line-height: 1.4;
-    margin-top: 0.3rem;
-    display: block;
-}
-
-/* Trust list */
-.trust-list {
-    list-style: none;
+.hero-query-list {
     display: grid;
-    gap: 0.6rem;
-    padding: 0;
+    gap: 0.55rem;
 }
 
-.trust-item {
+.hero-query-list p {
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.78rem;
+    background: var(--color-surface-soft);
+}
+
+.hero-match-preview {
+    display: grid;
+    gap: 0.35rem;
+    border-left: 3px solid var(--color-primary);
+    padding-left: 0.85rem;
+}
+
+.hero-match-preview strong {
+    font-size: 0.9rem;
+}
+
+.hero-match-preview p {
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+}
+
+
+/* ─────────────────────────────────────────────
+   SECTION HEADERS
+   Styled with a left accent line + label chip
+   to lift them beyond plain typography.
+───────────────────────────────────────────── */
+
+.section-header {
+    margin-bottom: 2.5rem;
+}
+
+/* Eyebrow chip: small pill above the title */
+.section-header::before {
+    content: attr(data-label);
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--color-primary-wash);
+    border: 1px solid rgba(29, 78, 216, 0.14);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.section-header-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+
+    /* Left accent rule rendered via a border trick on a wrapper span */
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 0.83rem;
-    font-weight: 500;
+    gap: 0.75rem;
 }
 
-.trust-tick {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #ddf7e8;
-    flex-shrink: 0;
-    position: relative;
-    display: inline-block;
-}
-
-.trust-tick::after {
+/* Bold left rule beside the title */
+.section-header-title::before {
     content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 8px;
-    height: 5px;
-    border-left: 2px solid #1f7a43;
-    border-bottom: 2px solid #1f7a43;
-    transform: rotate(-45deg);
+    display: block;
+    width: 4px;
+    height: 1.1em;
+    background: linear-gradient(180deg, var(--color-primary), rgba(29, 78, 216, 0.35));
+    border-radius: 999px;
+    flex-shrink: 0;
 }
 
-/* ── Advisor preview in hero ── */
-.hero-advisor-preview {
-    display: grid;
-    gap: 0.6rem;
+.section-header-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.65;
+    max-width: 56ch;
+    /* Indent to align under the title text (past the accent rule + gap) */
+    padding-left: calc(4px + 0.75rem);
 }
 
-.hero-advisor-row {
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
+/*
+  NOTE: SectionHeader component should pass data-label to .section-header
+  for the eyebrow chip (e.g. data-label="Advisors"). If no label is needed,
+  simply omit the attribute and ::before will render empty (hidden by default).
+*/
+.section-header:not([data-label])::before {
+    display: none;
 }
 
-.hero-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #e8eefc;
-    color: #1d4ed8;
-    font-size: 0.7rem;
-    font-weight: 700;
-    display: grid;
-    place-items: center;
-}
 
-.hero-advisor-name {
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.hero-advisor-headline {
-    font-size: 0.72rem;
-    color: #607089;
-}
-
-.hero-preview-link {
-    font-size: 0.75rem;
-    font-weight: 600;
-    margin-top: 0.2rem;
-}
-
-/* ── Advisor mosaic ── */
-.advisor-mosaic {
-    display: grid;
-    grid-template-columns: 1.45fr 1fr;
-    gap: 1rem;
-    align-items: start;
-}
-
-.advisor-feature {
-    display: flex;
-    flex-direction: column;
-}
-
-.advisor-compact-col {
-    display: grid;
-    gap: 1rem;
-}
+/* ─────────────────────────────────────────────
+   FEATURED ADVISORS
+───────────────────────────────────────────── */
 
 .advisor-grid-balanced {
     display: grid;
@@ -244,96 +264,160 @@
 }
 
 .browse-link-row {
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
 }
 
-/* ── How it works — timeline ── */
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS
+   Blue-wash background. Steps rendered as a
+   unified panel divided by 1px separators,
+   each with a ghost number + icon badge.
+───────────────────────────────────────────── */
+
 .how-section {
-    background: #f7f9fc;
-    padding: 3.5rem 0;
+    position: relative;
+    padding-block: 2.75rem;
+    overflow: hidden;
+    background: var(--color-primary-wash);
+}
+
+.how-section::before {
+    display: none;
+}
+
+.how-section .page-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+/* Tighten header spacing only inside this section */
+.how-section .section-header {
+    margin-bottom: 1.5rem;
 }
 
 .timeline-track {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    position: relative;
-    margin-top: 2rem;
+    gap: 0.75rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    margin-top: 0;
 }
 
 .timeline-step {
-    padding: 1rem 1.2rem;
-    background: #fff;
-    border: 1px solid #dee5f2;
-    border-radius: 10px;
-}
-
-.timeline-step:not(:first-child) {
-    padding-left: 2rem;
-}
-
-.timeline-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 1.75rem;
-    right: 0;
-    width: 1px;
-    height: 2.5rem;
-    background: #dee5f2;
+    position: relative;
+    padding: 1.15rem 1.15rem 1.2rem;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(29, 78, 216, 0.12);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    column-gap: 0.85rem;
+    row-gap: 0.25rem;
+    align-items: start;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(10px);
 }
 
 .timeline-num {
-    font-size: 1.6rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    opacity: 0.12;
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: rgba(29, 78, 216, 0.12);
     line-height: 1;
-    margin-bottom: 0.6rem;
+    margin: 0;
 }
 
-.timeline-connector {
-    display: none;
+.timeline-icon {
+    grid-row: span 2;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--color-primary-soft);
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    stroke: #2563eb;
+    fill: none;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.95;
 }
 
 .timeline-title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
+    font-size: 0.92rem;
+    font-weight: 800;
+    margin: 0;
+    padding-right: 2.5rem;
 }
 
 .timeline-desc {
-    font-size: 0.83rem;
-    color: #607089;
-    line-height: 1.6;
-    max-width: 100%;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--color-ink-soft);
 }
 
-/* ── Use case mosaic ── */
+
+/* ─────────────────────────────────────────────
+   USE CASES
+   Tiles gain a gradient top-bar on hover and
+   a category tag at the bottom for scanability.
+───────────────────────────────────────────── */
+
 .use-case-mosaic {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
     gap: 0.75rem;
 }
 
 .use-case-tile {
-    background: #fff;
-    border: 1px solid #dee5f2;
-    border-radius: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
     padding: 1.25rem;
     display: grid;
     gap: 0.4rem;
     align-content: start;
     min-height: 120px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
 }
 
-.use-case-tile.tile-wide {
-    grid-column: span 2;
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    flex-direction: row;
-    flex-wrap: wrap;
+/* Top accent bar — revealed on hover */
+.use-case-tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), #6366f1);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.use-case-tile:hover {
+    border-color: rgba(29, 78, 216, 0.28);
+}
+
+.use-case-tile:hover::before {
+    opacity: 1;
 }
 
 .tile-index {
@@ -341,41 +425,67 @@
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 1.5px;
-    opacity: 0.35;
+    color: var(--color-primary);
+    opacity: 0.6;
     text-transform: uppercase;
 }
 
 .tile-title {
     font-size: 0.95rem;
     font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.35;
 }
 
 .tile-desc {
     font-size: 0.8rem;
-    color: #607089;
+    color: var(--color-ink-soft);
     line-height: 1.5;
 }
 
-.tile-wide .tile-index {
-    align-self: flex-start;
-    min-width: 2rem;
-    margin-top: 0.1rem;
+/* Category tag — sits at the bottom of each tile */
+.tile-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.35rem;
+    width: fit-content;
 }
 
-.tile-wide .tile-title {
-    font-size: 1.05rem;
-}
 
-/* ── CTA full-bleed ── */
+/* ─────────────────────────────────────────────
+   CTA — full-bleed dark band
+   Grid overlay adds texture; blob ring retained.
+───────────────────────────────────────────── */
+
 .cta-fullbleed {
     position: relative;
-    background: #102032;
-    color: #f3f5f9;
-    padding: 3rem 0;
+    background: var(--color-ink);
+    color: var(--color-page);
+    padding-block: 3.5rem;
     overflow: hidden;
-    margin-top: 2rem;
 }
 
+/* Subtle grid texture — white lines at low opacity */
+.cta-fullbleed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Existing decorative blob ring */
 .cta-deco {
     position: absolute;
     top: -60px;
@@ -383,8 +493,9 @@
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    border: 40px solid rgba(255, 255, 255, 0.04);
+    border: 50px solid rgba(255, 255, 255, 0.05);
     pointer-events: none;
+    z-index: 0;
 }
 
 .cta-inner {
@@ -405,27 +516,30 @@
 
 .cta-text p {
     font-size: 0.88rem;
-    opacity: 0.65;
+    opacity: 0.6;
     max-width: 44ch;
     line-height: 1.6;
 }
 
 .cta-fullbleed .btn {
-    background: #fff;
-    color: #102032;
+    background: var(--color-surface);
+    color: var(--color-ink);
 }
 
 .cta-fullbleed .btn.ghost {
     background: transparent;
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* ── Responsive ── */
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
 @media (max-width: 900px) {
     .hero-split {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
     }
 
     .hero-rail {
@@ -433,30 +547,25 @@
     }
 
     .hero-aside {
-        border-top: 1px solid #dee5f2;
+        border-top: 1px solid var(--color-border);
         padding-top: 1.5rem;
     }
 
-    .advisor-mosaic {
-        grid-template-columns: 1fr;
-    }
-
+    /* Unified panel stacks vertically — restore individual step borders */
     .timeline-track {
         grid-template-columns: 1fr;
     }
 
-    .timeline-step::after {
-        display: none;
+    .timeline-step {
+        grid-template-columns: 40px 1fr;
+    }
+
+    .timeline-step:not(:last-child) {
+        border-bottom: 1px solid rgba(29, 78, 216, 0.12);
     }
 
     .use-case-mosaic {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .use-case-tile.tile-wide {
-        grid-column: span 2;
-        flex-direction: column;
-        gap: 0.4rem;
     }
 
     .cta-inner {
@@ -474,9 +583,5 @@
 @media (max-width: 560px) {
     .use-case-mosaic {
         grid-template-columns: 1fr;
-    }
-
-    .use-case-tile.tile-wide {
-        grid-column: span 1;
     }
 }

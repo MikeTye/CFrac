@@ -1,15 +1,16 @@
-:root {
-  font-family: Inter, system-ui, sans-serif;
-  color: #102032;
-  background: #f3f5f9;
-}
-
 * {
   box-sizing: border-box;
 }
 
+html {
+  background: var(--color-page);
+}
+
 body {
   margin: 0;
+  color: var(--color-ink);
+  background: var(--color-page);
+  font-family: var(--font-sans);
 }
 
 a {
@@ -17,24 +18,30 @@ a {
   text-decoration: none;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 input,
 select,
 textarea {
   width: 100%;
-  margin: .25rem 0 .7rem;
-  padding: .55rem .65rem;
-  border: 1px solid #cad5ea;
-  border-radius: 9px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+button {
+  border: 0;
 }
 
-th,
-td {
-  border-bottom: 1px solid #e1e7f1;
-  padding: .6rem;
-  text-align: left;
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+ul {
+  margin-top: 0;
 }

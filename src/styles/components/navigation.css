@@ -1,0 +1,139 @@
+.logo {
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.5rem;
+    background: rgba(243, 245, 249, 0.92);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+}
+
+.public-top-nav {
+    gap: 1rem;
+}
+
+.public-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.public-nav-link,
+.demo-nav-link {
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+}
+
+.public-nav-link:hover,
+.demo-nav-link:hover {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+
+.public-nav-link--active {
+    background: var(--color-ink);
+    color: #fff;
+}
+
+.demo-nav {
+    position: sticky;
+    top: 65px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.55rem 1.5rem;
+    background: rgba(243, 245, 249, 0.92);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+}
+
+.demo-nav-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+}
+
+.demo-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.demo-nav-link--active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.dash-brand {
+    display: grid;
+    gap: 0.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dash-brand-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.dash-brand-subtitle {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.45;
+}
+
+.dash-nav {
+    display: grid;
+    gap: 0.25rem;
+}
+
+.dash-nav-link {
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: rgba(246, 249, 255, 0.72);
+}
+
+.dash-nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.dash-nav-link--active {
+    background: #fff;
+    color: var(--color-ink);
+}
+
+@media (max-width: 900px) {
+    .demo-nav {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .dash-nav {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}

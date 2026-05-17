@@ -1,0 +1,223 @@
+.advisor-editor-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(32, 88, 255, 0.08), transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 2rem;
+}
+
+.advisor-editor-hero {
+    max-width: 1180px;
+    margin: 0 auto 1.25rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1.25rem;
+    align-items: stretch;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 26px;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.8)),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 18rem);
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+}
+
+.advisor-editor-eyebrow,
+.advisor-editor-card-header span,
+.advisor-editor-status-card span,
+.advisor-editor-sidebar-title,
+.advisor-editor-preview span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.advisor-editor-hero h1 {
+    max-width: 760px;
+    margin: 0.8rem 0;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -1px;
+    color: var(--color-ink);
+}
+
+.advisor-editor-hero p {
+    max-width: 66ch;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+}
+
+.advisor-editor-status-card,
+.advisor-editor-preview,
+.advisor-editor-sidebar,
+.advisor-editor-card {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.045);
+}
+
+.advisor-editor-status-card {
+    border-radius: 20px;
+    padding: 1.25rem;
+}
+
+.advisor-editor-status-card strong {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 1.6rem;
+    color: var(--color-ink);
+}
+
+.advisor-editor-status-card p {
+    margin-top: 0.5rem;
+    font-size: 0.86rem;
+}
+
+.advisor-editor-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr) 280px;
+    gap: 1rem;
+    align-items: start;
+}
+
+.advisor-editor-sidebar,
+.advisor-editor-preview {
+    position: sticky;
+    top: 1rem;
+    border-radius: 18px;
+    padding: 1rem;
+}
+
+.advisor-editor-sidebar {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.advisor-editor-sidebar a {
+    display: block;
+    border-radius: 12px;
+    padding: 0.65rem 0.75rem;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.advisor-editor-sidebar a:hover {
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+}
+
+.advisor-editor-main {
+    display: grid;
+    gap: 1rem;
+}
+
+.advisor-editor-card {
+    border-radius: 20px;
+    padding: 1.25rem;
+}
+
+.advisor-editor-card-header {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+
+.advisor-editor-card-header h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    letter-spacing: -0.3px;
+    color: var(--color-ink);
+}
+
+.advisor-editor-card-header p {
+    margin-top: 0.35rem;
+    color: var(--color-ink-soft);
+    line-height: 1.55;
+    font-size: 0.88rem;
+}
+
+.advisor-editor-card input,
+.advisor-editor-card textarea {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-surface-soft);
+    color: var(--color-ink);
+    padding: 0.9rem 1rem;
+    font: inherit;
+    outline: none;
+}
+
+.advisor-editor-card textarea {
+    resize: vertical;
+}
+
+.advisor-editor-card input:focus,
+.advisor-editor-card textarea:focus {
+    border-color: rgba(29, 78, 216, 0.4);
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
+}
+
+.advisor-editor-preview strong {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--color-ink);
+    line-height: 1.35;
+}
+
+.advisor-editor-preview ul {
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+    font-size: 0.84rem;
+}
+
+@media (max-width: 1050px) {
+    .advisor-editor-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .advisor-editor-sidebar,
+    .advisor-editor-preview {
+        position: static;
+    }
+
+    .advisor-editor-sidebar {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .advisor-editor-sidebar-title {
+        display: none;
+    }
+
+    .advisor-editor-sidebar a {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 760px) {
+    .advisor-editor-page {
+        padding: 1rem;
+    }
+
+    .advisor-editor-hero {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+    }
+
+    .advisor-editor-card-header {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+}

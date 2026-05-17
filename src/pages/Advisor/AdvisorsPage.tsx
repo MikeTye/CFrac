@@ -1,8 +1,13 @@
 import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { AdvisorCard } from '../../components/advisors/AdvisorCard';
+import { AdvisorSearchResultCard  } from '../../components/advisors/AdvisorSearchResultCard';
 import { AdvisorFilters, type AdvisorFiltersState } from '../../components/advisors/AdvisorFilters';
 import { advisors } from '../../mocks/advisors';
+
+const SEARCH_PROMPTS = [
+    'Preparing for Series A in B2B SaaS',
+    'Expanding from Malaysia into Indonesia',
+    'Need IPO readiness and finance leadership',
+];
 
 function getStartingPrice(advisor: (typeof advisors)[number]) {
     return Math.min(...advisor.sessionOfferings.map((s) => s.price));
@@ -22,7 +27,13 @@ export function AdvisorsPage() {
         return advisors
             .filter((a) => {
                 const q = filters.keyword.toLowerCase();
-                const searchable = `${a.fullName} ${a.headline} ${a.advisoryTopics.join(' ')} ${a.functions.join(' ')}`.toLowerCase();
+                const searchable = `
+                    ${a.fullName}
+                    ${a.headline}
+                    ${a.advisoryTopics.join(' ')}
+                    ${a.functions.join(' ')}
+                    ${a.industries.join(' ')}
+                `.toLowerCase();
 
                 return (!q || searchable.includes(q))
                     && (!filters.industry || a.industries.join(' ').toLowerCase().includes(filters.industry.toLowerCase()))
@@ -40,50 +51,84 @@ export function AdvisorsPage() {
     const featured = filtered[0];
 
     return (
-        <div className="advisor-directory-page">
-            <section className="advisor-directory-hero">
+        <div className="advisors-page">
+            <section className="advisors-hero">
                 <div className="hero-rail">
-                    <span className="rail-label">Advisor directory</span>
+                    <span className="rail-label">Advisor discovery</span>
                 </div>
 
-                <div>
-                    <p className="hero-eyebrow">Verified operators</p>
+                <div className="advisors-hero-main">
+                    <p className="hero-eyebrow">Outcome-driven advisor search</p>
                     <h1 className="hero-headline">
-                        Find the right advisor for the
-                        <em> decision in front of you.</em>
+                        Search by challenge.
+                        <em> Refine by proof.</em>
                     </h1>
                     <p className="hero-sub">
-                        Search by function, industry, challenge, availability, and price.
-                        Every booking stays platform-managed for payment, consent, and session records.
+                        Describe what you are trying to solve, then narrow the results by function,
+                        industry, topic, verification, price, and availability.
                     </p>
-                </div>
 
-                <div className="directory-hero-panel card">
-                    <span className="stat-giant">{advisors.length}<sup>+</sup></span>
-                    <span className="stat-caption">seed advisors available in this wireframe</span>
-                    <div className="directory-hero-list">
-                        <span>Platform-hosted sessions</span>
-                        <span>Consent-based recording</span>
-                        <span>Transcript-ready bookings</span>
+                    <div className="semantic-search-card">
+                        <label htmlFor="advisor-semantic-search">Describe your business challenge</label>
+                        <div className="semantic-search-box">
+                            <input
+                                id="advisor-semantic-search"
+                                value={filters.keyword}
+                                onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
+                                placeholder="Example: I need help preparing for Series A fundraising"
+                            />
+                            <button type="button">Search</button>
+                        </div>
+
+                        <div className="search-prompt-row">
+                            {SEARCH_PROMPTS.map((prompt) => (
+                                <button
+                                    key={prompt}
+                                    type="button"
+                                    onClick={() => setFilters({ ...filters, keyword: prompt })}
+                                >
+                                    {prompt}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
+
+                <aside className="advisors-hero-panel">
+                    <span className="stat-giant">{advisors.length}<sup>+</sup></span>
+                    <span className="stat-caption">seed advisors available in this wireframe</span>
+
+                    <div className="hero-match-preview">
+                        <span className="match-kicker">Discovery model</span>
+                        <strong>Semantic first, filters second</strong>
+                        <p>
+                            Start with intent, then use structured criteria to validate fit before booking.
+                        </p>
+                    </div>
+                </aside>
             </section>
 
-            <section className="page-wrap advisor-directory-body">
-                <AdvisorFilters filters={filters} onChange={setFilters} />
+            <section className="page-wrap advisors-body">
+                <aside className="advisors-filter-panel">
+                    <div className="filter-panel-header">
+                        <span>Refine results</span>
+                        <p>Use filters after the problem statement to make the shortlist more precise.</p>
+                    </div>
+                    <AdvisorFilters filters={filters} onChange={setFilters} />
+                </aside>
 
-                <div className="stack-lg">
+                <main className="advisors-results">
                     {featured ? (
-                        <section className="directory-feature-row">
+                        <section className="best-match-section">
                             <div>
                                 <p className="hero-eyebrow">Best match</p>
-                                <h2>Start with a senior operator who matches your current problem.</h2>
+                                <h2>Start with the operator closest to your current decision.</h2>
                                 <p className="muted">
-                                    The directory should feel curated first, searchable second — less like a database,
-                                    more like a decision-support surface.
+                                    This area should eventually show semantic match reasoning, such as matched
+                                    outcomes, relevant industries, and similar past challenges.
                                 </p>
                             </div>
-                            <AdvisorCard advisor={featured} />
+                            <AdvisorSearchResultCard  advisor={featured} />
                         </section>
                     ) : null}
 
@@ -105,10 +150,10 @@ export function AdvisorsPage() {
 
                     <div className="directory-grid">
                         {filtered.map((advisor) => (
-                            <AdvisorCard key={advisor.id} advisor={advisor} />
+                            <AdvisorSearchResultCard  key={advisor.id} advisor={advisor} />
                         ))}
                     </div>
-                </div>
+                </main>
             </section>
         </div>
     );
