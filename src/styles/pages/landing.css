@@ -1,0 +1,587 @@
+/* ─────────────────────────────────────────────
+   LAYOUT PRIMITIVES
+───────────────────────────────────────────── */
+
+/*
+  Consistent vertical rhythm for every section below the hero.
+  Use padding-block so the divider ::before sits flush at the top edge.
+*/
+.section-gap {
+    position: relative;
+    padding-block: 4rem;
+}
+
+/* Hairline divider that fades in from both edges — applied to every section */
+.section-gap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100%, 1120px);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.12), transparent);
+    pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────────────
+   LANDING ROOT
+───────────────────────────────────────────── */
+
+.landing {
+    background:
+        radial-gradient(circle at top left, rgba(32, 88, 255, 0.08), transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+
+/* ─────────────────────────────────────────────
+   HERO — asymmetric two-column
+   Pattern (radial glow + dot grid) lives here ONLY.
+───────────────────────────────────────────── */
+
+.hero-split {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr 340px;
+    gap: 0 2.5rem;
+    padding: 4rem 2rem 3.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+
+    /* Background: image wash + hero-only decorative pattern */
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78)),
+        url('../assets/landing/hero-bg.jpg') center / cover no-repeat;
+}
+
+/* Hero-only: radial glow + dot grid overlay — not used anywhere else */
+.hero-split::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.18), transparent 18rem),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.04) 25%, transparent 25%) 0 0 / 22px 22px;
+    pointer-events: none;
+}
+
+.hero-rail {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.25rem;
+}
+
+.rail-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.35;
+    white-space: nowrap;
+}
+
+.hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+.hero-headline {
+    font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.1rem;
+}
+
+.hero-headline em {
+    font-style: italic;
+    font-weight: 700;
+}
+
+.hero-sub {
+    max-width: 48ch;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    margin-bottom: 1.75rem;
+}
+
+.hero-actions {
+    gap: 0.65rem;
+}
+
+.hero-aside {
+    padding-top: 0.25rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* Ask card */
+.hero-ask-card {
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-surface);
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.hero-ask-label,
+.match-kicker {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.45;
+}
+
+.hero-query-list {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.hero-query-list p {
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.78rem;
+    background: var(--color-surface-soft);
+}
+
+.hero-match-preview {
+    display: grid;
+    gap: 0.35rem;
+    border-left: 3px solid var(--color-primary);
+    padding-left: 0.85rem;
+}
+
+.hero-match-preview strong {
+    font-size: 0.9rem;
+}
+
+.hero-match-preview p {
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+}
+
+
+/* ─────────────────────────────────────────────
+   SECTION HEADERS
+   Styled with a left accent line + label chip
+   to lift them beyond plain typography.
+───────────────────────────────────────────── */
+
+.section-header {
+    margin-bottom: 2.5rem;
+}
+
+/* Eyebrow chip: small pill above the title */
+.section-header::before {
+    content: attr(data-label);
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--color-primary-wash);
+    border: 1px solid rgba(29, 78, 216, 0.14);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.section-header-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+
+    /* Left accent rule rendered via a border trick on a wrapper span */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Bold left rule beside the title */
+.section-header-title::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 1.1em;
+    background: linear-gradient(180deg, var(--color-primary), rgba(29, 78, 216, 0.35));
+    border-radius: 999px;
+    flex-shrink: 0;
+}
+
+.section-header-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.65;
+    max-width: 56ch;
+    /* Indent to align under the title text (past the accent rule + gap) */
+    padding-left: calc(4px + 0.75rem);
+}
+
+/*
+  NOTE: SectionHeader component should pass data-label to .section-header
+  for the eyebrow chip (e.g. data-label="Advisors"). If no label is needed,
+  simply omit the attribute and ::before will render empty (hidden by default).
+*/
+.section-header:not([data-label])::before {
+    display: none;
+}
+
+
+/* ─────────────────────────────────────────────
+   FEATURED ADVISORS
+───────────────────────────────────────────── */
+
+.advisor-grid-balanced {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.advisor-grid-balanced .advisor-card-v2 {
+    height: 100%;
+}
+
+.browse-link-row {
+    margin-top: 1.5rem;
+}
+
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS
+   Blue-wash background. Steps rendered as a
+   unified panel divided by 1px separators,
+   each with a ghost number + icon badge.
+───────────────────────────────────────────── */
+
+.how-section {
+    position: relative;
+    padding-block: 2.75rem;
+    overflow: hidden;
+    background: var(--color-primary-wash);
+}
+
+.how-section::before {
+    display: none;
+}
+
+.how-section .page-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+/* Tighten header spacing only inside this section */
+.how-section .section-header {
+    margin-bottom: 1.5rem;
+}
+
+.timeline-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    margin-top: 0;
+}
+
+.timeline-step {
+    position: relative;
+    padding: 1.15rem 1.15rem 1.2rem;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(29, 78, 216, 0.12);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    column-gap: 0.85rem;
+    row-gap: 0.25rem;
+    align-items: start;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(10px);
+}
+
+.timeline-num {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: rgba(29, 78, 216, 0.12);
+    line-height: 1;
+    margin: 0;
+}
+
+.timeline-icon {
+    grid-row: span 2;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--color-primary-soft);
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    stroke: #2563eb;
+    fill: none;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.95;
+}
+
+.timeline-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    margin: 0;
+    padding-right: 2.5rem;
+}
+
+.timeline-desc {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--color-ink-soft);
+}
+
+
+/* ─────────────────────────────────────────────
+   USE CASES
+   Tiles gain a gradient top-bar on hover and
+   a category tag at the bottom for scanability.
+───────────────────────────────────────────── */
+
+.use-case-mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.use-case-tile {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    min-height: 120px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+/* Top accent bar — revealed on hover */
+.use-case-tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), #6366f1);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.use-case-tile:hover {
+    border-color: rgba(29, 78, 216, 0.28);
+}
+
+.use-case-tile:hover::before {
+    opacity: 1;
+}
+
+.tile-index {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--color-primary);
+    opacity: 0.6;
+    text-transform: uppercase;
+}
+
+.tile-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.35;
+}
+
+.tile-desc {
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+}
+
+/* Category tag — sits at the bottom of each tile */
+.tile-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.35rem;
+    width: fit-content;
+}
+
+
+/* ─────────────────────────────────────────────
+   CTA — full-bleed dark band
+   Grid overlay adds texture; blob ring retained.
+───────────────────────────────────────────── */
+
+.cta-fullbleed {
+    position: relative;
+    background: var(--color-ink);
+    color: var(--color-page);
+    padding-block: 3.5rem;
+    overflow: hidden;
+}
+
+/* Subtle grid texture — white lines at low opacity */
+.cta-fullbleed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Existing decorative blob ring */
+.cta-deco {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 50px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-text h2 {
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.cta-text p {
+    font-size: 0.88rem;
+    opacity: 0.6;
+    max-width: 44ch;
+    line-height: 1.6;
+}
+
+.cta-fullbleed .btn {
+    background: var(--color-surface);
+    color: var(--color-ink);
+}
+
+.cta-fullbleed .btn.ghost {
+    background: transparent;
+    color: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+    .hero-split {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-rail {
+        display: none;
+    }
+
+    .hero-aside {
+        border-top: 1px solid var(--color-border);
+        padding-top: 1.5rem;
+    }
+
+    /* Unified panel stacks vertically — restore individual step borders */
+    .timeline-track {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-step {
+        grid-template-columns: 40px 1fr;
+    }
+
+    .timeline-step:not(:last-child) {
+        border-bottom: 1px solid rgba(29, 78, 216, 0.12);
+    }
+
+    .use-case-mosaic {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cta-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 760px) {
+    .advisor-grid-balanced {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .use-case-mosaic {
+        grid-template-columns: 1fr;
+    }
+}

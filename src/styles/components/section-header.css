@@ -1,0 +1,25 @@
+.section-header-v2 {
+    margin-bottom: 2rem;
+}
+
+.sh-rule {
+    width: 2.5rem;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.18;
+    border-radius: var(--radius-pill);
+    margin-bottom: 0.75rem;
+}
+
+.sh-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.sh-subtitle {
+    color: var(--color-ink-soft);
+    max-width: 52ch;
+    line-height: 1.6;
+    font-size: 0.92rem;
+}

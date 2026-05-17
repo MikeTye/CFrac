@@ -1,0 +1,531 @@
+/* ═══════════════════════════════════════════════════════
+   ONBOARDING FLOW
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Shell ── */
+.onboard-shell {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    background: var(--color-page);
+}
+
+/* ── Top bar ── */
+.onboard-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.onboard-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ── Body: sidebar + main ── */
+.onboard-body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    align-items: start;
+}
+
+.onboard-body--simple {
+    display: block;
+}
+
+.onboard-body--simple .onboard-main {
+    min-height: calc(100vh - 65px);
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+}
+
+.onboard-body--simple .onboard-content-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* ── Step indicator sidebar ── */
+.onboard-sidebar {
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    min-height: calc(100vh - 57px);
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: sticky;
+    top: 57px;
+    height: calc(100vh - 57px);
+    overflow-y: auto;
+}
+
+.onboard-sidebar-footer {
+    padding-top: 2rem;
+}
+
+/* Step indicator */
+.onboard-step-indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.onboard-step {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.75rem;
+    position: relative;
+}
+
+.onboard-step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background: var(--color-surface);
+    display: grid;
+    place-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-ink-muted);
+    z-index: 1;
+    transition: all 0.2s;
+}
+
+.onboard-step--active .onboard-step-dot {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+}
+
+.onboard-step--done .onboard-step-dot {
+    border-color: var(--color-success);
+    background: var(--color-success-soft);
+    color: var(--color-success);
+}
+
+.onboard-step-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    align-self: center;
+    padding-bottom: 1px;
+}
+
+.onboard-step--active .onboard-step-label {
+    color: var(--color-ink);
+}
+
+.onboard-step--done .onboard-step-label {
+    color: var(--color-ink-soft);
+}
+
+/* Vertical connector line */
+.onboard-step-line {
+    grid-column: 1;
+    width: 2px;
+    height: 2rem;
+    background: var(--color-border);
+    margin: 0.25rem auto;
+}
+
+.onboard-step--done .onboard-step-line {
+    background: var(--color-success-soft);
+}
+
+.onboard-step--active .onboard-step-line {
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-border));
+}
+
+/* ── Main content area ── */
+.onboard-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 2rem;
+}
+
+.onboard-content-wrap {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 0 1.5rem;
+    width: 100%;
+    max-width: 580px;
+}
+
+.onboard-content {
+    display: grid;
+    gap: 2rem;
+}
+
+/* ── Step body ── */
+.onboard-step-body {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.onboard-step-header {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.onboard-step-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.25px;
+    margin: 0.3rem 0 0.2rem;
+}
+
+.onboard-step-title em {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.onboard-step-sub {
+    font-size: 0.87rem;
+    line-height: 1.6;
+    max-width: 50ch;
+}
+
+.onboard-fields {
+    display: grid;
+    gap: 0.1rem;
+}
+
+/* ── Goal tiles ── */
+.onboard-goal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.onboard-goal-tile {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-card);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    transition: border-color 0.15s;
+    border-left-width: 3px;
+    border-left-color: transparent;
+}
+
+.onboard-goal-tile:hover {
+    border-left-color: var(--color-border-strong);
+}
+
+.onboard-goal-tile--active {
+    border-left-color: var(--color-primary);
+    background: var(--color-primary-wash);
+}
+
+.onboard-goal-check {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid var(--color-border-strong);
+    display: grid;
+    place-items: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    background: var(--color-surface);
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.onboard-goal-tile--active .onboard-goal-check {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-surface);
+}
+
+/* ── Function chips ── */
+.onboard-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.3rem;
+}
+
+.onboard-chip {
+    padding: 0.35rem 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-card);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--color-ink);
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.onboard-chip:hover {
+    border-color: var(--color-ink-muted);
+}
+
+.onboard-chip--active {
+    background: var(--color-primary-soft);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* ── Profile depth tiles ── */
+.onboard-depth-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.onboard-depth-tile {
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-card);
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    display: grid;
+    gap: 0.4rem;
+    transition: border-color 0.15s;
+    border-left-width: 3px;
+    border-left-color: transparent;
+}
+
+.onboard-depth-tile:hover {
+    border-left-color: var(--color-border-strong);
+}
+
+.onboard-depth-tile--active {
+    border-left-color: var(--color-primary);
+    background: #f7f9ff;
+}
+
+.onboard-depth-tile-header {
+    margin-bottom: 0.25rem;
+}
+
+.onboard-depth-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--color-success);
+    background: var(--color-success-soft);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+}
+
+.onboard-depth-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.onboard-depth-desc {
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.onboard-depth-items {
+    list-style: none;
+    padding: 0;
+    margin: 0.3rem 0 0;
+    display: grid;
+    gap: 0.3rem;
+}
+
+.onboard-depth-items li {
+    font-size: 0.76rem;
+    color: var(--color-ink-soft);
+    padding-left: 0.85rem;
+    position: relative;
+}
+
+.onboard-depth-items li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+}
+
+/* ── Profile depth form (expanded) ── */
+.onboard-depth-form {
+    display: grid;
+    gap: 0.1rem;
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.onboard-textarea {
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+/* Rich profile notice */
+.onboard-rich-notice {
+    margin-top: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.onboard-rich-notice-inner {
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-border-strong);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.15rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.onboard-rich-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.onboard-rich-icon {
+    color: var(--color-ink-muted);
+    font-size: 0.9rem;
+}
+
+.onboard-rich-desc {
+    font-size: 0.79rem;
+    line-height: 1.6;
+}
+
+.onboard-rich-types {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.onboard-rich-type {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+}
+
+.onboard-rich-type-icon {
+    font-size: 0.9rem;
+    color: var(--color-ink-muted);
+    margin-top: 0.05rem;
+    flex-shrink: 0;
+    width: 1.1rem;
+    text-align: center;
+}
+
+.onboard-rich-type-label {
+    font-size: 0.79rem;
+    font-weight: 600;
+}
+
+.onboard-rich-type-hint {
+    font-size: 0.74rem;
+    line-height: 1.4;
+}
+
+/* ── Navigation row ── */
+.onboard-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.65rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.onboard-back-btn {
+    padding: 0.6rem 1rem;
+}
+
+.onboard-next-btn {
+    padding: 0.65rem 1.5rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 820px) {
+    .onboard-body {
+        grid-template-columns: 1fr;
+    }
+
+    .onboard-sidebar {
+        position: static;
+        height: auto;
+        min-height: 0;
+        padding: 1.25rem 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .onboard-sidebar-footer {
+        display: none;
+    }
+
+    .onboard-step-indicator {
+        flex-direction: row;
+        gap: 0;
+        overflow-x: auto;
+    }
+
+    .onboard-step {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+        min-width: 60px;
+    }
+
+    .onboard-step-label {
+        font-size: 0.68rem;
+        text-align: center;
+    }
+
+    .onboard-step-line {
+        display: none;
+    }
+
+    .onboard-main {
+        padding: 1.75rem 1rem;
+    }
+
+    .onboard-content-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-rail {
+        display: none;
+    }
+
+    .onboard-goal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .onboard-depth-tiles {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-field-row {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,25 @@
+.page-wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.stack-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.row-between {
+    justify-content: space-between;
+}
+
+.muted {
+    color: var(--color-ink-soft);
+}
+
+.section-gap {
+    padding-block: 3.5rem;
+}

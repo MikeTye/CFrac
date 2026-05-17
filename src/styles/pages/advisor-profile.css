@@ -1,0 +1,520 @@
+.advisor-profile-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(32, 88, 255, 0.08), transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.advisor-profile-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.78)),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.18), transparent 20rem);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.advisor-profile-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.035) 25%, transparent 25%) 0 0 / 22px 22px;
+    pointer-events: none;
+}
+
+.advisor-profile-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+    gap: 2.5rem;
+    align-items: center;
+    padding-block: 4rem;
+}
+
+.profile-back-link {
+    display: inline-flex;
+    margin-bottom: 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.advisor-profile-kicker-row,
+.advisor-profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    align-items: center;
+}
+
+.advisor-tier-badge,
+.advisor-verified-pill,
+.advisor-profile-tag,
+.profile-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.advisor-tier-badge {
+    color: var(--color-primary);
+    background: var(--color-primary-wash);
+    border: 1px solid rgba(29, 78, 216, 0.14);
+    padding: 0.34rem 0.75rem;
+}
+
+.advisor-verified-pill {
+    color: #0f766e;
+    background: rgba(20, 184, 166, 0.1);
+    border: 1px solid rgba(20, 184, 166, 0.18);
+    padding: 0.34rem 0.75rem;
+}
+
+.advisor-profile-copy h1 {
+    margin: 1rem 0 0.75rem;
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    line-height: 1.05;
+    letter-spacing: -1.2px;
+    color: var(--color-ink);
+}
+
+.advisor-profile-headline {
+    max-width: 58ch;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+    font-weight: 650;
+}
+
+.advisor-profile-meta {
+    margin-top: 0.65rem;
+    font-size: 0.86rem;
+    color: var(--color-ink-soft);
+}
+
+.advisor-profile-bio {
+    max-width: 66ch;
+    margin-top: 1.35rem;
+    color: var(--color-ink-soft);
+    line-height: 1.75;
+}
+
+.advisor-profile-tags {
+    margin-top: 1.35rem;
+}
+
+.advisor-profile-tag,
+.profile-chip {
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    padding: 0.35rem 0.7rem;
+}
+
+.advisor-video-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.advisor-video-frame {
+    min-height: 270px;
+    border-radius: 26px;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.88), rgba(30, 64, 175, 0.78)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 14rem);
+    color: white;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+}
+
+.advisor-video-play {
+    width: 64px;
+    height: 64px;
+    border: 0;
+    border-radius: 999px;
+    background: white;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.advisor-video-frame p {
+    margin: 0.9rem 0 0.25rem;
+    font-weight: 800;
+}
+
+.advisor-video-frame span {
+    max-width: 28ch;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    opacity: 0.7;
+}
+
+.advisor-hero-proof-card {
+    border-radius: 18px;
+    border: 1px solid rgba(29, 78, 216, 0.14);
+    background: rgba(255, 255, 255, 0.86);
+    padding: 1.1rem;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+}
+
+.advisor-hero-proof-card span,
+.advisor-section-label,
+.advisor-case-grid span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    opacity: 0.72;
+}
+
+.advisor-hero-proof-card strong {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--color-ink);
+}
+
+.advisor-hero-proof-card p {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+}
+
+.advisor-profile-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1.25rem;
+    align-items: start;
+    padding-block: 2rem 4rem;
+}
+
+.advisor-profile-main {
+    min-width: 0;
+}
+
+.profile-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding: 0.65rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+}
+
+.profile-tab {
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink-soft);
+    font-size: 0.82rem;
+    font-weight: 750;
+    padding: 0.55rem 0.85rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.profile-tab.active {
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+}
+
+.profile-tab-panel {
+    display: grid;
+    gap: 1rem;
+}
+
+.advisor-section-card,
+.profile-metric-card,
+.advisor-case-card,
+.advisor-booking-panel {
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.045);
+}
+
+.advisor-section-card,
+.advisor-case-card,
+.advisor-booking-panel {
+    padding: 1.35rem;
+}
+
+.advisor-section-card h2,
+.advisor-case-card h2 {
+    margin: 0.45rem 0 0.75rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    letter-spacing: -0.35px;
+    color: var(--color-ink);
+}
+
+.advisor-section-card p,
+.advisor-case-card p,
+.profile-offering p,
+.advisor-booking-panel p {
+    color: var(--color-ink-soft);
+    line-height: 1.65;
+}
+
+.advisor-section-subcopy {
+    max-width: 64ch;
+}
+
+.profile-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+}
+
+.profile-metric-card {
+    padding: 1.1rem;
+}
+
+.profile-metric-value {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--color-primary);
+}
+
+.profile-metric-label {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+}
+
+.profile-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1rem;
+}
+
+.profile-story-list {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.profile-story {
+    position: relative;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+    background: var(--color-surface-soft);
+}
+
+.profile-story-metric {
+    display: inline-flex;
+    margin-bottom: 0.65rem;
+    border-radius: 999px;
+    background: white;
+    border: 1px solid rgba(29, 78, 216, 0.14);
+    color: var(--color-primary);
+    padding: 0.3rem 0.65rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.profile-story h3,
+.profile-offering h3 {
+    margin: 0;
+    font-size: 0.98rem;
+    color: var(--color-ink);
+}
+
+.profile-story p {
+    margin-top: 0.4rem;
+}
+
+.advisor-case-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.advisor-case-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--color-primary), rgba(99, 102, 241, 0.45));
+}
+
+.advisor-case-index {
+    color: rgba(29, 78, 216, 0.28);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.advisor-case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.advisor-case-grid div {
+    border-radius: 16px;
+    background: var(--color-surface-soft);
+    padding: 1rem;
+}
+
+.profile-media-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.profile-media-tile {
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    background: var(--color-surface-soft);
+    padding: 1rem;
+    min-height: 145px;
+}
+
+.profile-media-tile.large {
+    grid-row: span 2;
+    min-height: 300px;
+    background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(29, 78, 216, 0.78));
+    color: white;
+}
+
+.profile-media-tile span {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+}
+
+.profile-media-tile.large span {
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+}
+
+.profile-media-tile strong {
+    display: block;
+}
+
+.profile-media-tile p {
+    margin-top: 0.35rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+}
+
+.profile-media-tile.large p {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.profile-offering-list {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.profile-offering {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+    background: var(--color-surface-soft);
+}
+
+.profile-offering strong {
+    white-space: nowrap;
+    color: var(--color-primary);
+}
+
+.advisor-booking-panel {
+    position: sticky;
+    top: 1rem;
+}
+
+.advisor-booking-panel h3 {
+    margin: 0.45rem 0 0.25rem;
+    font-size: 1.8rem;
+    letter-spacing: -0.8px;
+}
+
+.advisor-booking-btn {
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.advisor-trust-box {
+    margin-top: 1rem;
+    border-radius: 16px;
+    background: var(--color-primary-wash);
+    border: 1px solid rgba(29, 78, 216, 0.12);
+    padding: 1rem;
+}
+
+.advisor-trust-box strong {
+    color: var(--color-ink);
+}
+
+.advisor-trust-box p {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 980px) {
+
+    .advisor-profile-hero-inner,
+    .advisor-profile-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .advisor-booking-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 720px) {
+    .advisor-profile-hero-inner {
+        padding-block: 2.75rem;
+    }
+
+    .profile-metric-grid,
+    .advisor-case-grid,
+    .profile-media-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-media-tile.large {
+        min-height: 220px;
+    }
+
+    .profile-offering {
+        flex-direction: column;
+    }
+}

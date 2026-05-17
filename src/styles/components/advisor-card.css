@@ -1,0 +1,129 @@
+.advisor-card-v2 {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    height: 100%;
+}
+
+.advisor-card-v2 img,
+.advisor-card-v2 .advisor-photo,
+.advisor-card-v2 .advisor-image {
+    filter: grayscale(18%) saturate(0.88) opacity(0.9);
+    transform: scale(1);
+    transition:
+        filter 0.28s ease,
+        transform 0.28s ease;
+}
+
+.advisor-card-v2:hover img,
+.advisor-card-v2:hover .advisor-photo,
+.advisor-card-v2:hover .advisor-image {
+    filter: grayscale(0%) saturate(1) opacity(1);
+    transform: scale(1.02);
+}
+
+.ac-media {
+    position: relative;
+    min-height: 180px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--color-primary-soft);
+}
+
+.ac-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ac-media-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    display: grid;
+    place-items: center;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.ac-video-pill {
+    position: absolute;
+    left: 0.65rem;
+    bottom: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.72);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.ac-body {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.ac-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.ac-meta {
+    min-width: 0;
+}
+
+.ac-name {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.ac-headline,
+.ac-location {
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.ac-achievements {
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.ac-tags {
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.ac-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: 0.25rem;
+}
+
+.ac-price {
+    font-size: 0.95rem;
+}
+
+.ac-footnote {
+    font-size: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .advisor-card-v2 {
+        grid-template-columns: 1fr;
+    }
+
+    .ac-media {
+        min-height: 220px;
+    }
+}

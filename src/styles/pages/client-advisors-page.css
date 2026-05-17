@@ -1,0 +1,695 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   client-advisors-page.css
+   ─────────────────────────────────────────────────────────────────────────
+   Styles for ClientAdvisorsPage — the logged-in advisor-search experience.
+
+   Key pattern: "dashboard breakout"
+   The page lives inside DashboardLayout's .dash-content / .dash-content-inner
+   (which add padding + a 1180px max-width cap). We escape that box with
+   .dash-breakout so the page gets the full width of .dash-content, then
+   manages its own spacing and layout from scratch — matching the breathing
+   room of the public AdvisorsPage without duplicating its visual identity.
+
+   Import this file alongside dashboard.css and layouts.css.
+═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────
+   BREAKOUT UTILITY
+   Negates dash-content-inner's padding so the
+   page can span the full content-area width.
+   Add to dash-content-inner in layouts.css:
+     .dash-content-inner { position: relative; }
+   ─────────────────────────────────────────────── */
+
+.dash-breakout {
+    /* Cancel the 1.5rem padding from .dash-content */
+    margin: -1.5rem;
+}
+
+@media (max-width: 900px) {
+    .dash-breakout {
+        margin: -1rem;
+    }
+}
+
+
+/* ─────────────────────────────────────────────
+   PAGE SHELL
+───────────────────────────────────────────── */
+
+.cap-advisors-page {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 52px);
+    /* subtract topbar height */
+    background: var(--color-page);
+}
+
+
+/* ─────────────────────────────────────────────
+   BREADCRUMB BAR
+   Thin bar that anchors the user inside the
+   dashboard — "you are still in client workspace"
+───────────────────────────────────────────── */
+
+.cap-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.cap-breadcrumb-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    transition: color 0.14s;
+}
+
+.cap-breadcrumb-back:hover {
+    color: var(--color-primary);
+}
+
+.cap-breadcrumb-back .ti {
+    font-size: 0.9rem;
+}
+
+.cap-breadcrumb-sep {
+    font-size: 0.65rem;
+    color: var(--color-border-strong);
+}
+
+.cap-breadcrumb-current {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-ink);
+}
+
+
+/* ─────────────────────────────────────────────
+   HERO / SEARCH HEADER
+   Full-width, dark-tinted strip that mirrors
+   the public hero in function but uses the
+   dashboard's navy palette.
+───────────────────────────────────────────── */
+
+.cap-hero {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 2rem;
+    align-items: center;
+    padding: 2.5rem 2rem 2rem;
+    background: var(--color-navy-sidebar);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle radial glow — same decorative language as dash-discovery-strip */
+.cap-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 70% 50%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.cap-hero-inner {
+    position: relative;
+    /* above ::before */
+    display: grid;
+    gap: 1rem;
+}
+
+/* Context pill */
+.cap-context-pill {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0.4rem 0.75rem 0.4rem 0.6rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    color: rgba(244, 248, 255, 0.7);
+    width: fit-content;
+    max-width: 100%;
+}
+
+.cap-context-pill .ti {
+    font-size: 0.85rem;
+    color: rgba(147, 197, 253, 0.8);
+    flex-shrink: 0;
+}
+
+.cap-context-pill strong {
+    color: rgba(244, 248, 255, 0.95);
+    font-weight: 700;
+}
+
+.cap-context-tags {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.cap-context-tag {
+    display: inline-flex;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.25);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: #93c5fd;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+/* Headline */
+.cap-hero-headline {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--color-on-dark);
+    line-height: 1.15;
+    margin: 0;
+}
+
+.cap-hero-headline em {
+    font-style: italic;
+    font-weight: 700;
+    color: #93c5fd;
+}
+
+/* Search bar */
+.cap-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0 0.35rem 0 1rem;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    max-width: 680px;
+}
+
+.cap-search-bar:focus-within {
+    border-color: rgba(59, 130, 246, 0.55);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.cap-search-icon {
+    font-size: 1rem;
+    color: var(--color-ink-soft);
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+}
+
+.cap-search-bar input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    padding: 0.75rem 0.5rem 0.75rem 0;
+    font-size: 0.9rem;
+    color: var(--color-ink);
+    outline: none;
+}
+
+.cap-search-bar input::placeholder {
+    color: var(--color-ink-soft);
+}
+
+.cap-search-submit {
+    flex-shrink: 0;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    background: var(--dash-topbar-primary-bg, #1d4ed8);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.14s;
+    margin: 0.25rem;
+}
+
+.cap-search-submit:hover {
+    filter: brightness(1.1);
+}
+
+/* Prompt chips */
+.cap-prompt-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.cap-prompt-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(244, 248, 255, 0.38);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-right: 0.1rem;
+}
+
+.cap-prompt-chip {
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(244, 248, 255, 0.62);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.14s, color 0.14s, border-color 0.14s;
+    text-align: left;
+}
+
+.cap-prompt-chip:hover,
+.cap-prompt-chip--active {
+    background: rgba(59, 130, 246, 0.22);
+    border-color: rgba(59, 130, 246, 0.45);
+    color: #93c5fd;
+}
+
+/* Aside stat block */
+.cap-hero-aside {
+    position: relative;
+    display: grid;
+    gap: 1.1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+}
+
+.cap-hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.cap-hero-stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: var(--color-on-dark);
+    line-height: 1;
+}
+
+.cap-hero-stat-number sup {
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    vertical-align: super;
+}
+
+.cap-hero-stat-label {
+    font-size: 0.75rem;
+    color: rgba(244, 248, 255, 0.5);
+    font-weight: 500;
+}
+
+.cap-hero-stat-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.cap-hero-model {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.cap-hero-model-kicker {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(147, 197, 253, 0.65);
+}
+
+.cap-hero-model strong {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--color-on-dark);
+    line-height: 1.3;
+}
+
+.cap-hero-model p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: rgba(244, 248, 255, 0.5);
+    line-height: 1.5;
+}
+
+
+/* ─────────────────────────────────────────────
+   BODY — FILTER SIDEBAR + RESULTS
+   Matches the spatial rhythm of the public
+   AdvisorsPage (.advisors-body) but uses the
+   dashboard page background.
+───────────────────────────────────────────── */
+
+.cap-body {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 0;
+    flex: 1;
+    align-items: start;
+}
+
+/* Filter sidebar */
+.cap-filter-sidebar {
+    position: sticky;
+    top: 52px;
+    /* aligns below dashboard topbar */
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-surface);
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+}
+
+.cap-filter-header {
+    display: grid;
+    gap: 0.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cap-filter-header span {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-ink);
+}
+
+.cap-filter-header p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    line-height: 1.5;
+}
+
+/* Results column */
+.cap-results {
+    padding: 1.5rem 2rem 3rem;
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+}
+
+/* Mobile filter toggle bar — hidden on desktop */
+.cap-mobile-filter-bar {
+    display: none;
+}
+
+.cap-mobile-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.14s;
+}
+
+.cap-mobile-filter-btn:hover {
+    border-color: var(--color-border-strong);
+}
+
+.cap-mobile-filter-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+.cap-mobile-filter-drawer {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1rem;
+}
+
+.cap-sort-inline {
+    display: none;
+}
+
+/* Best-match spotlight */
+.cap-best-match {
+    display: grid;
+    gap: 0.65rem;
+    padding: 1.25rem;
+    background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.07), transparent 20rem),
+        var(--color-surface);
+    border: 1px solid rgba(29, 78, 216, 0.12);
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.cap-best-match-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    opacity: 0.75;
+}
+
+.cap-best-match-label .ti {
+    font-size: 0.85rem;
+}
+
+.cap-best-match-headline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    color: var(--color-ink);
+    margin: 0;
+    line-height: 1.25;
+}
+
+.cap-best-match-sub {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 52ch;
+}
+
+/* Results toolbar */
+.cap-results-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cap-results-count {
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+}
+
+.cap-results-count strong {
+    color: var(--color-ink);
+    font-size: 0.95rem;
+}
+
+.cap-sort-desktop {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+}
+
+.cap-sort-desktop select,
+.cap-sort-inline select {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm, 8px);
+    padding: 0.3rem 0.55rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.14s;
+}
+
+.cap-sort-desktop select:focus,
+.cap-sort-inline select:focus {
+    border-color: rgba(29, 78, 216, 0.4);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.08);
+}
+
+/* Card grid */
+.cap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 0.85rem;
+}
+
+/* Empty state */
+.cap-empty {
+    display: grid;
+    justify-items: center;
+    gap: 0.65rem;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.cap-empty-icon {
+    font-size: 2.5rem;
+    color: var(--color-border-strong);
+}
+
+.cap-empty-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.cap-empty-reset {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-border-strong);
+    background: transparent;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: background 0.14s, border-color 0.14s;
+}
+
+.cap-empty-reset:hover {
+    background: var(--color-primary-soft);
+    border-color: rgba(29, 78, 216, 0.35);
+}
+
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
+/* Tablet — collapse hero aside, tighten layout */
+@media (max-width: 1100px) {
+    .cap-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .cap-hero-aside {
+        display: none;
+        /* stat block hides — not essential at this width */
+    }
+}
+
+/* Tablet — remove sidebar, switch to top filter bar */
+@media (max-width: 860px) {
+    .cap-body {
+        grid-template-columns: 1fr;
+    }
+
+    .cap-filter-sidebar {
+        display: none;
+        /* replaced by mobile drawer */
+    }
+
+    .cap-mobile-filter-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .cap-sort-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-ink-soft);
+        cursor: pointer;
+    }
+
+    .cap-sort-desktop {
+        display: none;
+    }
+
+    .cap-results {
+        padding: 1.25rem 1.5rem 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .cap-hero {
+        padding: 1.5rem 1.25rem 1.25rem;
+    }
+
+    .cap-breadcrumb {
+        padding: 0.6rem 1.25rem;
+    }
+
+    .cap-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cap-results {
+        padding: 1rem 1rem 2rem;
+    }
+
+    .cap-prompt-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cap-hero-headline {
+        font-size: 1.4rem;
+    }
+
+    .cap-context-pill {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 14px;
+        padding: 0.6rem 0.75rem;
+    }
+}

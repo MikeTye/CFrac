@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 
+/* ─────────────────────────────────────────────
+   TYPES
+───────────────────────────────────────────── */
+
 export type AppointmentStatus =
     | 'upcoming'
     | 'in-progress'
@@ -7,30 +11,46 @@ export type AppointmentStatus =
     | 'cancelled'
     | 'pending-confirmation';
 
+/**
+ * The Appointment type is perspective-agnostic.
+ * Both `advisor` and `client` fields are optional
+ * so a single type works for both dashboards.
+ *
+ * Advisor perspective  → populate `client` field.
+ * Client perspective   → populate `advisor` field.
+ */
 export interface Appointment {
     id: string;
-    advisor: {
+
+    /** Present when rendered from the advisor's perspective */
+    client?: {
+        name: string;
+        company: string;
+        initials: string;
+    };
+
+    /** Present when rendered from the client's perspective */
+    advisor?: {
         name: string;
         title: string;
         initials: string;
-        /** e.g. "GTM Strategy" */
         function: string;
     };
-    date: string;          // ISO date string
-    timeStart: string;     // "14:00"
-    timeEnd: string;       // "15:00"
+
+    date: string;
+    timeStart: string;
+    timeEnd: string;
     duration: 30 | 60 | 90;
     status: AppointmentStatus;
     topic: string;
-    /** Whether AI session summary is ready */
     summaryReady?: boolean;
-    /** Whether recording is available */
     recordingReady?: boolean;
 }
 
 /* ─────────────────────────────────────────────
    STATUS CONFIG
 ───────────────────────────────────────────── */
+
 const STATUS_CONFIG: Record<
     AppointmentStatus,
     { label: string; className: string }
@@ -48,9 +68,9 @@ const STATUS_CONFIG: Record<
 /* ─────────────────────────────────────────────
    HELPERS
 ───────────────────────────────────────────── */
+
 function formatDate(iso: string) {
-    const d = new Date(iso);
-    return d.toLocaleDateString('en-GB', {
+    return new Date(iso).toLocaleDateString('en-GB', {
         weekday: 'short',
         day: 'numeric',
         month: 'short',
@@ -58,46 +78,81 @@ function formatDate(iso: string) {
     });
 }
 
+/**
+ * Derives the display person from the appointment
+ * based on whose workspace is rendering the card.
+ */
+function getParty(appt: Appointment, perspective: 'advisor' | 'client') {
+    if (perspective === 'advisor' && appt.client) {
+        return {
+            initials: appt.client.initials,
+            primaryLine: appt.client.name,
+            secondaryLine: appt.client.company,
+        };
+    }
+    if (perspective === 'client' && appt.advisor) {
+        return {
+            initials: appt.advisor.initials,
+            primaryLine: appt.advisor.name,
+            secondaryLine: appt.advisor.title,
+        };
+    }
+    // Fallback: should not happen with correct data
+    return { initials: '?', primaryLine: 'Unknown', secondaryLine: '' };
+}
+
+/* ─────────────────────────────────────────────
+   PROPS
+───────────────────────────────────────────── */
+
+type AppointmentCardProps = {
+    appt: Appointment;
+    variant?: 'default' | 'compact';
+    perspective?: 'advisor' | 'client';
+};
+
 /* ─────────────────────────────────────────────
    COMPONENT
 ───────────────────────────────────────────── */
+
 export function AppointmentCard({
     appt,
     variant = 'default',
-}: {
-    appt: Appointment;
-    /** "default" = full card; "compact" = condensed row for list views */
-    variant?: 'default' | 'compact';
-}) {
+    perspective = 'advisor',
+}: AppointmentCardProps) {
     const status = STATUS_CONFIG[appt.status];
+    const party = getParty(appt, perspective);
 
+    /* ── Compact variant ── */
     if (variant === 'compact') {
         return (
             <Link
                 to={`/appointments/${appt.id}`}
                 className="appt-card-compact"
-                aria-label={`Session with ${appt.advisor.name} on ${formatDate(appt.date)}`}
+                aria-label={`Session with ${party.primaryLine} on ${formatDate(appt.date)}`}
             >
-                {/* Left accent bar driven by status */}
                 <div className={`appt-compact-accent appt-accent--${appt.status}`} />
+
                 <div className="appt-compact-avatar">
-                    {appt.advisor.initials}
+                    {party.initials}
                 </div>
+
                 <div className="appt-compact-body">
                     <div className="appt-compact-top">
-                        <span className="appt-compact-name">{appt.advisor.name}</span>
+                        <span className="appt-compact-name">{party.primaryLine}</span>
                         <span className={`appt-status ${status.className}`}>
                             {status.label}
                         </span>
                     </div>
                     <div className="appt-compact-meta">
                         <span>{appt.topic}</span>
-                        <span className="appt-compact-sep">·</span>
+                        <span className="appt-compact-sep" aria-hidden="true">·</span>
                         <span>{formatDate(appt.date)}, {appt.timeStart}–{appt.timeEnd}</span>
-                        <span className="appt-compact-sep">·</span>
+                        <span className="appt-compact-sep" aria-hidden="true">·</span>
                         <span>{appt.duration} min</span>
                     </div>
                 </div>
+
                 <div className="appt-compact-arrow" aria-hidden="true">→</div>
             </Link>
         );
@@ -106,21 +161,18 @@ export function AppointmentCard({
     /* ── Default (full) card ── */
     return (
         <article className="appt-card">
-            {/* Left border accent — status-coloured */}
+            {/* Left accent bar — status-coloured */}
             <div className={`appt-card-accent appt-accent--${appt.status}`} />
 
             <div className="appt-card-inner">
+
                 {/* Header row */}
                 <div className="appt-card-header">
-                    <div className="appt-card-advisor">
-                        <div className="appt-card-avatar">{appt.advisor.initials}</div>
+                    <div className="appt-card-party">
+                        <div className="appt-card-avatar">{party.initials}</div>
                         <div>
-                            <div className="appt-card-advisor-name">
-                                {appt.advisor.name}
-                            </div>
-                            <div className="appt-card-advisor-title muted">
-                                {appt.advisor.title}
-                            </div>
+                            <div className="appt-card-party-name">{party.primaryLine}</div>
+                            <div className="appt-card-party-sub muted">{party.secondaryLine}</div>
                         </div>
                     </div>
                     <span className={`appt-status ${status.className}`}>
@@ -133,7 +185,13 @@ export function AppointmentCard({
 
                 {/* Meta row */}
                 <div className="appt-card-meta stack-row">
-                    <span className="badge">{appt.advisor.function}</span>
+                    {/* Badge differs by perspective */}
+                    {perspective === 'advisor' && appt.client?.company && (
+                        <span className="badge">{appt.client.company}</span>
+                    )}
+                    {perspective === 'client' && appt.advisor?.function && (
+                        <span className="badge">{appt.advisor.function}</span>
+                    )}
                     <span className="appt-meta-sep" aria-hidden="true">·</span>
                     <span className="muted" style={{ fontSize: '0.8rem' }}>
                         {formatDate(appt.date)}
@@ -148,9 +206,9 @@ export function AppointmentCard({
                     </span>
                 </div>
 
-                {/* Footer actions */}
+                {/* Footer actions — differ slightly by perspective */}
                 <div className="appt-card-footer">
-                    {appt.status === 'upcoming' || appt.status === 'in-progress' ? (
+                    {(appt.status === 'upcoming' || appt.status === 'in-progress') && (
                         <>
                             <Link
                                 to={`/appointments/${appt.id}/join`}
@@ -167,7 +225,9 @@ export function AppointmentCard({
                                 Details
                             </Link>
                         </>
-                    ) : appt.status === 'completed' ? (
+                    )}
+
+                    {appt.status === 'completed' && (
                         <>
                             {appt.summaryReady && (
                                 <Link
@@ -187,22 +247,38 @@ export function AppointmentCard({
                                     Recording
                                 </Link>
                             )}
-                            <Link
-                                to={`/appointments/${appt.id}/review`}
-                                className="btn ghost"
-                                style={{ fontSize: '0.82rem', padding: '0.45rem 0.85rem' }}
-                            >
-                                Leave review
-                            </Link>
+                            {/* Only clients leave reviews; advisors view session notes */}
+                            {perspective === 'client' && (
+                                <Link
+                                    to={`/appointments/${appt.id}/review`}
+                                    className="btn ghost"
+                                    style={{ fontSize: '0.82rem', padding: '0.45rem 0.85rem' }}
+                                >
+                                    Leave review
+                                </Link>
+                            )}
+                            {perspective === 'advisor' && (
+                                <Link
+                                    to={`/appointments/${appt.id}`}
+                                    className="btn ghost"
+                                    style={{ fontSize: '0.82rem', padding: '0.45rem 0.85rem' }}
+                                >
+                                    Session notes
+                                </Link>
+                            )}
                         </>
-                    ) : appt.status === 'pending-confirmation' ? (
+                    )}
+
+                    {appt.status === 'pending-confirmation' && (
                         <span
                             className="muted"
                             style={{ fontSize: '0.8rem', fontStyle: 'italic' }}
                         >
-                            Waiting for advisor to confirm
+                            {perspective === 'advisor'
+                                ? 'Waiting for you to confirm'
+                                : 'Waiting for advisor to confirm'}
                         </span>
-                    ) : null}
+                    )}
                 </div>
             </div>
         </article>

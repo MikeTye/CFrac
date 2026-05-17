@@ -1,0 +1,620 @@
+/* ─────────────────────────────────────────────
+   PUBLIC SHELL
+───────────────────────────────────────────── */
+
+.public-shell {
+    min-height: 100vh;
+    background: var(--color-page);
+}
+
+.public-main {
+    padding-top: 0;
+}
+
+.public-main > .landing {
+    margin-inline: calc(50% - 50vw);
+}
+
+
+/* ─────────────────────────────────────────────
+   ROLE-LEVEL THEME TOKENS
+   Scoped to [data-role] on .dash-layout so
+   every downstream token inherits automatically.
+   Client keeps the default blue; advisor shifts
+   to a deeper navy-indigo.
+───────────────────────────────────────────── */
+
+.dash-layout[data-role="advisor"] {
+    --color-primary: #1e3a8a;
+    --color-primary-soft: #e0e7ff;
+    --color-primary-wash: #eef2ff;
+    --dash-sidebar-accent: #2563eb;
+    --dash-sidebar-active-bg: rgba(37, 99, 235, 0.32);
+    --dash-sidebar-active-text: #bfdbfe;
+    --dash-sidebar-active-bar: #60a5fa;
+    --dash-topbar-primary-bg: #1e3a8a;
+}
+
+.dash-layout[data-role="client"] {
+    --dash-sidebar-accent: #3b82f6;
+    --dash-sidebar-active-bg: rgba(29, 78, 216, 0.32);
+    --dash-sidebar-active-text: #bfdbfe;
+    --dash-sidebar-active-bar: #93c5fd;
+    --dash-topbar-primary-bg: #1d4ed8;
+}
+
+
+/* ─────────────────────────────────────────────
+   OUTER SHELL
+───────────────────────────────────────────── */
+
+.dash-layout {
+    display: grid;
+    grid-template-columns: var(--dash-sidebar-w, 240px) minmax(0, 1fr);
+    min-height: 100vh;
+    background: var(--color-page);
+    transition: grid-template-columns 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ─────────────────────────────────────────────
+   SIDEBAR
+───────────────────────────────────────────── */
+
+.dash-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--color-navy-sidebar);
+    color: var(--color-on-dark);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 240px;
+    z-index: 20;
+
+    /* Scrollbar — subtle on dark bg */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.dash-sidebar--collapsed {
+    width: 56px;
+}
+
+
+/* ─────────────────────────────────────────────
+   BRAND LOCKUP
+───────────────────────────────────────────── */
+
+.dash-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 1rem 0.875rem 0.875rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    flex-shrink: 0;
+    min-height: 60px;
+    text-decoration: none;
+}
+
+.dash-brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--dash-sidebar-accent, #3b82f6);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.dash-brand-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.18s, width 0.28s;
+    opacity: 1;
+}
+
+.dash-sidebar--collapsed .dash-brand-text {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.dash-brand-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-on-dark);
+    line-height: 1.25;
+}
+
+.dash-brand-role {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--dash-sidebar-active-text, #93c5fd);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 0.15rem 0.5rem;
+    margin-top: 0.25rem;
+    width: fit-content;
+    letter-spacing: 0.2px;
+}
+
+
+/* ─────────────────────────────────────────────
+   NAV GROUPS
+───────────────────────────────────────────── */
+
+.dash-nav {
+    flex: 1;
+    padding: 0.65rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dash-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.dash-nav-group:last-child {
+    margin-bottom: 0;
+}
+
+.dash-nav-group-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.28);
+    padding: 0.3rem 0.625rem 0.45rem;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.18s;
+}
+
+.dash-sidebar--collapsed .dash-nav-group-label {
+    opacity: 0;
+}
+
+
+/* ─────────────────────────────────────────────
+   NAV LINKS
+───────────────────────────────────────────── */
+
+.dash-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: rgba(244, 248, 255, 0.58);
+    font-size: 0.82rem;
+    font-weight: 600;
+    position: relative;
+    transition: background 0.14s, color 0.14s;
+    white-space: nowrap;
+    overflow: hidden;
+    min-height: 36px;
+}
+
+.dash-nav-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(244, 248, 255, 0.9);
+}
+
+.dash-nav-link--active {
+    background: var(--dash-sidebar-active-bg);
+    color: var(--color-on-dark);
+}
+
+/* Left accent bar on active link */
+.dash-nav-link--active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    background: var(--dash-sidebar-active-bar, #93c5fd);
+    border-radius: 0 999px 999px 0;
+}
+
+.dash-nav-icon {
+    font-size: 1.05rem;
+    color: rgba(244, 248, 255, 0.45);
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    transition: color 0.14s;
+}
+
+.dash-nav-link:hover .dash-nav-icon {
+    color: rgba(244, 248, 255, 0.8);
+}
+
+.dash-nav-link--active .dash-nav-icon {
+    color: var(--dash-sidebar-active-text, #bfdbfe);
+}
+
+.dash-nav-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.18s;
+}
+
+.dash-sidebar--collapsed .dash-nav-label {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.dash-nav-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--dash-sidebar-accent, #3b82f6);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0 0.3rem;
+    flex-shrink: 0;
+    transition: opacity 0.18s;
+}
+
+.dash-sidebar--collapsed .dash-nav-badge {
+    opacity: 0;
+}
+
+
+/* ─────────────────────────────────────────────
+   SIDEBAR FOOTER  (user row)
+───────────────────────────────────────────── */
+
+.dash-sidebar-footer {
+    padding: 0.625rem 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    flex-shrink: 0;
+}
+
+.dash-user-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: 8px;
+    cursor: default;
+    transition: background 0.14s;
+}
+
+.dash-user-row:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.dash-user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--dash-sidebar-active-text, #bfdbfe);
+    font-size: 0.68rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+.dash-user-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.18s;
+}
+
+.dash-sidebar--collapsed .dash-user-info {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.dash-user-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-on-dark);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dash-user-role {
+    font-size: 0.66rem;
+    color: rgba(244, 248, 255, 0.38);
+    text-transform: capitalize;
+}
+
+
+/* ─────────────────────────────────────────────
+   COLLAPSE BUTTON  (desktop only)
+───────────────────────────────────────────── */
+
+.dash-collapse-btn {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-navy-3, #1d3a65);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(244, 248, 255, 0.55);
+    font-size: 0.62rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.14s, color 0.14s;
+}
+
+.dash-collapse-btn:hover {
+    background: var(--dash-sidebar-accent, #3b82f6);
+    color: #fff;
+}
+
+
+/* ─────────────────────────────────────────────
+   MAIN CONTENT AREA
+───────────────────────────────────────────── */
+
+.dash-main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* ─────────────────────────────────────────────
+   TOPBAR
+───────────────────────────────────────────── */
+
+.dash-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 52px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1.5rem;
+    flex-shrink: 0;
+}
+
+.dash-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-soft);
+    font-size: 1rem;
+    cursor: pointer;
+    background: transparent;
+    flex-shrink: 0;
+}
+
+.dash-topbar-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dash-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.dash-topbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-border);
+    background: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.14s, border-color 0.14s, color 0.14s;
+    white-space: nowrap;
+}
+
+.dash-topbar-btn:hover {
+    background: var(--color-surface-soft);
+    border-color: var(--color-border-strong);
+    color: var(--color-ink);
+}
+
+.dash-topbar-btn--primary {
+    background: var(--dash-topbar-primary-bg, #1d4ed8);
+    border-color: transparent;
+    color: #fff;
+}
+
+.dash-topbar-btn--primary:hover {
+    filter: brightness(1.1);
+    color: #fff;
+    background: var(--dash-topbar-primary-bg, #1d4ed8);
+}
+
+.dash-topbar-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.14s;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.dash-topbar-icon-btn:hover {
+    background: var(--color-surface-soft);
+    color: var(--color-ink);
+}
+
+/* Notification dot */
+.dash-topbar-icon-btn--notif::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: 1.5px solid var(--color-surface);
+}
+
+
+/* ─────────────────────────────────────────────
+   PAGE CONTENT
+───────────────────────────────────────────── */
+
+.dash-content {
+    flex: 1;
+    padding: 1.5rem;
+    background: var(--color-page);
+}
+
+.dash-content-inner {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+
+/* ─────────────────────────────────────────────
+   MOBILE OVERLAY
+───────────────────────────────────────────── */
+
+.dash-mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 19;
+    backdrop-filter: blur(2px);
+}
+
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+    .dash-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Sidebar slides in as a drawer */
+    .dash-sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: none;
+        width: 240px !important; /* always full width on mobile, ignore collapsed */
+    }
+
+    .dash-sidebar--mobile-open {
+        transform: translateX(0);
+        box-shadow: 8px 0 32px rgba(15, 23, 42, 0.25);
+    }
+
+    /* All text visible in drawer regardless of collapsed state */
+    .dash-sidebar--mobile-open .dash-brand-text,
+    .dash-sidebar--mobile-open .dash-nav-label,
+    .dash-sidebar--mobile-open .dash-nav-badge,
+    .dash-sidebar--mobile-open .dash-nav-group-label,
+    .dash-sidebar--mobile-open .dash-user-info {
+        opacity: 1 !important;
+        width: auto !important;
+        pointer-events: auto !important;
+    }
+
+    .dash-mobile-overlay {
+        display: block;
+    }
+
+    .dash-hamburger {
+        display: inline-flex;
+    }
+
+    .dash-collapse-btn {
+        display: none;
+    }
+
+    /* Topbar has less horizontal padding on mobile */
+    .dash-topbar {
+        padding: 0 1rem;
+    }
+
+    /* Hide ghost action button on small screens to save space */
+    .dash-topbar-btn:not(.dash-topbar-btn--primary) {
+        display: none;
+    }
+
+    .dash-content {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dash-topbar-title {
+        font-size: 0.82rem;
+    }
+}

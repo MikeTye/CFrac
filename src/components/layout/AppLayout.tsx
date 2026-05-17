@@ -6,7 +6,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 ───────────────────────────────────────────── */
 const PRIMARY_NAV = [
     { to: '/dashboard', label: 'Dashboard', icon: <IconDashboard /> },
-    { to: '/advisors', label: 'Browse Advisors', icon: <IconAdvisors /> },
+    { to: '/advisors', label: 'Search Advisors', icon: <IconAdvisors /> },
     { to: '/appointments', label: 'My Sessions', icon: <IconSessions /> },
     { to: '/messages', label: 'Messages', icon: <IconMessages />, badge: 2 },
 ];

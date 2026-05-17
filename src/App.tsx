@@ -10,11 +10,11 @@ import { ClientBookingDetailPage } from './pages/Client/ClientBookingDetailPage'
 import { ClientJoinSessionPage } from './pages/Client/ClientJoinSessionPage';
 import { ClientSessionDetailsPage } from './pages/Client/ClientSessionDetailsPage';
 import { LandingPage } from './pages/LandingPage';
-import { SignupPage } from './pages/SignUpPage';
-import { LoginPage } from './pages/LoginPage';
+import { SignupPage } from './pages/Auth/SignUpPage';
+import { LoginPage } from './pages/Auth/LoginPage';
 import { AdvisorDashboardPage } from './pages/Advisor/AdvisorDashboardPage';
-import { OnboardingPage } from './pages/OnboardingPage';
-import { VerifyCodePage } from './pages/VerifyCodePage';
+import { OnboardingPage } from './pages/Auth/OnboardingPage';
+import { VerifyCodePage } from './pages/Auth/VerifyCodePage';
 import { AdvisorsPage } from './pages/Advisor/AdvisorsPage';
 import { AdvisorProfilePage } from './pages/Advisor/AdvisorProfilePage';
 import { LandingPage2 } from './pages/LandingPage2';
@@ -33,6 +33,7 @@ import { AdminDisputeReviewPage } from './pages/Admin/AdminDisputeReviewPage';
 import { AdminRecordingAuditPage } from './pages/Admin/AdminRecordingAuditPage';
 import { AdminDeclineMonitoringPage } from './pages/Admin/AdminDeclineMonitoringPage';
 import { DemoStartPage } from './pages/DemoStartPage';
+import { ClientAdvisorsPage } from './pages/Client/ClientAdvisorsPage';
 
 export function App() {
   return (
@@ -52,6 +53,7 @@ export function App() {
 
       <Route path="/client" element={<DashboardLayout role="client" />}>
         <Route path="dashboard" element={<ClientDashboardPage />} />
+        <Route path="advisors" element={<ClientAdvisorsPage />} />
         <Route path="intake/new" element={<ClientIntakeNewPage />} />
         <Route path="intake/:intakeId/status" element={<ClientIntakeStatusPage />} />
         <Route path="checkout/:bookingId" element={<ClientCheckoutPage />} />
