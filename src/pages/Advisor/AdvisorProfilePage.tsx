@@ -10,54 +10,13 @@ function getStartingPrice(advisor: (typeof advisors)[number]) {
     return Math.min(...advisor.sessionOfferings.map((s) => s.price));
 }
 
-function getAdvisorProof(advisor: (typeof advisors)[number]) {
-    const proofMetrics = advisor.achievements
-        .filter((item) => item.metric)
-        .slice(0, 3)
-        .map((item) => ({
-            label: item.title,
-            value: item.metric!,
-            description: item.description,
-        }));
-
-    return {
-        headline: advisor.achievements[0]
-            ? `${advisor.achievements[0].title}: ${advisor.achievements[0].metric ?? advisor.achievements[0].description}`
-            : advisor.headline,
-        proofMetrics,
-        bestFor: [
-            ...advisor.advisoryTopics.slice(0, 3),
-            ...advisor.functions.slice(0, 2),
-        ],
-    };
-}
-
-function getAdvisorImpact(advisor: (typeof advisors)[number]) {
-    return advisor.impact ?? {
-        headlineOutcome: advisor.headline,
-        metrics: [
-            { label: 'Functions covered', value: String(advisor.functions.length) },
-            { label: 'Industries served', value: String(advisor.industries.length) },
-            { label: 'Client reviews', value: String(advisor.reviewCount) },
-        ],
-        proofPoints: advisor.achievements?.slice(0, 3).map((a) => a.metric || a.title) ?? [],
-        bestFor: [
-            `Teams needing support in ${advisor.functions.slice(0, 2).join(' / ')}`,
-            `Operators working across ${advisor.industries.slice(0, 2).join(' / ')}`,
-            'Founders seeking senior operating guidance',
-        ],
-    };
-}
-
 export function AdvisorProfilePage() {
     const { advisorId } = useParams();
     const advisor = advisors.find((a) => a.id === advisorId) ?? advisors[0];
     const [open, setOpen] = useState(false);
-    const [tab, setTab] = useState<ProfileTab>('proof');
+    const [tab, setTab] = useState<ProfileTab>('overview');
 
     const startingPrice = getStartingPrice(advisor);
-    const proof = getAdvisorProof(advisor);
-    const impact = getAdvisorImpact(advisor);
 
     return (
         <div className="advisor-profile-page">
@@ -127,7 +86,7 @@ export function AdvisorProfilePage() {
                         ))}
                     </nav>
 
-                    {tab === 'proof' ? (
+                    {tab === 'overview' ? (
                         <div className="profile-tab-panel">
                             <section className="advisor-section-card advisor-narrative-card">
                                 <span className="advisor-section-label">Positioning</span>
