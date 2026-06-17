@@ -231,7 +231,11 @@ export function ClientAdvisorsPage() {
                                 Ranking will eventually reflect semantic match reasoning — matched
                                 outcomes, relevant past challenges, and industry overlap.
                             </p>
-                            <AdvisorSearchResultCard advisor={featured} />
+                            <AdvisorSearchResultCard
+                                advisor={featured}
+                                profileBasePath="/client/advisors"
+                                ctaLabel="View advisor"
+                            />
                         </section>
                     ) : null}
 
@@ -254,7 +258,12 @@ export function ClientAdvisorsPage() {
                     {/* Grid */}
                     <div className="cap-grid">
                         {filtered.map((advisor) => (
-                            <AdvisorSearchResultCard key={advisor.id} advisor={advisor} />
+                            <AdvisorSearchResultCard
+                                key={advisor.id}
+                                advisor={advisor}
+                                profileBasePath="/client/advisors"
+                                ctaLabel="View advisor"
+                            />
                         ))}
                     </div>
 

@@ -1,0 +1,329 @@
+/* ─────────────────────────────────────────────
+   APPOINTMENT CARD
+   Styles for both `default` and `compact`
+   variants of <AppointmentCard>.
+
+   Accent colours are driven by status modifier
+   classes applied to .appt-card-accent and
+   .appt-compact-accent, keeping card layout
+   decoupled from status logic.
+───────────────────────────────────────────── */
+
+
+/* ─────────────────────────────────────────────
+   STATUS ACCENT COLOURS
+   Shared by both variants via .appt-accent--*
+───────────────────────────────────────────── */
+
+.appt-accent--upcoming {
+    background: var(--color-primary);
+}
+
+.appt-accent--in-progress {
+    background: #16a34a;
+}
+
+.appt-accent--completed {
+    background: var(--color-border-strong);
+}
+
+.appt-accent--cancelled {
+    background: #e5e7eb;
+}
+
+.appt-accent--pending-confirmation {
+    background: #f59e0b;
+}
+
+
+/* ─────────────────────────────────────────────
+   STATUS PILL  (.appt-status + modifier)
+   Used in both variants.
+───────────────────────────────────────────── */
+
+.appt-status {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    padding: 0.28rem 0.65rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.appt-status--upcoming {
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    border: 1px solid rgba(29, 78, 216, 0.16);
+}
+
+.appt-status--live {
+    color: #15803d;
+    background: rgba(22, 163, 74, 0.1);
+    border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+.appt-status--done {
+    color: var(--color-ink-soft);
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+}
+
+.appt-status--cancelled {
+    color: var(--color-ink-muted);
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    text-decoration: line-through;
+}
+
+.appt-status--pending {
+    color: #b45309;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.22);
+}
+
+
+/* ─────────────────────────────────────────────
+   DEFAULT CARD
+───────────────────────────────────────────── */
+
+.appt-card {
+    position: relative;
+    display: flex;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface);
+    box-shadow: 0 4px 12px rgba(16, 32, 50, 0.045);
+    overflow: hidden;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.appt-card:hover {
+    border-color: rgba(29, 78, 216, 0.24);
+    box-shadow: 0 8px 28px rgba(16, 32, 50, 0.08);
+}
+
+/* Left accent bar — status colour applied via .appt-accent--* */
+.appt-card-accent {
+    width: 4px;
+    flex-shrink: 0;
+    border-radius: 0;
+    align-self: stretch;
+}
+
+.appt-card-inner {
+    flex: 1;
+    min-width: 0;
+    padding: 1.1rem 1.25rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+/* Header: avatar + name on the left, status pill on the right */
+.appt-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.appt-card-party {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+}
+
+.appt-card-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.appt-card-party-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.25;
+}
+
+.appt-card-party-sub {
+    font-size: 0.76rem;
+    color: var(--color-ink-soft);
+    margin-top: 0.1rem;
+    line-height: 1.3;
+}
+
+/* Topic line */
+.appt-card-topic {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.45;
+}
+
+/* Meta row: badge + date/time chips */
+.appt-card-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    row-gap: 0.3rem;
+}
+
+.appt-meta-sep {
+    color: var(--color-ink-muted);
+    font-size: 0.75rem;
+    user-select: none;
+}
+
+/* Footer: action buttons */
+.appt-card-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--color-border);
+}
+
+
+/* ─────────────────────────────────────────────
+   COMPACT CARD
+   Rendered as a <Link> — full row is clickable.
+───────────────────────────────────────────── */
+
+.appt-card-compact {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    padding: 0.8rem 1rem 0.8rem 0;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.appt-card-compact:hover {
+    border-color: rgba(29, 78, 216, 0.24);
+    background: var(--color-surface-soft);
+}
+
+/* Left accent bar — flush to card edge */
+.appt-compact-accent {
+    width: 4px;
+    align-self: stretch;
+    flex-shrink: 0;
+    border-radius: 0;
+}
+
+.appt-compact-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.appt-compact-body {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: 0.2rem;
+}
+
+.appt-compact-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.appt-compact-name {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.appt-compact-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+    line-height: 1.4;
+}
+
+.appt-compact-sep {
+    color: var(--color-ink-muted);
+    user-select: none;
+}
+
+.appt-compact-arrow {
+    font-size: 0.85rem;
+    color: var(--color-ink-muted);
+    flex-shrink: 0;
+    padding-right: 0.25rem;
+    transition: color 0.14s, transform 0.14s;
+}
+
+.appt-card-compact:hover .appt-compact-arrow {
+    color: var(--color-primary);
+    transform: translateX(2px);
+}
+
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+    .appt-card-header {
+        flex-wrap: wrap;
+    }
+
+    .appt-card-footer {
+        gap: 0.4rem;
+    }
+
+    /* Stack topic below header on very small screens */
+    .appt-card-inner {
+        gap: 0.55rem;
+    }
+
+    /* Compact: hide the arrow on mobile — row is already tappable */
+    .appt-compact-arrow {
+        display: none;
+    }
+
+    .appt-compact-meta {
+        /* Let meta wrap without the separator creating orphaned dots */
+        row-gap: 0.15rem;
+    }
+}

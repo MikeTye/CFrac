@@ -25,23 +25,67 @@ const NAV: Record<'client' | 'advisor', NavGroup[]> = {
         {
             label: 'Overview',
             items: [
-                { label: 'Dashboard', path: '/client/dashboard', icon: 'layout-dashboard', end: true },
-                { label: 'New intake', path: '/client/intake/new', icon: 'file-plus' },
+                {
+                    label: 'Dashboard',
+                    path: '/client/dashboard',
+                    icon: 'layout-dashboard',
+                    end: true,
+                },
+                {
+                    label: 'Advisory requests',
+                    path: '/client/requests',
+                    icon: 'briefcase',
+                    badge: 2,
+                },
+                {
+                    label: 'Bookings',
+                    path: '/client/bookings',
+                    icon: 'calendar-check',
+                    badge: 2,
+                },
             ],
         },
+
         {
-            label: 'Sessions',
+            label: 'Advisory',
             items: [
-                { label: 'Upcoming', path: '/client/sessions/upcoming', icon: 'calendar', badge: 2 },
-                { label: 'Past sessions', path: '/client/sessions/past', icon: 'history' },
-                { label: 'Booking detail', path: '/client/booking/bk-1002', icon: 'receipt' },
+                {
+                    label: 'Saved advisors',
+                    path: '/client/saved-advisors',
+                    icon: 'bookmark',
+                },
             ],
         },
+
+        {
+            label: 'Discover',
+            items: [
+                {
+                    label: 'Search advisors',
+                    path: '/client/advisors',
+                    icon: 'search',
+                },
+                {
+                    label: 'Recommended',
+                    path: '/client/recommended',
+                    icon: 'sparkles',
+                },
+            ],
+        },
+
         {
             label: 'Account',
             items: [
-                { label: 'Profile', path: '/client/profile', icon: 'user' },
-                { label: 'Settings', path: '/client/settings', icon: 'settings' },
+                {
+                    label: 'Profile',
+                    path: '/client/profile',
+                    icon: 'user',
+                },
+                {
+                    label: 'Settings',
+                    path: '/client/settings',
+                    icon: 'settings',
+                },
             ],
         },
     ],
@@ -56,7 +100,7 @@ const NAV: Record<'client' | 'advisor', NavGroup[]> = {
         {
             label: 'Sessions',
             items: [
-                { label: 'Calendar', path: '/advisor/calendar', icon: 'calendar-event' },
+                // { label: 'Calendar', path: '/advisor/calendar', icon: 'calendar-event' },
                 { label: 'Bookings', path: '/advisor/bookings', icon: 'calendar-check' },
             ],
         },
@@ -64,9 +108,9 @@ const NAV: Record<'client' | 'advisor', NavGroup[]> = {
             label: 'Manage',
             items: [
                 { label: 'Profile editor', path: '/advisor/profile', icon: 'id-badge' },
-                { label: 'Availability', path: '/advisor/availability', icon: 'clock' },
-                { label: 'Offerings', path: '/advisor/offerings', icon: 'list-check' },
-                { label: 'Earnings', path: '/advisor/earnings', icon: 'cash' },
+                // { label: 'Availability', path: '/advisor/availability', icon: 'clock' },
+                // { label: 'Offerings', path: '/advisor/offerings', icon: 'list-check' },
+                { label: 'Performance', path: '/advisor/performance', icon: 'chart-bar' },
             ],
         },
     ],
@@ -81,30 +125,41 @@ const NAV: Record<'client' | 'advisor', NavGroup[]> = {
 function useTopbarMeta(role: 'client' | 'advisor', pathname: string) {
     const titles: Record<string, string> = {
         '/client/dashboard': 'Dashboard',
-        '/client/intake/new': 'New intake',
-        '/client/sessions/upcoming': 'Upcoming sessions',
-        '/client/sessions/past': 'Past sessions',
+
+        '/client/requests': 'Advisory requests',
+        '/client/requests/new': 'Start advisory request',
+
+        '/client/bookings': 'Bookings',
+
+        '/client/saved-advisors': 'Saved advisors',
+
+        '/client/advisors': 'Search advisors',
+
+        '/client/recommended': 'Recommended advisors',
+
         '/client/profile': 'Profile',
+
         '/client/settings': 'Settings',
+
         '/advisor': 'Dashboard',
         '/advisor/intakes': 'Intake queue',
-        '/advisor/calendar': 'Calendar',
+        // '/advisor/calendar': 'Calendar',
         '/advisor/bookings': 'Bookings',
         '/advisor/profile': 'Profile editor',
-        '/advisor/availability': 'Availability',
-        '/advisor/offerings': 'Offerings',
-        '/advisor/earnings': 'Earnings',
+        // '/advisor/availability': 'Availability',
+        // '/advisor/offerings': 'Offerings',
+        '/advisor/performance': 'Performance',
     };
 
     const title = titles[pathname] ?? (role === 'advisor' ? 'Advisor workspace' : 'Client workspace');
 
     const ghost = role === 'advisor'
         ? { label: 'Edit profile', to: '/advisor/profile' }
-        : { label: 'Browse advisors', to: '/advisors' };
+        : { label: 'Saved advisors', to: '/client/saved-advisors' };
 
     const primary = role === 'advisor'
         ? { label: 'Set availability', to: '/advisor/availability' }
-        : { label: 'New intake', to: '/client/intake/new' };
+        : { label: 'Browse advisors', to: '/client/advisors' };
 
     return { title, ghost, primary };
 }

@@ -1,0 +1,363 @@
+.client-advisor-profile {
+    color: #102032;
+}
+
+.cap-profile-breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.cap-profile-breadcrumb a {
+    color: #102032;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.cap-profile-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #102032, #213650);
+    color: #fff;
+}
+
+.cap-profile-hero--media {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    align-items: stretch;
+}
+
+.cap-media-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.cap-video-frame {
+    min-height: 260px;
+    border-radius: 28px;
+    padding: 1.5rem;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.2), transparent 34%),
+        linear-gradient(135deg, #111827, #334155);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+}
+
+.cap-video-play {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    border: 0;
+    background: white;
+    color: #111827;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.cap-video-frame p {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.cap-video-frame span {
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.cap-hero-proof-card {
+    padding: 1.25rem;
+    color: #102032;
+}
+
+.cap-hero-proof-card span,
+.cap-price-row span {
+    display: block;
+    color: #64748b;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.cap-hero-proof-card strong {
+    display: block;
+    margin-top: 0.4rem;
+    color: #0f172a;
+    font-size: 1.1rem;
+}
+
+.cap-hero-proof-card p {
+    margin-bottom: 0;
+    color: #475569;
+}
+
+.cap-side-card--primary {
+    border-color: rgba(37, 99, 235, 0.18);
+    box-shadow: 0 20px 48px rgba(37, 99, 235, 0.1);
+}
+
+.cap-price-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    margin: 1rem 0;
+}
+
+.cap-price-row strong {
+    font-size: 1.35rem;
+    color: #0f172a;
+}
+
+.cap-profile-copy h1 {
+    margin: 1rem 0 0.5rem;
+    font-size: clamp(2rem, 4vw, 4rem);
+    letter-spacing: -0.05em;
+}
+
+.cap-profile-headline {
+    max-width: 760px;
+    font-size: 1.15rem;
+    color: #dbeafe;
+}
+
+.cap-profile-meta,
+.cap-profile-bio {
+    max-width: 760px;
+    color: #cbd5e1;
+}
+
+.cap-profile-kicker-row,
+.cap-profile-tags,
+.cap-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.cap-tier-badge,
+.cap-verified-pill,
+.cap-profile-tags span,
+.cap-chip-grid span {
+    border-radius: 999px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.cap-tier-badge {
+    background: #f8d477;
+    color: #2b1b00;
+}
+
+.cap-verified-pill,
+.cap-profile-tags span {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.cap-side-card,
+.cap-section-card,
+.cap-metric-grid article,
+.cap-hero-proof-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.cap-panel-label,
+.cap-section-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #64748b;
+}
+
+.cap-request-btn {
+    width: 100%;
+    justify-content: center;
+    margin: 0.85rem 0;
+}
+
+.cap-profile-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.cap-profile-main {
+    display: grid;
+    gap: 1rem;
+}
+
+.cap-profile-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(248, 250, 252, 0.92);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+}
+
+.cap-profile-tabs a {
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: #475569;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.cap-profile-tabs a:hover {
+    background: #e2e8f0;
+    color: #102032;
+}
+
+.cap-section-card {
+    padding: 1.4rem;
+}
+
+.cap-section-card h2 {
+    margin: 0.35rem 0 0.75rem;
+    font-size: 1.35rem;
+}
+
+.cap-section-card p {
+    color: #475569;
+    line-height: 1.65;
+}
+
+.cap-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.cap-metric-grid article {
+    padding: 1rem;
+}
+
+.cap-metric-grid strong {
+    display: block;
+    font-size: 1.8rem;
+}
+
+.cap-metric-grid span {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.cap-chip-grid span {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.cap-story-list,
+.cap-case-list,
+.cap-offering-list {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.cap-story,
+.cap-case-card,
+.cap-offering {
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 1rem;
+    background: #fbfdff;
+}
+
+.cap-story span,
+.cap-case-card>span {
+    color: #0f766e;
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+
+.cap-story h3,
+.cap-case-card h3,
+.cap-offering h3 {
+    margin: 0.35rem 0;
+}
+
+.cap-offering {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.cap-offering strong {
+    white-space: nowrap;
+}
+
+.cap-side-rail {
+    display: grid;
+    gap: 1rem;
+    align-self: start;
+    position: sticky;
+    top: 1rem;
+}
+
+.cap-side-card {
+    padding: 1.1rem;
+}
+
+.cap-side-card p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 980px) {
+
+    .cap-profile-hero,
+    .cap-profile-hero--media,
+    .cap-profile-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .cap-side-rail {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .cap-profile-hero,
+    .cap-profile-shell {
+        padding: 1rem;
+    }
+
+    .cap-metric-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cap-offering {
+        flex-direction: column;
+    }
+
+    .cap-profile-tabs {
+        overflow-x: auto;
+    }
+}

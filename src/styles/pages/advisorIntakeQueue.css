@@ -1,0 +1,385 @@
+.advisor-intake-page {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.advisor-intake-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    width: fit-content;
+}
+
+.advisor-intake-tab {
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink-soft);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 0.45rem 0.8rem;
+    cursor: pointer;
+}
+
+.advisor-intake-tab--active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.advisor-intake-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.advisor-intake-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface);
+    padding: 1.1rem;
+    box-shadow: 0 4px 12px rgba(16, 32, 50, 0.04);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.advisor-intake-row:hover {
+    border-color: rgba(29, 78, 216, 0.32);
+    box-shadow: 0 10px 26px rgba(16, 32, 50, 0.08);
+    transform: translateY(-1px);
+}
+
+.advisor-intake-row::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--color-border-strong);
+}
+
+.advisor-intake-row--expiring::before {
+    background: linear-gradient(180deg, var(--color-primary), #6366f1);
+}
+
+.advisor-intake-row--accepted::before {
+    background: #16a34a;
+}
+
+.advisor-intake-row--declined::before {
+    background: #94a3b8;
+}
+
+.advisor-intake-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font-size: 0.78rem;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+.advisor-intake-row-body {
+    min-width: 0;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.advisor-intake-row-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.advisor-intake-row-top strong {
+    font-size: 0.92rem;
+    color: var(--color-ink);
+    line-height: 1.35;
+}
+
+.advisor-intake-row-body p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+}
+
+.advisor-intake-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.advisor-intake-meta span,
+.advisor-intake-badges span {
+    border-radius: 999px;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-soft);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.24rem 0.55rem;
+}
+
+.advisor-intake-status {
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    white-space: nowrap;
+    padding: 0.28rem 0.65rem;
+}
+
+.advisor-intake-status--expiring {
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(220, 38, 38, 0.18);
+    color: #b91c1c;
+}
+
+.advisor-intake-status--pending {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #92400e;
+}
+
+.advisor-intake-status--accepted {
+    background: rgba(22, 163, 74, 0.08);
+    border: 1px solid rgba(22, 163, 74, 0.18);
+    color: #15803d;
+}
+
+.advisor-intake-status--declined {
+    background: rgba(100, 116, 139, 0.1);
+    border: 1px solid rgba(100, 116, 139, 0.18);
+    color: #475569;
+}
+
+.advisor-intake-review-btn {
+    white-space: nowrap;
+}
+
+/* Modal */
+
+.advisor-intake-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(15, 23, 42, 0.48);
+    padding: 2rem;
+    display: grid;
+    place-items: center;
+}
+
+.advisor-intake-modal {
+    width: min(920px, 100%);
+    max-height: min(760px, calc(100vh - 4rem));
+    overflow: auto;
+    border-radius: 24px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+}
+
+.advisor-intake-modal-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.35rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.advisor-intake-modal-head h2 {
+    margin: 0.25rem 0;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    letter-spacing: -0.35px;
+}
+
+.advisor-intake-close {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface-soft);
+    color: var(--color-ink);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.advisor-intake-modal-body {
+    display: grid;
+    gap: 1.15rem;
+    padding: 1.5rem;
+}
+
+.advisor-intake-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+}
+
+.advisor-intake-facts div {
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface-soft);
+    padding: 0.8rem;
+    display: grid;
+    gap: 0.2rem;
+}
+
+.advisor-intake-facts span {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+}
+
+.advisor-intake-facts strong {
+    font-size: 0.95rem;
+    color: var(--color-ink);
+}
+
+.advisor-intake-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.advisor-intake-brief-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.advisor-intake-brief-grid p {
+    margin: 0.35rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+}
+
+.advisor-intake-attachments {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 0.6rem;
+}
+
+.advisor-intake-attachment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface-soft);
+    padding: 0.8rem;
+}
+
+.advisor-intake-attachment div {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.advisor-intake-attachment strong {
+    font-size: 0.85rem;
+    color: var(--color-ink);
+}
+
+.advisor-intake-attachment span,
+.advisor-intake-empty-copy {
+    font-size: 0.76rem;
+    color: var(--color-ink-soft);
+}
+
+.advisor-intake-decline-box {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--color-ink);
+}
+
+.advisor-intake-decline-box textarea {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 0.8rem;
+    resize: vertical;
+    font: inherit;
+    font-size: 0.82rem;
+    outline: none;
+}
+
+.advisor-intake-decline-box textarea:focus {
+    border-color: rgba(29, 78, 216, 0.45);
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.08);
+}
+
+.advisor-intake-modal-actions {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.advisor-intake-note {
+    margin: 0;
+    max-width: 34ch;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--color-ink-soft);
+}
+
+@media (max-width: 760px) {
+    .advisor-intake-modal-backdrop {
+        padding: 1rem;
+        place-items: stretch;
+    }
+
+    .advisor-intake-row {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .advisor-intake-review-btn {
+        grid-column: 1 / -1;
+        justify-content: center;
+    }
+
+    .advisor-intake-row-top,
+    .advisor-intake-modal-head,
+    .advisor-intake-modal-actions {
+        flex-direction: column;
+    }
+
+    .advisor-intake-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .advisor-intake-tabs {
+        border-radius: 20px;
+        width: 100%;
+    }
+
+    .advisor-intake-tab {
+        flex: 1;
+    }
+}

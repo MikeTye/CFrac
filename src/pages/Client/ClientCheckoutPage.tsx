@@ -1,11 +1,56 @@
-import { Link, useParams } from 'react-router-dom';
-import { Card } from '../../components/common/Card';
-import { bookings } from '../../mocks/bookings';
+import { Link, useSearchParams } from 'react-router-dom';
+import '../../styles/pages/clientCheckout.css';
 
 export function ClientCheckoutPage() {
-  const { bookingId } = useParams();
-  const booking = bookings.find((b) => b.id === bookingId) ?? bookings[0];
-  const deposit = 100;
-  const remaining = Math.max(booking.price - deposit, 0);
-  return <div className="stack-lg"><h1>Checkout & Payment</h1><Card><h3>Booking summary</h3><p>{booking.sessionName} with {booking.advisorName}</p><p>Total: ${booking.price} {booking.currency}</p><p>Deposit applied: ${deposit}</p><p>Remaining due: ${remaining}</p></Card><Card><h3>Payment details (demo)</h3><label>Name on card<input placeholder="Any value accepted" /></label><label>Card number<input placeholder="4242 4242 4242 4242" /></label><label>Expiry<input placeholder="MM/YY" /></label><label>CVC<input placeholder="123" /></label><div className="stack-row"><Link to={`/client/booking/${booking.id}`} className="btn">Pay & Confirm</Link><Link to="/client/checkout/pending" className="btn ghost">Mock Pending</Link><Link to="/client/checkout/failed" className="btn ghost">Mock Failed</Link></div></Card></div>;
+    const [params] = useSearchParams();
+    const requestId = params.get('requestId');
+    const slotId = params.get('slotId');
+
+    return (
+        <>
+            <div className="dash-page-head">
+                <div>
+                    <p className="hero-eyebrow">Demo checkout</p>
+                    <h1 className="dash-page-title">Confirm advisory booking</h1>
+                    <p className="muted">
+                        Request: {requestId ?? 'req-003'} {slotId ? `· Slot: ${slotId}` : ''}
+                    </p>
+                </div>
+
+                <Link to="/client/requests" className="btn ghost">
+                    Back to requests
+                </Link>
+            </div>
+
+            <div className="client-checkout-card">
+                <section>
+                    <span>Payment summary</span>
+                    <h2>Priya Nair · 60-minute advisory session</h2>
+
+                    <div className="client-checkout-row">
+                        <p>Session fee</p>
+                        <strong>$650</strong>
+                    </div>
+                    <div className="client-checkout-row">
+                        <p>Escrow deposit applied</p>
+                        <strong>-$300</strong>
+                    </div>
+                    <div className="client-checkout-total">
+                        <p>Amount due</p>
+                        <strong>$350</strong>
+                    </div>
+                </section>
+
+                <section className="client-checkout-demo-box">
+                    <span>Stripe placeholder</span>
+                    <p>
+                        This is a wireframe-only checkout state. Replace this panel with Stripe Checkout or Payment Element during integration.
+                    </p>
+                    <Link to="/client/bookings/booking-001" className="btn">
+                        Demo confirm booking
+                    </Link>
+                </section>
+            </div>
+        </>
+    );
 }

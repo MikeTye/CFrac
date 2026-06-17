@@ -1,0 +1,91 @@
+.booking-timeline {
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(16, 32, 50, 0.04);
+}
+
+.booking-timeline-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 0.8rem;
+    padding: 1rem 1.1rem;
+}
+
+.booking-timeline-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 27px;
+    top: 42px;
+    bottom: -10px;
+    width: 2px;
+    background: var(--color-border);
+}
+
+.booking-timeline-marker {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+    color: var(--color-ink-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    z-index: 1;
+}
+
+.booking-timeline-step--done .booking-timeline-marker,
+.booking-timeline-step--current .booking-timeline-marker {
+    border-color: rgba(29, 78, 216, 0.28);
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+}
+
+.booking-timeline-step--current {
+    background: rgba(29, 78, 216, 0.04);
+}
+
+.booking-timeline-copy {
+    display: grid;
+    gap: 0.22rem;
+    min-width: 0;
+}
+
+.booking-timeline-label {
+    font-size: 0.86rem;
+    font-weight: 800;
+    color: var(--color-ink);
+}
+
+.booking-timeline-description {
+    font-size: 0.76rem;
+    color: var(--color-ink-soft);
+    line-height: 1.45;
+}
+
+.booking-timeline--compact {
+    display: flex;
+    overflow-x: auto;
+}
+
+.booking-timeline--compact .booking-timeline-step {
+    min-width: 150px;
+    grid-template-columns: 28px 1fr;
+    padding: 0.85rem;
+}
+
+.booking-timeline--compact .booking-timeline-marker {
+    width: 28px;
+    height: 28px;
+}
+
+.booking-timeline--compact .booking-timeline-step:not(:last-child)::after {
+    display: none;
+}

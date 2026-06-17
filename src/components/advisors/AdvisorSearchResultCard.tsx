@@ -3,13 +3,24 @@ import type { Advisor } from '../../mocks/advisors';
 import { Badge } from '../common/Badge';
 import '../../styles/components/advisor-search-result-card.css';
 
+type AdvisorSearchResultCardProps = {
+    advisor: Advisor;
+    profileBasePath?: string;
+    ctaLabel?: string;
+};
+
 function getStartingPrice(advisor: Advisor) {
     return Math.min(...advisor.sessionOfferings.map((s) => s.price));
 }
 
-export function AdvisorSearchResultCard({ advisor }: { advisor: Advisor }) {
+export function AdvisorSearchResultCard({
+    advisor,
+    profileBasePath = '/advisors',
+    ctaLabel = 'View Profile',
+}: AdvisorSearchResultCardProps) {
     const startingPrice = getStartingPrice(advisor);
     const topAchievement = advisor.achievements?.[0];
+    const profilePath = `${profileBasePath}/${advisor.id}`;
 
     return (
         <article className="advisor-result-card">
@@ -71,8 +82,8 @@ export function AdvisorSearchResultCard({ advisor }: { advisor: Advisor }) {
                         ))}
                     </div>
 
-                    <Link className="btn advisor-result-cta" to={`/advisors/${advisor.id}`}>
-                        View Profile
+                    <Link className="btn advisor-result-cta" to={profilePath}>
+                        {ctaLabel}
                     </Link>
                 </div>
             </div>
